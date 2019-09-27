@@ -34,6 +34,10 @@ namespace Assets.Resources.Classes.Blobs
             return BlobType.Player;
         }
 
+        /// <summary>
+        /// Gets the size to initialize the Player with
+        /// </summary>
+        /// <returns></returns>
         public override Vector2 GetSize()
         {
             return this.DefaultSize;

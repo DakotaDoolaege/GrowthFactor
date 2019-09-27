@@ -27,6 +27,13 @@ namespace Assets.Resources.Classes.Blobs
         /// <returns></returns>
         protected virtual int GenerateFoodValue() => 0;
 
+        /// <summary>
+        /// Performs the appropriate actions upon a Player when that
+        /// Player object consumes the Consumable object holding the
+        /// current ConsumableAction object.
+        /// </summary>
+        /// <param name="player">The that consumes the Consumable object
+        /// holding the current ConsumableAction object</param>
         public abstract void OnPlayerConsumption(Player player);
 
         public static ConsumableAction GetAction(BlobType type)
