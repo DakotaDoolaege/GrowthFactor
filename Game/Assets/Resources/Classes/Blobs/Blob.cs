@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
@@ -26,10 +27,10 @@ namespace Assets.Resources.Classes.Blobs
     public abstract class Blob : MonoBehaviour
     {
         public int FoodValue { get; set; }
+        public Vector2 SizeVector;
         public Sprite Icon;
         public SpriteRenderer Renderer;
         public readonly BlobType Type;
-        public IList<Sprite> SpritesSheet;
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -39,13 +40,23 @@ namespace Assets.Resources.Classes.Blobs
             this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
             this.Renderer.drawMode = SpriteDrawMode.Sliced;
 
-            this.SpritesSheet =
-                UnityEngine.Resources.LoadAll<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic1024x1024");
+            // Generate the size for the blob
+            this.SizeVector = this.GetSize();
+            this.transform.localScale = this.SizeVector;
 
+            // Generate food value and icon for blob
             this.FoodValue = GetFoodValue();
             this.Icon = GetSprite();
             this.Renderer.sprite = Icon;
         }
+
+        /// <summary>
+        /// Gets the appropriate starting size for the Blob
+        /// </summary>
+        /// <returns>
+        /// The appropriate starting size for a Blob object
+        /// </returns>
+        public abstract Vector2 GetSize();
 
         /// <summary>
         /// Gets the appropriate starting food value for a Blob
@@ -70,16 +81,5 @@ namespace Assets.Resources.Classes.Blobs
         /// Called once per frame to update the object
         /// </summary>
         public virtual void Update(){}
-
-        /// <summary>
-        /// Factor that generates the proper sprite icon to use
-        /// </summary>
-        /// <param name="value">The value that the Blob object contains</param>
-        /// <param name="type">The type of the Blob object</param>
-        /// <returns>
-        /// A sprite icon for the inputted Blob type
-        /// </returns>
-        public static Sprite BlobFactory(int value, BlobType type) => 
-            SpriteFactory.BlobFactory(value, type);
     }
 }
