@@ -1,61 +1,55 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
     public class Consumable : Blob
     {
-        public new readonly BlobType Type = BlobType.Food;
-        protected Vector2 DefaultSize = new Vector2(.7f, .7f);
+        public ConsumableAction Action;
 
-        public static int MaxFoodValue = 100;
-        public static int MinFoodValue = -100;
+        public override int FoodValue
+        {
+            get => this.Action.FoodValue;
+            set => this.Action.FoodValue = value;
+        }
 
-        /// <summary>
-        /// Start is called before any frame to initialize the object
-        /// </summary>
+        // Start is called before the first frame update
         public override void Start()
         {
+            this.Action = ConsumableAction.GetAction(this.BlobType);
             base.Start();
         }
 
+        /// <summary>
+        /// Gets the appropriate BlobType for the Blob
+        /// </summary>
+        /// <returns>
+        /// The type of Blob that the current object is
+        /// </returns>
+        public override BlobType GetBlobType()
+        {
+            return BlobType.Food;
+        }
+
+        /// <summary>
+        /// Gets the appropriate starting size for the Blob
+        /// </summary>
+        /// <returns>
+        /// The appropriate starting size for a Blob object
+        /// </returns>
         public override Vector2 GetSize()
         {
-            return this.DefaultSize;
+            float maximum = (float) ConsumableAction.MaxFoodValue;
+            float value = Math.Abs((float) this.FoodValue);
+
+            float size = 0.1f + (value / maximum);
+            return new Vector2(size, size);
         }
 
-        /// <summary>
-        /// Gets the value of the food
-        /// </summary>
-        /// <returns>
-        /// The value that a food object should be initialized with
-        /// </returns>
-        public override int GetFoodValue()
+
+        public void OnPlayerConsume(Player player)
         {
-            System.Random rnd = new System.Random();
-            return rnd.Next(MinFoodValue, MaxFoodValue);
+            this.Action.OnPlayerConsumption(player);
         }
-
-        /// <summary>
-        /// Generates the icon for the sprite
-        /// </summary>
-        /// <returns>
-        /// The icon that the sprite should be initialized with
-        /// </returns>
-        public override Sprite GetSprite()
-        {
-            return SpriteFactory.BlobFactory(this.FoodValue, this.Type);
-        }
-
-        /// <summary>
-        /// Update is called once per frame to update the object
-        /// </summary>
-        public override void Update()
-        {
-            base.Update();
-            // If food need additional update functionality that the player
-            // does not need, add it here. Otherwise, remove this method
-        }
-
     }
 }

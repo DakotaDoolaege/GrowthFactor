@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Resources\Classes\Blobs\Blob.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Consumable.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\ConsumableAction.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\Food.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Player.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\SpriteFactory.cs" />
     <None Include="Assets\Resources\BayatGames\Free Platform Game Assets\Readme.txt" />

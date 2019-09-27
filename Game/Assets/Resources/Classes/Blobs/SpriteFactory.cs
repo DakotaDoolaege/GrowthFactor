@@ -31,18 +31,14 @@ namespace Assets.Resources.Classes.Blobs
                 UnityEngine.Resources.LoadAll<Sprite>(SpriteFile);
 
             // Create the list of names in the exact order of the list of sprites
-            IList<string> names = new List<string>();
-            foreach (Sprite sprite in spritesSheet)
-            {
-                names.Add(sprite.name);
-            }
+            IList<string> names = spritesSheet.Select(sprite => sprite.name).ToList();
 
             // Get the proper Sprite type and return
             switch (type)
             {
                 case BlobType.Food:
                 {
-                    string foodType = (value >= 0 ? NegativeFood : PositiveFood);
+                    string foodType = (value < 0 ? NegativeFood : PositiveFood);
                     int index = names.IndexOf(foodType);
 
                     return spritesSheet[index];
