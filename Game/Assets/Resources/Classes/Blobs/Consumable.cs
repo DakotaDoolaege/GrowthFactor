@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /// <summary>
+    /// Class <c>Consumable</c> is a class that represents objects that may
+    /// be consumed by a Player object. These include PowerUps and Food.
+    /// </summary>
     public class Consumable : Blob
     {
         public ConsumableAction Action;
@@ -13,7 +17,9 @@ namespace Assets.Resources.Classes.Blobs
             set => this.Action.FoodValue = value;
         }
 
-        // Start is called before the first frame update
+        /// <summary>
+        /// Start is called before the first frame to initialize the object
+        /// </summary>
         public override void Start()
         {
             this.Action = ConsumableAction.GetAction(this.BlobType);
@@ -46,11 +52,15 @@ namespace Assets.Resources.Classes.Blobs
             return new Vector2(size, size);
         }
 
-
+        /// <summary>
+        /// Performs the appropriate action upon the player object when
+        /// the player object consumes the current Consumable object.
+        /// </summary>
+        /// <param name="player">The Player object that consumes the
+        /// Consumable object</param>
         public void OnPlayerConsume(Player player)
         {
             this.Action.OnPlayerConsumption(player);
-            //Destroy(this);
         }
     }
 }
