@@ -50,6 +50,7 @@ namespace Assets.Resources.Classes.Blobs
         public void OnPlayerConsume(Player player)
         {
             this.Action.OnPlayerConsumption(player);
+            //Destroy(this);
         }
     }
 }

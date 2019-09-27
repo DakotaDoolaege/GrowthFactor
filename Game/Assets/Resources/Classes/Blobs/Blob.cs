@@ -23,6 +23,7 @@ namespace Assets.Resources.Classes.Blobs
         public Vector2 SizeVector;
         public Sprite Icon;
         public SpriteRenderer Renderer;
+        public CircleCollider2D Collider;
         protected BlobType BlobType;
         public abstract int FoodValue { get; set; }
         
@@ -45,6 +46,19 @@ namespace Assets.Resources.Classes.Blobs
             // Generate the size for the blob
             this.SizeVector = this.GetSize();
             this.transform.localScale = this.SizeVector;
+
+            // Adjust the collider
+            this.Collider = this.GetComponent<CircleCollider2D>();
+            UpdateColliderSize();
+        }
+
+        /// <summary>
+        /// Updates the collider radius for the Blob object's collider
+        /// </summary>
+        protected void UpdateColliderSize()
+        {
+            Vector3 spriteHalfSize = this.Renderer.sprite.bounds.extents;
+            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? spriteHalfSize.x : spriteHalfSize.y;
         }
 
         /// <summary>
