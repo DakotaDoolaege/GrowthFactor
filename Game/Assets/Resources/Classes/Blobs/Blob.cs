@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
@@ -25,6 +29,7 @@ namespace Assets.Resources.Classes.Blobs
         public Sprite Icon;
         public SpriteRenderer Renderer;
         public readonly BlobType Type;
+        public IList<Sprite> SpritesSheet;
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -33,6 +38,9 @@ namespace Assets.Resources.Classes.Blobs
         {
             this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
             this.Renderer.drawMode = SpriteDrawMode.Sliced;
+
+            this.SpritesSheet =
+                UnityEngine.Resources.LoadAll<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic1024x1024");
 
             this.FoodValue = GetFoodValue();
             this.Icon = GetSprite();
@@ -71,22 +79,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <returns>
         /// A sprite icon for the inputted Blob type
         /// </returns>
-        public static Sprite BlobFactory(int value, BlobType type)
-        {
-            if (type == BlobType.Food)
-            {
-                string spriteToUse = (value >= 0
-                    ? "BayatGames/Free Platform Game Assets/Character/png/2x/Right Foot"
-                    : "BayatGames/Free Platform Game Assets/Character/png/2x/Body");
-                return UnityEngine.Resources.Load<Sprite>(spriteToUse);
-            }
-            else if (type == BlobType.Player)
-            {
-                return UnityEngine.Resources.Load<Sprite>(
-                    "BayatGames/Free Platform Game Assets/Coin Animation/png/2x/image 1");
-            }
-
-            return null;
-        }
+        public static Sprite BlobFactory(int value, BlobType type) => 
+            SpriteFactory.BlobFactory(value, type);
     }
 }
