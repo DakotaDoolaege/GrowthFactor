@@ -6,6 +6,8 @@ namespace Assets.Resources.Classes.Blobs
     public class Consumable : Blob
     {
         public new readonly BlobType Type = BlobType.Food;
+        protected Vector2 DefaultSize = new Vector2(.7f, .7f);
+
         public static int MaxFoodValue = 100;
         public static int MinFoodValue = -100;
 
@@ -15,6 +17,11 @@ namespace Assets.Resources.Classes.Blobs
         public override void Start()
         {
             base.Start();
+        }
+
+        public override Vector2 GetSize()
+        {
+            return this.DefaultSize;
         }
 
         /// <summary>
@@ -37,7 +44,7 @@ namespace Assets.Resources.Classes.Blobs
         /// </returns>
         public override Sprite GetSprite()
         {
-            return Blob.BlobFactory(this.FoodValue, this.Type);
+            return SpriteFactory.BlobFactory(this.FoodValue, this.Type);
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace Assets.Resources.Classes.Blobs
         private const string PowerUp = "PowerUp";
 
         // The name of the file containing the sliced Sprite objects
-        private const string SpriteFile = "BayatGames/Free Platform Game Assets/GUI/png/Iconic1024x1024";
+        private const string SpriteFile = "BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048";
 
         public static Sprite BlobFactory(int value, BlobType type)
         {

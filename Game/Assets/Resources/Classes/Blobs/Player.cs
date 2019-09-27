@@ -8,6 +8,7 @@ namespace Assets.Resources.Classes.Blobs
     public class Player : Blob
     {
         public new readonly BlobType Type = BlobType.Player;
+        protected Vector2 DefaultSize = new Vector2(0.9f, 0.9f);
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -17,13 +18,18 @@ namespace Assets.Resources.Classes.Blobs
             base.Start();
         }
 
+        public override Vector2 GetSize()
+        {
+            return this.DefaultSize;
+        }
+
         /// <summary>
         /// Gets and returns the appropriate sprite to use for a player object
         /// </summary>
         /// <returns></returns>
         public override Sprite GetSprite()
         {
-            return Blob.BlobFactory(this.FoodValue, this.Type);
+            return SpriteFactory.BlobFactory(this.FoodValue, this.Type);
         }
 
         /// <summary>
