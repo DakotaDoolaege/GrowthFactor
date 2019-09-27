@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Diagnostics;
+using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace Assets.Resources.Classes.Blobs
 {
@@ -7,8 +10,9 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class Player : Blob
     {
-        public new readonly BlobType Type = BlobType.Player;
         protected Vector2 DefaultSize = new Vector2(0.9f, 0.9f);
+        private readonly int initialPlayerValue = 0;
+        public override int FoodValue { get; set; }
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -16,20 +20,23 @@ namespace Assets.Resources.Classes.Blobs
         public override void Start()
         {
             base.Start();
+            this.FoodValue = this.initialPlayerValue;
+        }
+
+        /// <summary>
+        /// Gets the appropriate BlobType for the Blob
+        /// </summary>
+        /// <returns>
+        /// The type of Blob that the current object is
+        /// </returns>
+        public override BlobType GetBlobType()
+        {
+            return BlobType.Player;
         }
 
         public override Vector2 GetSize()
         {
             return this.DefaultSize;
-        }
-
-        /// <summary>
-        /// Gets and returns the appropriate sprite to use for a player object
-        /// </summary>
-        /// <returns></returns>
-        public override Sprite GetSprite()
-        {
-            return SpriteFactory.BlobFactory(this.FoodValue, this.Type);
         }
 
         /// <summary>
@@ -42,7 +49,7 @@ namespace Assets.Resources.Classes.Blobs
             // Example showing that the growing function works
             if (Input.GetMouseButtonDown(0))
             {
-                this.Grow(0.2f);
+                this.Grow(20);
             }
         }
 
@@ -50,9 +57,13 @@ namespace Assets.Resources.Classes.Blobs
         /// Grows the sprite by the specified amount
         /// </summary>
         /// <param name="amount">The amount to grow the sprite</param>
-        private void Grow(float amount)
+        public void Grow(int amount)
         {
-            this.Renderer.size += new Vector2(amount, amount);
+            float size = (float) Math.Abs(amount) / 
+                         (float) ConsumableAction.MaxFoodValue;
+
+            this.Renderer.size += new Vector2(size, size);
+            this.FoodValue += amount;
         }
 
         /// <summary>
@@ -63,10 +74,12 @@ namespace Assets.Resources.Classes.Blobs
         /// consumes</param>
         public void ConsumeFood(Consumable consumable)
         {
-            this.FoodValue += consumable.FoodValue;
+            consumable.OnPlayerConsume(this);
 
-            int amount = consumable.FoodValue / Consumable.MaxFoodValue; 
-            this.Grow(amount);
+            //this.FoodValue += consumable.FoodValue;
+
+            //int amount = consumable.FoodValue / ConsumableAction.MaxFoodValue; 
+            //this.Grow(amount);
         }
     }
 }

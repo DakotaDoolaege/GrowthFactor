@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2381631438409226899}
   - component: {fileID: 2381631438409226896}
-  - component: {fileID: 2381631438409226897}
+  - component: {fileID: 7911068167340612338}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2381631438409226897
+--- !u!114 &7911068167340612338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,8 +90,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2381631438409226902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f07426c5b2015034282bcf816c48e3c2, type: 3}
+  m_Script: {fileID: 11500000, guid: bdc3f7a030b4f414cb6f99242ceb23f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SizeVector: {x: 0, y: 0}
   Icon: {fileID: 0}
   Renderer: {fileID: 0}
