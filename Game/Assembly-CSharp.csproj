@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resources\Classes\Blobs\Blob.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\Collision.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Consumable.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\ConsumableAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Food.cs" />

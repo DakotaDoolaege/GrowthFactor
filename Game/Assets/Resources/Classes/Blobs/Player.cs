@@ -59,7 +59,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="amount">The amount to grow the sprite</param>
         public void Grow(int amount)
         {
-            float size = (float) Math.Abs(amount) / 
+            float size = (float) amount / 
                          (float) ConsumableAction.MaxFoodValue;
 
             this.Renderer.size += new Vector2(size, size);
@@ -75,11 +75,22 @@ namespace Assets.Resources.Classes.Blobs
         public void ConsumeFood(Consumable consumable)
         {
             consumable.OnPlayerConsume(this);
+            base.UpdateColliderSize();
+        }
 
-            //this.FoodValue += consumable.FoodValue;
-
-            //int amount = consumable.FoodValue / ConsumableAction.MaxFoodValue; 
-            //this.Grow(amount);
+        /// <summary>
+        /// Deal with collisions with a Player object
+        /// </summary>
+        /// <param name="collision">The object the Player collided with</param>
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Food")
+            {
+                UnityEngine.Debug.Log("Collided with a food object");
+                Consumable food = collision.gameObject.GetComponent<Consumable>();
+                this.ConsumeFood(food);
+                Destroy(collision.gameObject);
+            }
         }
     }
 }
