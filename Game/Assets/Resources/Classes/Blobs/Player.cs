@@ -51,15 +51,15 @@ namespace Assets.Resources.Classes.Blobs
 
         /// <summary>
         /// A function which calculates the changes to a Player object upon
-        /// consuming a food object.
+        /// consuming a consumable object.
         /// </summary>
-        /// <param name="food">The food object that the Player object
+        /// <param name="consumable">The consumable object that the Player object
         /// consumes</param>
-        public void ConsumeFood(Food food)
+        public void ConsumeFood(Consumable consumable)
         {
-            this.FoodValue += food.FoodValue;
+            this.FoodValue += consumable.FoodValue;
 
-            int amount = food.FoodValue / Food.MaxFoodValue; 
+            int amount = consumable.FoodValue / Consumable.MaxFoodValue; 
             this.Grow(amount);
         }
     }
