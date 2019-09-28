@@ -26,6 +26,7 @@ namespace Assets.Resources.Classes.Blobs
         public CircleCollider2D Collider;
         protected BlobType BlobType;
         public abstract int FoodValue { get; set; }
+        public const int MinimumFoodValue = 0;
         
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -57,8 +58,9 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         protected void UpdateColliderSize()
         {
-            Vector3 spriteHalfSize = this.Renderer.sprite.bounds.extents;
-            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? spriteHalfSize.x : spriteHalfSize.y;
+            Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
+            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
+                spriteHalfSize.x : spriteHalfSize.y;
         }
 
         /// <summary>

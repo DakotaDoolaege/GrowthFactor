@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
@@ -10,7 +11,7 @@ namespace Assets.Resources.Classes.Blobs
     public abstract class ConsumableAction
     {
         public const int MaxFoodValue = 100;
-        public static int MinFoodValue = -100;
+        public static int MinFoodValue = -50;
         public int FoodValue { get; set; }
 
         /// <summary>
