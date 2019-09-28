@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 124900364}
   m_Layer: 0
   m_Name: Grass (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 186343470}
   m_Layer: 0
   m_Name: Grass (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 520081943}
   m_Layer: 0
   m_Name: Grass
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -855,6 +855,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4464634091058545138, guid: f923342f1350dcf4992725e9eabfd0dd,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4464634091058545138, guid: f923342f1350dcf4992725e9eabfd0dd,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 45e95e1ebfce47e49bcffb0667769ad7, type: 2}
     m_RemovedComponents:
     - {fileID: 8996457471078081735, guid: f923342f1350dcf4992725e9eabfd0dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f923342f1350dcf4992725e9eabfd0dd, type: 3}
