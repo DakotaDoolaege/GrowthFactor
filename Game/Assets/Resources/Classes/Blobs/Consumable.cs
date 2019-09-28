@@ -10,6 +10,11 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class Consumable : Blob
     {
+        /*
+         * TODO
+         *
+         * - Add animation for when a Consumable gets consumed
+         */
         public ConsumableAction Action;
 
         public override int FoodValue
@@ -73,14 +78,5 @@ namespace Assets.Resources.Classes.Blobs
         {
             base.CalculateCollision2D(collision);
         }
-
-
-        //private IEnumerator Shrink(float growthFactor=3.0f)
-        //{
-        //    float size = (float) this.FoodValue /
-        //                 (growthFactor * ConsumableAction.MaxFoodValue);
-        //    this.Renderer.size -= new Vector2(size, size);
-        //    yield return null;
-        //}
     }
 }
