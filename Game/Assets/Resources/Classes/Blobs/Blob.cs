@@ -35,12 +35,16 @@ namespace Assets.Resources.Classes.Blobs
         protected BlobType BlobType;
         public abstract int FoodValue { get; set; }
         public const int MinimumFoodValue = 0;
-        
+        public Vector2 LastVelocity;
+        public Vector2 Acceleration;
+
         /// <summary>
         /// Start is called before the first frame to initialize the object
         /// </summary>
         public virtual void Start()
         {
+            this.LastVelocity = new Vector2(0, 0);
+
             this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
             this.Renderer.drawMode = SpriteDrawMode.Sliced;
             this.RigidBody = this.gameObject.GetComponent<Rigidbody2D>();
@@ -133,14 +137,29 @@ namespace Assets.Resources.Classes.Blobs
             // Calculate the angle between the two
             float theta = Vector2.Angle(xAxis, velocity);
 
+            Vector2 lastVelocity = collision.gameObject.GetComponent<Blob>()
+                .LastVelocity;
+
             // Calculate the changes in the x and y coordinates to be
             // applied to the current object
-            float x = (float)(mass * Math.Cos(theta));
-            float y = (float) (mass * Math.Sin(theta));
+            float x = (float)(mass * this.Acceleration.x * Math.Cos(theta));
+            float y = (float) (mass * this.Acceleration.y * Math.Sin(theta));
             Vector2 force = new Vector2(x, y);
 
             // Change the current object's velocity by the calculate force
             this.RigidBody.velocity -= force;
+        }
+
+        /// <summary>
+        /// FixedUpdate() is called a by the UnityEngine to deal with physics
+        /// </summary>
+        public void FixedUpdate()
+        {
+            // Since this method deals with physics, it is a safe option to 
+            // calculate the object's acceleration here
+            this.Acceleration = (LastVelocity - this.RigidBody.velocity)
+                                / Time.fixedDeltaTime;
+            this.LastVelocity = this.RigidBody.velocity;
         }
     }
 }
