@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
@@ -61,11 +62,25 @@ namespace Assets.Resources.Classes.Blobs
         public void OnPlayerConsume(Player player)
         {
             this.Action.OnPlayerConsumption(player);
+            //StartCoroutine("Shrink");
         }
 
+        /// <summary>
+        /// Deals with collisions between some Object and a Consumable object
+        /// </summary>
+        /// <param name="collision">The object colliding with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
             base.CalculateCollision2D(collision);
         }
+
+
+        //private IEnumerator Shrink(float growthFactor=3.0f)
+        //{
+        //    float size = (float) this.FoodValue /
+        //                 (growthFactor * ConsumableAction.MaxFoodValue);
+        //    this.Renderer.size -= new Vector2(size, size);
+        //    yield return null;
+        //}
     }
 }
