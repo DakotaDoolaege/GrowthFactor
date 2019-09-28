@@ -4,10 +4,10 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8930023339860362735
-    second: NegativeFood
+    second: NegativeFood_Old
   - first:
       213: 2036246892656419346
-    second: PositiveFood
+    second: PositiveFood_Old
   - first:
       213: 7011412487406338254
     second: PowerUp
@@ -340,10 +340,10 @@ TextureImporter:
     second: Iconic2048x2048_111
   - first:
       213: -5762483183490701539
-    second: Iconic2048x2048_112
+    second: NegativeFood
   - first:
       213: 6943985475902439751
-    second: Iconic2048x2048_113
+    second: PositiveFood
   - first:
       213: -4005789564629187255
     second: Iconic2048x2048_114
@@ -554,7 +554,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NegativeFood
+      name: NegativeFood_Old
       rect:
         serializedVersion: 2
         x: 146
@@ -575,7 +575,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PositiveFood
+      name: PositiveFood_Old
       rect:
         serializedVersion: 2
         x: 294
@@ -2906,7 +2906,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconic2048x2048_112
+      name: NegativeFood
       rect:
         serializedVersion: 2
         x: 738
@@ -2927,7 +2927,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconic2048x2048_113
+      name: PositiveFood
       rect:
         serializedVersion: 2
         x: 886
