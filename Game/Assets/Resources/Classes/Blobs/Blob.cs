@@ -7,6 +7,13 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /*
+     * TODO:
+     *
+     * - Modify blobs so that they start with masses depending on their food value
+     */
+
+
     /// <summary>
     /// Enum <c>BlobType</c> represents each type that a blob may be
     /// </summary>
@@ -20,6 +27,7 @@ namespace Assets.Resources.Classes.Blobs
     public abstract class Blob : MonoBehaviour
     {
         // public int FoodValue { get; set; }
+        public Rigidbody2D RigidBody;
         public Vector2 SizeVector;
         public Sprite Icon;
         public SpriteRenderer Renderer;
@@ -35,6 +43,7 @@ namespace Assets.Resources.Classes.Blobs
         {
             this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
             this.Renderer.drawMode = SpriteDrawMode.Sliced;
+            this.RigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 
             // Generate the type of Blob
             this.BlobType = this.GetBlobType();
@@ -95,5 +104,43 @@ namespace Assets.Resources.Classes.Blobs
         /// Called once per frame to update the object
         /// </summary>
         public virtual void Update(){}
+
+        /// <summary>
+        /// Calculates the changes in the x-coordinate and y-coordinate of
+        /// the force vector upon collision with some object. The changes in
+        /// forces are calculated as follows:
+        ///
+        /// The x coordinate changes by mass * cos(theta) where mass is the
+        /// mass of the object being collided with and theta is the angle
+        /// between the positive x-axis and the vector of the velocity of
+        /// the collided with object.
+        ///
+        /// The y coordinate changes by mass * sin(theta) where mass is the
+        /// mass of the object being collided with and theta is the angle
+        /// between the positive x-axis and the vector of the velocity of
+        /// the collided with object.
+        /// </summary>
+        /// <param name="collision">The object being collided with</param>
+        public void CalculateCollision2D(Collision2D collision)
+        {
+            Rigidbody2D rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            float mass = rigidbody.mass;
+
+            // Get the vectors of velocity and positive x-axis
+            Vector2 velocity = rigidbody.velocity;
+            Vector2 xAxis = rigidbody.centerOfMass + new Vector2(1, 0);
+
+            // Calculate the angle between the two
+            float theta = Vector2.Angle(xAxis, velocity);
+
+            // Calculate the changes in the x and y coordinates to be
+            // applied to the current object
+            float x = (float)(mass * Math.Cos(theta));
+            float y = (float) (mass * Math.Sin(theta));
+            Vector2 force = new Vector2(x, y);
+
+            // Change the current object's velocity by the calculate force
+            this.RigidBody.velocity -= force;
+        }
     }
 }

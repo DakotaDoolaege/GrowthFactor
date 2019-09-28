@@ -101,7 +101,7 @@ namespace Assets.Resources.Classes.Blobs
         /// See https://docs.unity3d.com/Manual/Coroutines.html for more details.
         /// </summary>
         /// <returns>
-        /// An IEnumerator object that tells the Coroutine when to stop execution
+        /// An IEnumerator object that tells the coroutine when to stop execution
         /// until the SaveDelay seconds have passed.
         /// </returns>
         private IEnumerator SavePosition()

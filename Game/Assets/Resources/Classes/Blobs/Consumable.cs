@@ -62,5 +62,10 @@ namespace Assets.Resources.Classes.Blobs
         {
             this.Action.OnPlayerConsumption(player);
         }
+
+        public void OnCollisionEnter2D(Collision2D collision)
+        {
+            base.CalculateCollision2D(collision);
+        }
     }
 }
