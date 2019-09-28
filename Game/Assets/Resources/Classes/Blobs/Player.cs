@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Debug = System.Diagnostics.Debug;
 
 namespace Assets.Resources.Classes.Blobs
@@ -11,7 +13,7 @@ namespace Assets.Resources.Classes.Blobs
     public class Player : Blob
     {
         protected Vector2 DefaultSize = new Vector2(0.9f, 0.9f);
-        private readonly int initialPlayerValue = 0;
+        private const int InitialPlayerValue = 0;
         public override int FoodValue { get; set; }
 
         /// <summary>
@@ -20,7 +22,7 @@ namespace Assets.Resources.Classes.Blobs
         public override void Start()
         {
             base.Start();
-            this.FoodValue = this.initialPlayerValue;
+            this.FoodValue = InitialPlayerValue;
         }
 
         /// <summary>
@@ -44,27 +46,16 @@ namespace Assets.Resources.Classes.Blobs
         }
 
         /// <summary>
-        /// Update is called once per frame to update the object
-        /// </summary>
-        public override void Update()
-        {
-            base.Update();
-
-            // Example showing that the growing function works
-            if (Input.GetMouseButtonDown(0))
-            {
-                this.Grow(20);
-            }
-        }
-
-        /// <summary>
         /// Grows the sprite by the specified amount
         /// </summary>
         /// <param name="amount">The amount to grow the sprite</param>
-        public void Grow(int amount)
+        /// <param name="growthFactor">The speed at which the object's growing
+        /// should be slowed down by. A higher growthFactor means a slower
+        /// growing speed.</param>
+        public void Grow(int amount, float growthFactor=3.0f)
         {
-            float size = (float) amount / 
-                         (float) ConsumableAction.MaxFoodValue;
+            float size = (float)amount /
+                         (growthFactor * ConsumableAction.MaxFoodValue);
 
             this.Renderer.size += new Vector2(size, size);
             this.FoodValue += amount;
@@ -78,8 +69,11 @@ namespace Assets.Resources.Classes.Blobs
         /// consumes</param>
         public void ConsumeFood(Consumable consumable)
         {
+            // Enact the Consumable's changes to the player
             consumable.OnPlayerConsume(this);
-            base.UpdateColliderSize();
+            
+            // Run the animation to make the player grow or shrink
+            StartCoroutine(ConsumeAnimation(consumable));
         }
 
         /// <summary>
@@ -92,8 +86,45 @@ namespace Assets.Resources.Classes.Blobs
             {
                 UnityEngine.Debug.Log("Collided with a food object");
                 Consumable food = collision.gameObject.GetComponent<Consumable>();
-                this.ConsumeFood(food);
-                Destroy(collision.gameObject);
+                if (this.FoodValue + food.FoodValue > Blob.MinimumFoodValue)
+                {
+                    this.ConsumeFood(food);
+                    Destroy(collision.gameObject);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Animates a Player object's growth upon consuming a Consumable
+        /// object.
+        /// </summary>
+        /// <param name="consumable">The object to consume</param>
+        /// <returns>
+        /// An IEnumerator that tells the coroutine when to stop and restart
+        /// execution
+        /// </returns>
+        private IEnumerator ConsumeAnimation(Blob consumable)
+        {
+            int value = consumable.FoodValue;
+            if (value > 0)
+            {
+                while (value > 0)
+                {
+                    this.Grow(1);
+                    value -= 1;
+                    base.UpdateColliderSize();
+                    yield return null;
+                }
+            }
+            else if (value < 0)
+            {
+                while (value < 0)
+                {
+                    this.Grow(-1);
+                    value += 1;
+                    base.UpdateColliderSize();
+                    yield return null;
+                }
             }
         }
     }
