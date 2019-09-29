@@ -11,8 +11,6 @@ namespace Assets.Resources.Classes.Blobs
      * TODO:
      *
      * - Modify blobs so that they start with masses depending on their food value
-     * - Modify CalculateCollsion2D so that duplicate code is put in
-     *   a single method
      */
 
 
@@ -149,23 +147,6 @@ namespace Assets.Resources.Classes.Blobs
                 Vector2 force = new Vector2(x, y);
 
                 // Change the current object's velocity by the calculate force
-                this.RigidBody.velocity -= force;
-            }
-            else if (collision.gameObject.tag == "Wall")
-            {
-                // NEEDS COMMENTING AND CREATE FUNCTION THAT CONTAINS DUPLICATE 
-                // CODE OF THIS AND ABOVE
-                const float WallMass = 100.0f;
-                Vector2 velocity = this.RigidBody.velocity;
-                Vector2 xAxis = this.RigidBody.centerOfMass + new Vector2(1, 0);
-
-                float theta = Vector2.Angle(xAxis, velocity);
-
-                float x = (float) (WallMass * this.Acceleration.x * Math.Cos(theta));
-                float y = (float) (WallMass * this.Acceleration.y * Math.Sin((theta)));
-
-                Vector2 force = new Vector2(x, y);
-
                 this.RigidBody.velocity -= force;
             }
         }
