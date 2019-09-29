@@ -11,6 +11,7 @@ namespace Assets.Resources.Classes.Blobs
      * TODO:
      *
      * - Modify blobs so that they start with masses depending on their food value
+     * - Fix sprite sizing so we don't get very small blobs
      */
 
 

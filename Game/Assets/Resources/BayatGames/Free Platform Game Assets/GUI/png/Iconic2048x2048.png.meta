@@ -340,7 +340,7 @@ TextureImporter:
     second: Iconic2048x2048_111
   - first:
       213: -5762483183490701539
-    second: NegativeFood
+    second: Iconic2048x2048_112
   - first:
       213: 6943985475902439751
     second: PositiveFood
@@ -376,7 +376,7 @@ TextureImporter:
     second: Iconic2048x2048_123
   - first:
       213: 5987355180400296218
-    second: Iconic2048x2048_124
+    second: NegativeFood
   - first:
       213: 6253326114566709556
     second: Iconic2048x2048_125
@@ -2888,7 +2888,7 @@ TextureImporter:
       name: Iconic2048x2048_111
       rect:
         serializedVersion: 2
-        x: 589
+        x: 583
         y: 516
         width: 129
         height: 129
@@ -2906,7 +2906,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NegativeFood
+      name: Iconic2048x2048_112
       rect:
         serializedVersion: 2
         x: 738
@@ -3158,7 +3158,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Iconic2048x2048_124
+      name: NegativeFood
       rect:
         serializedVersion: 2
         x: 738
