@@ -1,54 +1,37 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
-    public class Food : Blob
+    /// <summary>
+    /// Class <c>Food</c> is an action that a Consumable object may have.
+    /// This class allows for a consumable object to be consumed as food,
+    /// growing the player object upon consumption.
+    /// </summary>
+    public class Food : ConsumableAction
     {
-        public new readonly BlobType Type = BlobType.Food;
-        public static int MaxFoodValue = 100;
-        public static int MinFoodValue = -100;
-
         /// <summary>
-        /// Start is called before any frame to initialize the object
-        /// </summary>
-        public override void Start()
-        {
-            base.Start();
-        }
-
-        /// <summary>
-        /// Gets the value of the food
+        /// Generates a random food value for the Consumable object
         /// </summary>
         /// <returns>
-        /// The value that a food object should be initialized with
+        /// A random integer representing the Food value of a Consumable object
         /// </returns>
-        public override int GetFoodValue()
+        protected override int GenerateFoodValue()
         {
             System.Random rnd = new System.Random();
             return rnd.Next(MinFoodValue, MaxFoodValue);
         }
 
         /// <summary>
-        /// Generates the icon for the sprite
+        /// Handles the event where a Player consumes A Consumable object
+        /// holding the current ConsumableAction
         /// </summary>
-        /// <returns>
-        /// The icon that the sprite should be initialized with
-        /// </returns>
-        public override Sprite GetSprite()
+        /// <param name="player">The Player consuming the Consumable
+        /// object</param>
+        public override void OnPlayerConsumption(Player player)
         {
-            return Blob.BlobFactory(this.FoodValue, this.Type);
+            //player.Grow(this.FoodValue);
+            player.FoodValue += this.FoodValue;
         }
-
-        /// <summary>
-        /// Update is called once per frame to update the object
-        /// </summary>
-        public override void Update()
-        {
-            base.Update();
-            // If food need additional update functionality that the player
-            // does not need, add it here. Otherwise, remove this method
-        }
-
     }
 }
