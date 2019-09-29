@@ -1,19 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using UnityEditor;
+using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /*
+     * TODO:
+     *
+     * - Modify blobs so that they start with masses depending on their food value
+     * - Fix sprite sizing so we don't get very small blobs
+     */
+
+
     /// <summary>
     /// Enum <c>BlobType</c> represents each type that a blob may be
     /// </summary>
     public enum BlobType {Food, Player, PowerUp}
 
-
-    /**
-     * TODO
-     *
-     * - Set instance variable that determines initial size of the
-     *   object
-     */
 
     /// <summary>
     /// Class <c>Blob</c> parent to all blob objects in the game. A Blob
@@ -21,42 +27,83 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public abstract class Blob : MonoBehaviour
     {
-        public int FoodValue { get; set; }
+        // public int FoodValue { get; set; }
+        public Rigidbody2D RigidBody;
+        public Vector2 SizeVector;
         public Sprite Icon;
         public SpriteRenderer Renderer;
-        public readonly BlobType Type;
+        public CircleCollider2D Collider;
+        protected BlobType BlobType;
+        public abstract int FoodValue { get; set; }
+        public const int MinimumFoodValue = 0;
+        public Vector2 LastVelocity;
+        public Vector2 Acceleration;
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
         /// </summary>
         public virtual void Start()
         {
+            this.LastVelocity = new Vector2(0, 0);
+
             this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
             this.Renderer.drawMode = SpriteDrawMode.Sliced;
+            this.RigidBody = this.gameObject.GetComponent<Rigidbody2D>();
 
-            this.FoodValue = GetFoodValue();
+            // Generate the type of Blob
+            this.BlobType = this.GetBlobType();
+
+            // Generate food value and icon for blob
+            //this.FoodValue = GetFoodValue();
             this.Icon = GetSprite();
             this.Renderer.sprite = Icon;
+
+            // Generate the size for the blob
+            this.SizeVector = this.GetSize();
+            this.transform.localScale = this.SizeVector;
+
+            // Adjust the collider
+            this.Collider = this.GetComponent<CircleCollider2D>();
+            UpdateColliderSize();
         }
 
         /// <summary>
-        /// Gets the appropriate starting food value for a Blob
+        /// Updates the collider radius for the Blob object's collider
         /// </summary>
-        /// <returns>
-        /// The appropriate starting food value for a Blob
-        /// </returns>
-        public virtual int GetFoodValue()
+        protected void UpdateColliderSize()
         {
-            return 0;
+            Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
+            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
+                spriteHalfSize.x : spriteHalfSize.y;
         }
 
         /// <summary>
-        /// Gets the appropriate sprite to use for the Blob's icon
+        /// Gets the appropriate BlobType for the Blob
         /// </summary>
         /// <returns>
-        /// The sprite to use for the Blob's icon
+        /// The type of Blob that the current object is
         /// </returns>
-        public abstract Sprite GetSprite();
+        public abstract BlobType GetBlobType();
+
+        /// <summary>
+        /// Gets the appropriate starting size for the Blob
+        /// </summary>
+        /// <returns>
+        /// The appropriate starting size for a Blob object
+        /// </returns>
+        public abstract Vector2 GetSize();
+
+
+        /// <summary>
+        /// Generates the icon for the sprite
+        /// </summary>
+        /// <returns>
+        /// The icon that the sprite should be initialized with
+        /// </returns>
+        public virtual Sprite GetSprite()
+        {
+            return SpriteFactory.BlobFactory(this.FoodValue, this.BlobType);
+        }
 
         /// <summary>
         /// Called once per frame to update the object
@@ -64,29 +111,57 @@ namespace Assets.Resources.Classes.Blobs
         public virtual void Update(){}
 
         /// <summary>
-        /// Factor that generates the proper sprite icon to use
+        /// Calculates the changes in the x-coordinate and y-coordinate of
+        /// the force vector upon collision with some object. The changes in
+        /// forces are calculated as follows:
+        ///
+        /// The x coordinate changes by mass * cos(theta) where mass is the
+        /// mass of the object being collided with and theta is the angle
+        /// between the positive x-axis and the vector of the velocity of
+        /// the collided with object.
+        ///
+        /// The y coordinate changes by mass * sin(theta) where mass is the
+        /// mass of the object being collided with and theta is the angle
+        /// between the positive x-axis and the vector of the velocity of
+        /// the collided with object.
         /// </summary>
-        /// <param name="value">The value that the Blob object contains</param>
-        /// <param name="type">The type of the Blob object</param>
-        /// <returns>
-        /// A sprite icon for the inputted Blob type
-        /// </returns>
-        public static Sprite BlobFactory(int value, BlobType type)
+        /// <param name="collision">The object being collided with</param>
+        public void CalculateCollision2D(Collision2D collision)
         {
-            if (type == BlobType.Food)
+            if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "Player")
             {
-                string spriteToUse = (value >= 0
-                    ? "BayatGames/Free Platform Game Assets/Character/png/2x/Right Foot"
-                    : "BayatGames/Free Platform Game Assets/Character/png/2x/Body");
-                return UnityEngine.Resources.Load<Sprite>(spriteToUse);
-            }
-            else if (type == BlobType.Player)
-            {
-                return UnityEngine.Resources.Load<Sprite>(
-                    "BayatGames/Free Platform Game Assets/Coin Animation/png/2x/image 1");
-            }
+                Rigidbody2D rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+                float mass = rigidbody.mass;
+                Blob blob = collision.gameObject.GetComponent<Blob>();
 
-            return null;
+                // Get the vectors of velocity and positive x-axis
+                Vector2 velocity = rigidbody.velocity;
+                Vector2 xAxis = rigidbody.centerOfMass + new Vector2(1, 0);
+
+                // Calculate the angle between the two
+                float theta = Vector2.Angle(xAxis, velocity);
+
+                // Calculate the changes in the x and y coordinates to be
+                // applied to the current object
+                float x = (float) (mass * blob.Acceleration.x * Math.Cos(theta));
+                float y = (float) (mass * blob.Acceleration.y * Math.Sin(theta));
+                Vector2 force = new Vector2(x, y);
+
+                // Change the current object's velocity by the calculate force
+                this.RigidBody.velocity -= force;
+            }
+        }
+
+        /// <summary>
+        /// FixedUpdate() is called a by the UnityEngine to deal with physics
+        /// </summary>
+        public void FixedUpdate()
+        {
+            // Since this method deals with physics, it is a safe option to 
+            // calculate the object's acceleration here
+            this.Acceleration = (LastVelocity - this.RigidBody.velocity)
+                                / Time.fixedDeltaTime;
+            this.LastVelocity = this.RigidBody.velocity;
         }
     }
 }
