@@ -54,7 +54,7 @@ namespace Assets.Resources.Classes.Blobs
             float maximum = (float) ConsumableAction.MaxFoodValue;
             float value = Math.Abs((float) this.FoodValue);
 
-            float size = 0.1f + (value / maximum);
+            float size = 0.3f + (value / (2.0f * maximum));
             return new Vector2(size, size);
         }
 
