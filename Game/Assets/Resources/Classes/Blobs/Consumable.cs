@@ -76,7 +76,30 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object colliding with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            base.CalculateCollision2D(collision);
+            //base.CalculateCollision2D(collision);
+        }
+
+        public IEnumerator Shrink()
+        {
+            float speed = this.Renderer.size.x > this.Renderer.size.y ? this.Renderer.size.x : this.Renderer.size.y;
+            while ((this.Renderer.size.x > 0 || this.Renderer.size.y > 0))
+            {
+                Debug.Log(this.Renderer.size);
+                if (this.FoodValue > 0)
+                {
+                    this.FoodValue -= 1;
+                }
+                else if (this.FoodValue < 0)
+                {
+                    this.FoodValue -= 1;
+                }
+                float size = speed / ConsumableAction.MaxFoodValue;
+                this.Renderer.size -= new Vector2(size, size);
+                this.UpdateColliderSize();
+                yield return null;
+            }
+
+            Destroy(this.gameObject);
         }
     }
 }
