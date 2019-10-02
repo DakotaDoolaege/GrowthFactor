@@ -20,6 +20,16 @@ namespace Assets.Resources.Classes.Blobs
         public override int FoodValue { get; set; }
         public Vector3 StartPosition { get; set; }
 
+        public float MaxRadius
+        {
+            get
+            {
+                float x = this.Renderer.size.x;
+                float y = this.Renderer.size.y;
+                return x > y ? x : y;
+            }
+        }
+
         /// <summary>
         /// Start is called before the first frame to initialize the object
         /// </summary>
