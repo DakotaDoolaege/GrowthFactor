@@ -36,7 +36,7 @@ namespace Assets.Resources.Classes.Blobs
         public Sprite Icon;
         public SpriteRenderer Renderer;
         public CircleCollider2D Collider;
-        protected BlobType BlobType;
+        public BlobType BlobType;
         public abstract int FoodValue { get; set; }
         public const int MinimumFoodValue = 0;
         public Vector2 LastVelocity;
