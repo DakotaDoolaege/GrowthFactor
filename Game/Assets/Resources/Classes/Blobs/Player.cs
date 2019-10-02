@@ -82,7 +82,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object the Player collided with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            base.CalculateCollision2D(collision);
+            //base.CalculateCollision2D(collision);
 
             // Deal with colliding with a Food object
             if (collision.gameObject.tag == "Food")
