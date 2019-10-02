@@ -34,11 +34,10 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         /// <param name="player">The Player consuming the Consumable
         /// object</param>
-        public void OnPlayerConsumption(Player player)
+        public virtual void OnPlayerConsumption(Player player)
         {
             // The only action the food has is to perform the collision
-            // event on the player.
-            //player.FoodValue += this.FoodValue;
+            // event on the player
             player.StartCoroutine(player.OnCollisionEvent);
         }
 

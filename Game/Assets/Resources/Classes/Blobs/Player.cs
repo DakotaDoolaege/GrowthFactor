@@ -74,6 +74,7 @@ namespace Assets.Resources.Classes.Blobs
 
             this.Renderer.size += new Vector2(size, size);
             this.FoodValue += amount;
+            base.UpdateColliderSize();
         }
 
         /// <summary>
@@ -85,19 +86,23 @@ namespace Assets.Resources.Classes.Blobs
         public void ConsumeFood(Consumable consumable)
         {
             // Set the collision instance variable
-            this.OnCollisionEvent = this.ConsumeAnimation(consumable);
+            //this.OnCollisionEvent = this.ConsumeFoodEvent(consumable);
+            this.SetOnCollisionEvent(consumable);
+
 
             // Enact the Consumable's changes to the player, which will call the
             // collision event on the player
             consumable.OnPlayerConsume(this);
-            
+
             // Start the collision event on the consumable
             StartCoroutine(consumable.OnCollisionEvent);
         }
 
-        // WORK ON THIS
+        
         public void OnCollisionExit2D(Collision2D collision)
         {
+            // Do not deal with the case that a powerup stops collision, this way, we
+            // ensure that powerup will always be completely eaten by the player
             if (collision.gameObject.tag == "Food")
             {
                 Consumable consumable = collision.gameObject.GetComponent<Consumable>();
@@ -122,28 +127,13 @@ namespace Assets.Resources.Classes.Blobs
         {
             UnityEngine.Debug.Log("Player: " + this.FoodValue.ToString());
             // Deal with colliding with a Food object
-            if (collision.gameObject.tag == "Food")
+            if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "PowerUp")
             {
                 Consumable food = collision.gameObject.GetComponent<Consumable>();
                 if (this.FoodValue + food.FoodValue > Blob.MinimumFoodValue)
                 {
                     this.ConsumeFood(food);
                 }
-            }
-            else if (collision.gameObject.tag == "PowerUp")
-            {
-                Consumable powerup = collision.gameObject.GetComponent<Consumable>();
-                // this.ConsumePowerUp(powerup);
-                /*
-                 * In this function, the appropriate this.OnCollisionEvent should be
-                 * set to deal with powerups. Then the Consumable object simply just
-                 * calls the this.OnCollisionEvent coroutine, so we just set the appropriate
-                 * stuff in there that we want to do.
-                 *
-                 * We need the this.ConsumePowerUp(powerup) function
-                 * A Coroutine for animating the player and performing actions upon consuming
-                 * the power up
-                 */
             }
         }
 
@@ -157,47 +147,38 @@ namespace Assets.Resources.Classes.Blobs
         /// An IEnumerator that tells the coroutine when to stop and restart
         /// execution
         /// </returns>
-        public IEnumerator ConsumeAnimation(Blob consumable, int speed = Consumable.ShrinkSpeed)
+        public IEnumerator ConsumeFoodEvent(Blob consumable, int speed = Consumable.ShrinkSpeed)
         {
+            UnityEngine.Debug.Log("Player: " + this.FoodValue);
             int value = consumable.FoodValue;
-            if (value > 0)
+            while (value > 0)
             {
-                while (value > 0)
+                if (value - speed < 0)
                 {
-                    if (value - speed < 0)
-                    {
-                        this.Grow(value);
-                        value = 0;
-                        base.UpdateColliderSize();
-                        yield return null;
-                    }
-                    else
-                    {
-                        this.Grow(speed);
-                        value -= speed;
-                        base.UpdateColliderSize();
-                        yield return null;
-                    }
+                    this.Grow(value);
+                    value = 0;
+                    yield return null;
+                }
+                else
+                {
+                    this.Grow(speed);
+                    value -= speed;
+                    yield return null;
                 }
             }
-            else if (value < 0)
+            while (value < 0)
             {
-                while (value < 0)
+                if (value + speed > 0)
                 {
-                    if (value + speed > 0)
-                    {
-                        this.Grow(-speed);
-                        value += speed;
-                        base.UpdateColliderSize();
-                        yield return null;
-                    }
-                    else
-                    {
-                        this.Grow(value);
-                        value = 0;
-                        base.UpdateColliderSize();
-                        yield return null;
-                    }
+                    this.Grow(-speed);
+                    value += speed;
+                    yield return null;
+                }
+                else
+                {
+                    this.Grow(value);
+                    value = 0;
+                    yield return null;
                 }
             }
         }
@@ -212,6 +193,15 @@ namespace Assets.Resources.Classes.Blobs
             float step = speed * Time.deltaTime; // Distance to move
             this.transform.position = Vector3.MoveTowards(this.transform
                 .position, this.StartPosition, step);
+        }
+
+        public void SetOnCollisionEvent(Consumable consumable)
+        {
+            if (consumable.BlobType == BlobType.Food)
+            {
+                this.OnCollisionEvent = this.ConsumeFoodEvent(consumable);
+            }
+            // else set to PowerUp OnCollisionEvent
         }
     }
 }

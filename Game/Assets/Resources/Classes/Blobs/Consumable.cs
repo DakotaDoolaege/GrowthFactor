@@ -10,11 +10,6 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class Consumable : Blob
     {
-        /*
-         * TODO
-         *
-         * - Add animation for when a Consumable gets consumed
-         */
         public ConsumableAction Action;
         public const float MinSizeTolerance = 0.6f;
         public const int ShrinkSpeed = 5;
@@ -80,21 +75,17 @@ namespace Assets.Resources.Classes.Blobs
         /// Consumable object</param>
         public void OnPlayerConsume(Player player)
         {
+            // Shrink the consumable
+            if (this.BlobType == BlobType.Food || this.BlobType == BlobType.PowerUp)
+            {
+                this.OnCollisionEvent = this.Shrink();
+            }
+            //player.SetOnCollisionEvent(this);
+
             // Call the action's action on the player, and start shrinking the
             // consumable
             this.Action.OnPlayerConsumption(player);
-            
-            // Shrink the consumable
-            this.OnCollisionEvent = this.Shrink();
-        }
-
-        /// <summary>
-        /// Deals with collisions between some Object and a Consumable object
-        /// </summary>
-        /// <param name="collision">The object colliding with</param>
-        public void OnCollisionEnter2D(Collision2D collision)
-        {
-            Debug.Log("Food: " + this.FoodValue.ToString());
+            //StartCoroutine(this.OnCollisionEvent);
         }
 
         public IEnumerator Shrink(int speed = ShrinkSpeed, 
@@ -110,10 +101,12 @@ namespace Assets.Resources.Classes.Blobs
                 {
                     if (this.FoodValue - speed < 0)
                     {
+                        //player.Grow(this.FoodValue);
                         this.FoodValue = 0;
                     }
                     else
                     {
+                        //player.Grow(speed);
                         this.FoodValue -= speed;
                     }
                 }
@@ -121,10 +114,12 @@ namespace Assets.Resources.Classes.Blobs
                 {
                     if (this.FoodValue + speed > 0)
                     {
+                        //player.Grow(this.FoodValue);
                         this.FoodValue = 0;
                     }
                     else
                     {
+                        //player.Grow(speed);
                         this.FoodValue += speed;
                     }
                 }
