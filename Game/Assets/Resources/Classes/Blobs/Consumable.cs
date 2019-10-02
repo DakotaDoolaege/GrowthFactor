@@ -16,6 +16,8 @@ namespace Assets.Resources.Classes.Blobs
          * - Add animation for when a Consumable gets consumed
          */
         public ConsumableAction Action;
+        public const float MinSizeTolerance = 0.6f;
+        public const int ShrinkSpeed = 5;
 
         public override int FoodValue
         {
@@ -32,6 +34,14 @@ namespace Assets.Resources.Classes.Blobs
             base.Start();
         }
 
+        public override void Update()
+        {
+            if (this.FoodValue == 0)
+            {
+                StartCoroutine(this.Shrink());
+            }
+        }
+
         /// <summary>
         /// Gets the appropriate BlobType for the Blob
         /// </summary>
@@ -40,7 +50,11 @@ namespace Assets.Resources.Classes.Blobs
         /// </returns>
         public override BlobType GetBlobType()
         {
-            return BlobType.Food;
+            if (this.gameObject.tag == "Food")
+            {
+                return BlobType.Food;
+            }
+            return BlobType.PowerUp;
         }
 
         /// <summary>
@@ -54,7 +68,7 @@ namespace Assets.Resources.Classes.Blobs
             float maximum = (float) ConsumableAction.MaxFoodValue;
             float value = Math.Abs((float) this.FoodValue);
 
-            float size = 0.3f + (value / (2.0f * maximum));
+            float size = MinSizeTolerance + (value / (2.0f * maximum));
             return new Vector2(size, size);
         }
 
@@ -66,8 +80,12 @@ namespace Assets.Resources.Classes.Blobs
         /// Consumable object</param>
         public void OnPlayerConsume(Player player)
         {
+            // Call the action's action on the player, and start shrinking the
+            // consumable
             this.Action.OnPlayerConsumption(player);
-            //StartCoroutine("Shrink");
+            
+            // Shrink the consumable
+            this.OnCollisionEvent = this.Shrink();
         }
 
         /// <summary>
@@ -76,27 +94,58 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object colliding with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            //base.CalculateCollision2D(collision);
+            Debug.Log("Food: " + this.FoodValue.ToString());
         }
 
-        public IEnumerator Shrink()
+        public IEnumerator Shrink(int speed = ShrinkSpeed, 
+                                  float tolerance = MinSizeTolerance)
         {
-            float speed = this.Renderer.size.x > this.Renderer.size.y ? this.Renderer.size.x : this.Renderer.size.y;
-            while ((this.Renderer.size.x > 0 || this.Renderer.size.y > 0))
+            Debug.Log("Food: " + this.FoodValue.ToString());
+
+            Vector2 decreaseValue;
+
+            while ((this.Renderer.size.x > tolerance || this.Renderer.size.y > tolerance))
             {
-                Debug.Log(this.Renderer.size);
                 if (this.FoodValue > 0)
                 {
-                    this.FoodValue -= 1;
+                    if (this.FoodValue - speed < 0)
+                    {
+                        this.FoodValue = 0;
+                    }
+                    else
+                    {
+                        this.FoodValue -= speed;
+                    }
                 }
                 else if (this.FoodValue < 0)
                 {
-                    this.FoodValue -= 1;
+                    if (this.FoodValue + speed > 0)
+                    {
+                        this.FoodValue = 0;
+                    }
+                    else
+                    {
+                        this.FoodValue += speed;
+                    }
                 }
-                float size = speed / ConsumableAction.MaxFoodValue;
-                this.Renderer.size -= new Vector2(size, size);
+
+                decreaseValue = this.Renderer.size - this.GetSize();
+                this.Renderer.size -= decreaseValue;
                 this.UpdateColliderSize();
                 yield return null;
+            }
+
+            if (this.FoodValue == 0)
+            {
+                const float size = (1 / (2.0f * ConsumableAction.MaxFoodValue));
+                decreaseValue = new Vector2(size, size);
+                while ((this.Renderer.size.x >= 0 && this.Renderer.size.y >= 0))
+                {
+                    this.Renderer.size -= decreaseValue;
+                    //this.FoodValue -= 1;
+                    this.UpdateColliderSize();
+                    yield return null;
+                }
             }
 
             Destroy(this.gameObject);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,8 +11,10 @@ namespace Assets.Resources.Classes.Blobs
     /*
      * TODO:
      *
-     * - Modify blobs so that they start with masses depending on their food value
-     * - Fix sprite sizing so we don't get very small blobs
+     * - Move consuming into just the Consumable class, so that on collision the
+     *   Consumable class takes care of all the consuming. It calls its action, which
+     *   calls the appropriate functionality on the Player, and then it calls the
+     *   appropriate functionality on itself.
      */
 
 
@@ -39,6 +42,8 @@ namespace Assets.Resources.Classes.Blobs
         public Vector2 LastVelocity;
         public Vector2 Acceleration;
 
+        public IEnumerator OnCollisionEvent { get; set; }
+
         /// <summary>
         /// Start is called before the first frame to initialize the object
         /// </summary>
@@ -60,7 +65,8 @@ namespace Assets.Resources.Classes.Blobs
 
             // Generate the size for the blob
             this.SizeVector = this.GetSize();
-            this.transform.localScale = this.SizeVector;
+            this.Renderer.size = SizeVector;
+            //this.transform.localScale = this.SizeVector;
 
             // Adjust the collider
             this.Collider = this.GetComponent<CircleCollider2D>();
@@ -68,6 +74,10 @@ namespace Assets.Resources.Classes.Blobs
 
             // Update the mass for the RigidBody to the FoodValue
             this.RigidBody.mass = Math.Abs(this.FoodValue);
+            if (this.FoodValue == 0)
+            {
+                this.RigidBody.mass = 1;
+            }
         }
 
         /// <summary>

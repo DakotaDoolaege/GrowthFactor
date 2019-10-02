@@ -29,13 +29,18 @@ namespace Assets.Resources.Classes.Blobs
         protected virtual int GenerateFoodValue() => 0;
 
         /// <summary>
-        /// Performs the appropriate actions upon a Player when that
-        /// Player object consumes the Consumable object holding the
-        /// current ConsumableAction object.
+        /// Handles the event where a Player consumes A Consumable object
+        /// holding the current ConsumableAction
         /// </summary>
-        /// <param name="player">The that consumes the Consumable object
-        /// holding the current ConsumableAction object</param>
-        public abstract void OnPlayerConsumption(Player player);
+        /// <param name="player">The Player consuming the Consumable
+        /// object</param>
+        public void OnPlayerConsumption(Player player)
+        {
+            // The only action the food has is to perform the collision
+            // event on the player.
+            //player.FoodValue += this.FoodValue;
+            player.StartCoroutine(player.OnCollisionEvent);
+        }
 
         public static ConsumableAction GetAction(BlobType type)
         {
