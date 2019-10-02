@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = System.Diagnostics.Debug;
@@ -12,9 +13,12 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class Player : Blob
     {
+        public const int PlayerMass = 10000;
+
         protected Vector2 DefaultSize = new Vector2(0.9f, 0.9f);
         private const int InitialPlayerValue = 0;
         public override int FoodValue { get; set; }
+        public Vector3 StartPosition { get; set; }
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -23,6 +27,17 @@ namespace Assets.Resources.Classes.Blobs
         {
             base.Start();
             this.FoodValue = InitialPlayerValue;
+            this.RigidBody.mass = PlayerMass;
+            this.StartPosition = this.transform.position;
+        }
+
+        public override void Update()
+        {
+            if (this.RigidBody.velocity.magnitude == 0.0f)
+            {
+                this.MoveToStart();
+            }
+            base.Update();
         }
 
         /// <summary>
@@ -69,25 +84,34 @@ namespace Assets.Resources.Classes.Blobs
         /// consumes</param>
         public void ConsumeFood(Consumable consumable)
         {
-            // Enact the Consumable's changes to the player
+            // Set the collision instance variable
+            this.OnCollisionEvent = this.ConsumeAnimation(consumable);
+
+            // Enact the Consumable's changes to the player, which will call the
+            // collision event on the player
             consumable.OnPlayerConsume(this);
             
-            // Run the animation to make the player grow or shrink
-            StartCoroutine(ConsumeAnimation(consumable));
-            StartCoroutine(consumable.Shrink());
+            // Start the collision event on the consumable
+            StartCoroutine(consumable.OnCollisionEvent);
         }
 
         // WORK ON THIS
-        public void OnCollisionExit(UnityEngine.Collision collision)
+        public void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Food")
             {
                 Consumable consumable = collision.gameObject.GetComponent<Consumable>();
 
-                StopCoroutine(ConsumeAnimation(consumable));
-                StopCoroutine(consumable.Shrink());
-            }
+                if (this.OnCollisionEvent != null)
+                {
+                    StopCoroutine(this.OnCollisionEvent);
+                }
 
+                if (consumable.OnCollisionEvent != null)
+                {
+                    StopCoroutine(consumable.OnCollisionEvent);
+                }
+            }
         }
 
         /// <summary>
@@ -96,8 +120,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object the Player collided with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            //base.CalculateCollision2D(collision);
-
+            UnityEngine.Debug.Log("Player: " + this.FoodValue.ToString());
             // Deal with colliding with a Food object
             if (collision.gameObject.tag == "Food")
             {
@@ -105,8 +128,22 @@ namespace Assets.Resources.Classes.Blobs
                 if (this.FoodValue + food.FoodValue > Blob.MinimumFoodValue)
                 {
                     this.ConsumeFood(food);
-                    //Destroy(collision.gameObject);
                 }
+            }
+            else if (collision.gameObject.tag == "PowerUp")
+            {
+                Consumable powerup = collision.gameObject.GetComponent<Consumable>();
+                // this.ConsumePowerUp(powerup);
+                /*
+                 * In this function, the appropriate this.OnCollisionEvent should be
+                 * set to deal with powerups. Then the Consumable object simply just
+                 * calls the this.OnCollisionEvent coroutine, so we just set the appropriate
+                 * stuff in there that we want to do.
+                 *
+                 * We need the this.ConsumePowerUp(powerup) function
+                 * A Coroutine for animating the player and performing actions upon consuming
+                 * the power up
+                 */
             }
         }
 
@@ -115,33 +152,66 @@ namespace Assets.Resources.Classes.Blobs
         /// object.
         /// </summary>
         /// <param name="consumable">The object to consume</param>
+        /// <param name="speed">The speed at which to grow the player</param>
         /// <returns>
         /// An IEnumerator that tells the coroutine when to stop and restart
         /// execution
         /// </returns>
-        private IEnumerator ConsumeAnimation(Blob consumable)
+        public IEnumerator ConsumeAnimation(Blob consumable, int speed = Consumable.ShrinkSpeed)
         {
             int value = consumable.FoodValue;
             if (value > 0)
             {
                 while (value > 0)
                 {
-                    this.Grow(1);
-                    value -= 1;
-                    base.UpdateColliderSize();
-                    yield return null;
+                    if (value - speed < 0)
+                    {
+                        this.Grow(value);
+                        value = 0;
+                        base.UpdateColliderSize();
+                        yield return null;
+                    }
+                    else
+                    {
+                        this.Grow(speed);
+                        value -= speed;
+                        base.UpdateColliderSize();
+                        yield return null;
+                    }
                 }
             }
             else if (value < 0)
             {
                 while (value < 0)
                 {
-                    this.Grow(-1);
-                    value += 1;
-                    base.UpdateColliderSize();
-                    yield return null;
+                    if (value + speed > 0)
+                    {
+                        this.Grow(-speed);
+                        value += speed;
+                        base.UpdateColliderSize();
+                        yield return null;
+                    }
+                    else
+                    {
+                        this.Grow(value);
+                        value = 0;
+                        base.UpdateColliderSize();
+                        yield return null;
+                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// Moves the player back to the start after it has been displaced
+        /// </summary>
+        /// <param name="speed">The speed at which to move the player
+        /// back</param>
+        private void MoveToStart(float speed=0.2f)
+        {
+            float step = speed * Time.deltaTime; // Distance to move
+            this.transform.position = Vector3.MoveTowards(this.transform
+                .position, this.StartPosition, step);
         }
     }
 }
