@@ -76,7 +76,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object colliding with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            base.CalculateCollision2D(collision);
+            //base.CalculateCollision2D(collision);
         }
     }
 }
