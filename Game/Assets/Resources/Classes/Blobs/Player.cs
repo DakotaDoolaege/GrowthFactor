@@ -74,6 +74,20 @@ namespace Assets.Resources.Classes.Blobs
             
             // Run the animation to make the player grow or shrink
             StartCoroutine(ConsumeAnimation(consumable));
+            StartCoroutine(consumable.Shrink());
+        }
+
+        // WORK ON THIS
+        public void OnCollisionExit(UnityEngine.Collision collision)
+        {
+            if (collision.gameObject.tag == "Food")
+            {
+                Consumable consumable = collision.gameObject.GetComponent<Consumable>();
+
+                StopCoroutine(ConsumeAnimation(consumable));
+                StopCoroutine(consumable.Shrink());
+            }
+
         }
 
         /// <summary>
@@ -87,12 +101,11 @@ namespace Assets.Resources.Classes.Blobs
             // Deal with colliding with a Food object
             if (collision.gameObject.tag == "Food")
             {
-                UnityEngine.Debug.Log("Collided with a food object");
                 Consumable food = collision.gameObject.GetComponent<Consumable>();
                 if (this.FoodValue + food.FoodValue > Blob.MinimumFoodValue)
                 {
                     this.ConsumeFood(food);
-                    Destroy(collision.gameObject);
+                    //Destroy(collision.gameObject);
                 }
             }
         }
