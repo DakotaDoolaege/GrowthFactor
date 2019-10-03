@@ -45,7 +45,7 @@ namespace Assets.Resources.Classes.Blobs
         //            }
         //            else
         //            {
-        //                this.Player.Grow(speed);
+        //                this.Player.Grow(-speed);
         //                consumable.FoodValue += speed;
         //            }
         //        }

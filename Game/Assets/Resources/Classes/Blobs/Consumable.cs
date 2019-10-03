@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /*
+     * TODO
+     * - Move the Shrink coroutine and other coroutines needed into
+     *   the ConsumableAction class so that the Consumable can have
+     *   dynamic actions, depending on the action.
+     */
+
     /// <summary>
     /// Class <c>Consumable</c> is a class that represents objects that may
     /// be consumed by a Player object. These include PowerUps and Food.
@@ -67,26 +74,26 @@ namespace Assets.Resources.Classes.Blobs
             return new Vector2(size, size);
         }
 
-        /// <summary>
-        /// Performs the appropriate action upon the player object when
-        /// the player object consumes the current Consumable object.
-        /// </summary>
-        /// <param name="player">The Player object that consumes the
-        /// Consumable object</param>
-        public void OnPlayerConsume(Player player)
-        {
-            // Shrink the consumable
-            if (this.BlobType == BlobType.Food || this.BlobType == BlobType.PowerUp)
-            {
-                this.OnCollisionEvent = this.Shrink();
-            }
-            //player.SetOnCollisionEvents(this);
+        ///// <summary>
+        ///// Performs the appropriate action upon the player object when
+        ///// the player object consumes the current Consumable object.
+        ///// </summary>
+        ///// <param name="player">The Player object that consumes the
+        ///// Consumable object</param>
+        //public void OnPlayerConsume(Player player)
+        //{
+        //    // Shrink the consumable
+        //    if (this.BlobType == BlobType.Food || this.BlobType == BlobType.PowerUp)
+        //    {
+        //        this.OnCollisionEvent = this.Shrink();
+        //    }
+        //    //player.SetOnCollisionEvents(this);
 
-            // Call the action's action on the player, and start shrinking the
-            // consumable
-            this.Action.OnPlayerConsumption(player);
-            //StartCoroutine(this.OnCollisionEvent);
-        }
+        //    // Call the action's action on the player, and start shrinking the
+        //    // consumable
+        //    this.Action.OnPlayerConsumption(player);
+        //    //StartCoroutine(this.OnCollisionEvent);
+        //}
 
         public IEnumerator Shrink(int speed = ShrinkSpeed, 
                                   float tolerance = MinSizeTolerance)
