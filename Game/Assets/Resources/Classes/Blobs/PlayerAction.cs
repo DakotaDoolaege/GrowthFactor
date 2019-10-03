@@ -18,24 +18,14 @@ namespace Assets.Resources.Classes.Blobs
     {
         public Player Player { get; set; }
         public PlayerActionType Type { get; set; }
+        public bool Consuming { get; set; }
+
+        /// <summary>
+        /// Start is called once per frame.
+        /// </summary>
+        public abstract void Start();
 
         //public abstract void ConsumePowerUpEvent();
-
-        /// <summary>
-        /// Start is called before the first frame update
-        /// </summary>
-        public virtual void Start()
-        {
-        
-        }
-
-        /// <summary>
-        /// Update is called once per frame
-        /// </summary>
-        void Update()
-        {
-        
-        }
 
         /// <summary>
         /// Deals with the event of consumption of a consumable
@@ -51,9 +41,28 @@ namespace Assets.Resources.Classes.Blobs
         /// consumes</param>
         public virtual void ConsumeEvent(Consumable consumable)
         {
-            // Start the collision events
-            StartCoroutine(consumable.OnCollisionEvent);
+            this.Consuming = true;
+
+            // Start the collision event
             StartCoroutine(this.Player.OnCollisionEvent);
+            StartCoroutine(consumable.OnCollisionEvent);
+        }
+
+        public virtual void StopConsumeEvent(Consumable consumable)
+        {
+            if (!this.Consuming)
+            {
+                return;
+            }
+
+            if (consumable != null)
+            {
+                StopCoroutine(consumable.OnCollisionEvent);
+            }
+
+            StopCoroutine(this.Player.OnCollisionEvent);
+
+            this.Consuming = false;
         }
 
         /// <summary>
@@ -65,7 +74,7 @@ namespace Assets.Resources.Classes.Blobs
         public void SetOnCollisionEvents(Consumable consumable, int speed = Consumable.ShrinkSpeed)
         {
             if (consumable.BlobType == BlobType.Food)
-            {
+            { 
                 consumable.OnCollisionEvent = consumable.Shrink(speed);
                 this.Player.OnCollisionEvent = this.ConsumeFoodEvent(consumable, speed);
             }
@@ -90,6 +99,7 @@ namespace Assets.Resources.Classes.Blobs
         {
             UnityEngine.Debug.Log("Player: " + this.Player.FoodValue);
             int value = consumable.FoodValue;
+
             while (value > 0)
             {
                 if (value - speed < 0)
