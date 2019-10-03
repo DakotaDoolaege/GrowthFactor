@@ -8,6 +8,9 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
+        public Vector2 startPos;
+        public Vector2 direction;
+        public bool directionChosen;
         private Rigidbody2D _body;
         private float _startPosX;
         private float _startPosY;
@@ -48,7 +51,7 @@ namespace Assets.Resources.Classes.Blobs
                 mousePos = Camera.main.ScreenToWorldPoint((mousePos));
                 _isHeld = true;
 
-                this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
+               // this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
             }
 
             if (Input.GetMouseButtonDown(0) && (this.CalculateMagnitude()))
@@ -66,8 +69,8 @@ namespace Assets.Resources.Classes.Blobs
             if (this._following)
             {
                 const float midpoint = 0.5f;
-                this.transform.position = Vector2.Lerp(this.transform.position,
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
+               // this.transform.position = Vector2.Lerp(this.transform.position,
+                   // Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
             }
 
             if (this._nextSave)
@@ -75,6 +78,7 @@ namespace Assets.Resources.Classes.Blobs
                 StartCoroutine("SavePosition");
             }
         }
+
 
         /// <summary>
         /// Fixed update is called by the UnityEngine to update physics.
@@ -135,6 +139,8 @@ namespace Assets.Resources.Classes.Blobs
             }
         }
 
+
+
         /// <summary>
         /// OnMouseUp handles the event where the left mouse button is realesed
         /// from an object.
@@ -145,5 +151,6 @@ namespace Assets.Resources.Classes.Blobs
             Vector2 vel = this._rigidBody.velocity;
             this._rigidBody.AddForce(vel);
         }
+
     }
 }

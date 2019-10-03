@@ -126,31 +126,31 @@ namespace Assets.Resources.Classes.Blobs
         /// the collided with object.
         /// </summary>
         /// <param name="collision">The object being collided with</param>
-        public void CalculateCollision2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "Player")
-            {
-                Rigidbody2D rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-                float mass = rigidbody.mass;
-                Blob blob = collision.gameObject.GetComponent<Blob>();
+        //public void CalculateCollision2D(Collision2D collision)
+        //{
+        //    if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "Player")
+        //    {
+        //        Rigidbody2D rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+        //        float mass = rigidbody.mass;
+        //        Blob blob = collision.gameObject.GetComponent<Blob>();
 
-                // Get the vectors of velocity and positive x-axis
-                Vector2 velocity = rigidbody.velocity;
-                Vector2 xAxis = rigidbody.centerOfMass + new Vector2(1, 0);
+        //        // Get the vectors of velocity and positive x-axis
+        //        Vector2 velocity = rigidbody.velocity;
+        //        Vector2 xAxis = rigidbody.centerOfMass + new Vector2(1, 0);
 
-                // Calculate the angle between the two
-                float theta = Vector2.Angle(xAxis, velocity);
+        //        // Calculate the angle between the two
+        //        float theta = Vector2.Angle(xAxis, velocity);
 
-                // Calculate the changes in the x and y coordinates to be
-                // applied to the current object
-                float x = (float) (mass * blob.Acceleration.x * Math.Cos(theta));
-                float y = (float) (mass * blob.Acceleration.y * Math.Sin(theta));
-                Vector2 force = new Vector2(x, y);
+        //        // Calculate the changes in the x and y coordinates to be
+        //        // applied to the current object
+        //        float x = (float) (mass * blob.Acceleration.x * Math.Cos(theta));
+        //        float y = (float) (mass * blob.Acceleration.y * Math.Sin(theta));
+        //        Vector2 force = new Vector2(x, y);
 
-                // Change the current object's velocity by the calculate force
-                this.RigidBody.velocity -= force;
-            }
-        }
+        //        // Change the current object's velocity by the calculate force
+        //        this.RigidBody.velocity -= force;
+        //    }
+        //}
 
         /// <summary>
         /// FixedUpdate() is called a by the UnityEngine to deal with physics
