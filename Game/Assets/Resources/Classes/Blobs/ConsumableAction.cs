@@ -43,7 +43,11 @@ namespace Assets.Resources.Classes.Blobs
 
         public static ConsumableAction GetAction(BlobType type)
         {
-            // Modify this for powerups later!
+            if (type == BlobType.Food)
+            {
+                return new Food();
+            }
+            /// Modify for powerup
             return new Food();
         }
     }

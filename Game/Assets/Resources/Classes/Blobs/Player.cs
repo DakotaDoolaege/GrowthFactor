@@ -19,6 +19,7 @@ namespace Assets.Resources.Classes.Blobs
         private const int InitialPlayerValue = 0;
         public override int FoodValue { get; set; }
         public Vector3 StartPosition { get; set; }
+        public PlayerAction Action { get; set; }
 
         public float MaxRadius
         {
@@ -36,9 +37,20 @@ namespace Assets.Resources.Classes.Blobs
         public override void Start()
         {
             base.Start();
+            this.AddAction();
+            UnityEngine.Debug.Log(this.Action.Player == this);
             this.FoodValue = InitialPlayerValue;
             this.RigidBody.mass = PlayerMass;
             this.StartPosition = this.transform.position;
+        }
+
+        private void AddAction(PlayerActionType action = PlayerActionType.Default)
+        {
+            if (action == PlayerActionType.Default)
+            {
+                this.Action = this.gameObject.AddComponent<DefaultPlayerAction>();
+                this.Action.Player = this;
+            }
         }
 
         public override void Update()
@@ -143,6 +155,7 @@ namespace Assets.Resources.Classes.Blobs
                 if (this.FoodValue + food.FoodValue > Blob.MinimumFoodValue)
                 {
                     this.ConsumeFood(food);
+                    //this.Action.Consume(food);
                 }
             }
         }

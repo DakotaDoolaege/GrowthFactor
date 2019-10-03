@@ -80,7 +80,7 @@ namespace Assets.Resources.Classes.Blobs
             {
                 this.OnCollisionEvent = this.Shrink();
             }
-            //player.SetOnCollisionEvent(this);
+            //player.SetOnCollisionEvents(this);
 
             // Call the action's action on the player, and start shrinking the
             // consumable

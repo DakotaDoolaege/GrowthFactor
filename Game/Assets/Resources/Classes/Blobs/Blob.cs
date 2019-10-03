@@ -83,7 +83,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <summary>
         /// Updates the collider radius for the Blob object's collider
         /// </summary>
-        protected void UpdateColliderSize()
+        public void UpdateColliderSize()
         {
             Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
             this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
@@ -116,6 +116,21 @@ namespace Assets.Resources.Classes.Blobs
         public virtual Sprite GetSprite()
         {
             return SpriteFactory.BlobFactory(this.FoodValue, this.BlobType);
+        }
+
+        public void UpdateSize(Vector2? decrease = null)
+        {
+            Vector2 decreaseValue;
+            if (decrease == null)
+            {
+                decreaseValue = this.GetSize() - this.Renderer.size;
+            }
+            else
+            {
+                decreaseValue = (Vector2) decrease;
+            }
+            this.Renderer.size += decreaseValue;
+            this.UpdateColliderSize();
         }
 
         /// <summary>
