@@ -62,6 +62,7 @@ namespace Assets.Resources.Classes.Blobs
 
             StopCoroutine(this.Player.OnCollisionEvent);
 
+            this.Player.Instantiator.ConsumeBlob(); // Change this to observer pattern
             this.Consuming = false;
         }
 

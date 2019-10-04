@@ -9,7 +9,13 @@ namespace Assets.Resources.Classes.Blobs
      * - Move the Shrink coroutine and other coroutines needed into
      *   the ConsumableAction class so that the Consumable can have
      *   dynamic actions, depending on the action.
+     *
+     * - Use observer pattern. Consumables are observables and the
+     *   instantiator is an observer which registers its ConsumeBlob()
+     *   with each consumable. When a consumable is consumed, it updates
+     *   the observers.
      */
+
 
     /// <summary>
     /// Class <c>Consumable</c> is a class that represents objects that may
@@ -34,6 +40,8 @@ namespace Assets.Resources.Classes.Blobs
         {
             this.Action = ConsumableAction.GetAction(this.BlobType);
             base.Start();
+
+            // Register Instantiator observer with observable Consumable object
         }
 
         public override void Update()
@@ -149,7 +157,6 @@ namespace Assets.Resources.Classes.Blobs
                     yield return null;
                 }
             }
-
             Destroy(this.gameObject);
         }
     }
