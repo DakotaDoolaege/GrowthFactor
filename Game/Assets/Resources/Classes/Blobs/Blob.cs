@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Assets.Resources.Classes.Instantiator;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,7 +43,18 @@ namespace Assets.Resources.Classes.Blobs
         public Vector2 LastVelocity;
         public Vector2 Acceleration;
 
+        public Instantiation Instantiator { get; set; }
+
         public IEnumerator OnCollisionEvent { get; set; }
+
+        /// <summary>
+        /// Sets the instantiator instance variable
+        /// </summary>
+        private void SetInstantiator()
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("Instantiator");
+            this.Instantiator = obj.gameObject.GetComponent<Instantiation>();
+        }
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -78,6 +90,9 @@ namespace Assets.Resources.Classes.Blobs
             {
                 this.RigidBody.mass = 1;
             }
+
+            // Set instantiation variable
+            this.SetInstantiator();
         }
 
         /// <summary>

@@ -1,23 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
-    /*
-     * TODO
-     *
-     * - When a player consumes a Blob, the this.Count should be decremented
-     */
     public class Instantiation : MonoBehaviour
     {
         public GameObject Prefab;
         public int Level { get; set; } = 1;
         public int Count { get; set; } = 0;
+        public IList<Vector3> StartPositions { get; set; }
+        public int NumStartPositions { get; set; } = 5;
+        private System.Random _rnd;
 
         /// <summary>
         /// Start is called before the first frame
         /// </summary>
         void Start()
         {
+            StartPositions = new List<Vector3>();
+            this._rnd = new System.Random();
+            this.SetStartPositions();
+
+            for (int i = 0; i < this.NumStartPositions; i++)
+            {
+                this.GenerateBlobs();
+            }
         }
         
         /// <summary>
@@ -25,10 +32,54 @@ namespace Assets.Resources.Classes.Instantiator
         /// </summary>
         void Update()
         {
-            if (this.CheckPositionEmpty(new Vector3(0, 0, 0)) && this.Count < this.CalculateMaxFood())
+            this.GenerateBlobs();
+        }
+
+        /// <summary>
+        /// Action to perform when a blob is consumed
+        /// </summary>
+        public void ConsumeBlob()
+        {
+            this.Count--;
+        }
+
+        private void GenerateBlobs()
+        {
+            int index = this._rnd.Next(0, this.StartPositions.Count);
+            Vector3 spawnPoint = this.StartPositions[index];
+
+            if (this.CheckPositionEmpty(spawnPoint) && this.Count < this.CalculateMaxFood())
             {
-                Instantiate(Prefab, new Vector2(0, 0), Quaternion.identity);
+                Debug.Log(spawnPoint);
+                GameObject a = Instantiate(this.Prefab, spawnPoint, Quaternion.identity);
                 this.Count++;
+            }
+        }
+
+        public void SetStartPositions()
+        {
+            float x = Camera.main.transform.position.x;
+            float y = Camera.main.transform.position.y;
+
+            float height = Camera.main.orthographicSize * 2.0f;
+            float width = Camera.main.aspect * height;
+
+            Debug.Log("X: " + x);
+            Debug.Log("Y: " + y);
+            Debug.Log(Camera.main.rect);
+
+            float shift = height / (2 * this.NumStartPositions);
+
+            for (int i = 1; i <= this.NumStartPositions; i++)
+            {
+                float xPos = (float) (x);
+                float yPos = (float) (y - (height / 2) + ((height * i) / this.NumStartPositions)) - shift;
+
+
+                Debug.Log(yPos);
+
+                Vector3 vector = new Vector3(xPos, yPos, 0);
+                this.StartPositions.Add(vector);
             }
         }
 
@@ -40,7 +91,7 @@ namespace Assets.Resources.Classes.Instantiator
         /// </returns>
         public int CalculateMaxFood()
         {
-            return this.Level * 5 + 5;
+            return this.Level % 3 + 5;
         }
 
         /// <summary>
