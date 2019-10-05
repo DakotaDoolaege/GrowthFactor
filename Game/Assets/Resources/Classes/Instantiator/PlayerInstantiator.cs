@@ -4,15 +4,23 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
-    public class PlayerInstantiator : MonoBehaviour
+    public class PlayerInstantiator : Instantiator
     {
-        public const int MaxPlayers = 6;
-        private Vector3[] _startPositions = new Vector3[MaxPlayers];
+        public const int NumStartPositions = 6;
         public IList<Blob> CurrentPlayers;
-        public GameObject Prefab;
         private const float ShiftFromEdge = 1.0f;
 
-        public int Count => this.CurrentPlayers.Count;
+        private int _count = 0; // Used to make the count readonly 
+        public override int Count
+        {
+            get => this.CurrentPlayers.Count;
+            set => this._count = value;
+        }
+
+        protected override void InitializePositionArray()
+        {
+            this.StartPositions = new Vector3[NumStartPositions];
+        }
 
         /// <summary>
         /// The current number of players playing
@@ -20,10 +28,11 @@ namespace Assets.Resources.Classes.Instantiator
         public int NumPlayers { get; set; }
 
         // Start is called before the first frame update
-        public void Start()
+        public override void Start()
         {
             this.CurrentPlayers = new List<Blob>();   
-            this.SetStartPositions();
+            //this.SetStartPositions();
+            base.Start();
         }
 
         // Update is called once per frame
@@ -31,11 +40,11 @@ namespace Assets.Resources.Classes.Instantiator
         {
             if (Input.GetMouseButtonDown(0))
             {
-                this.AddPlayer();
+                this.GenerateBlob();
             }
         }
 
-        private void SetStartPositions()
+        protected override void SetStartPositions()
         {
             float x = Camera.main.transform.position.x;
             float y = Camera.main.transform.position.y;
@@ -47,14 +56,14 @@ namespace Assets.Resources.Classes.Instantiator
             Debug.Log(height);
             Debug.Log(width);
 
-            this._startPositions[0] = new Vector3(x + (width / 2) - ShiftFromEdge, y, z);
-            this._startPositions[1] = new Vector3(x - (width / 2) + ShiftFromEdge, y, z);
+            this.StartPositions[0] = new Vector3(x + (width / 2) - ShiftFromEdge, y, z);
+            this.StartPositions[1] = new Vector3(x - (width / 2) + ShiftFromEdge, y, z);
 
-            this._startPositions[2] = new Vector3(x + (width / 4), y + (height / 2) - ShiftFromEdge, z);
-            this._startPositions[3] = new Vector3(x - (width / 4), y + (height / 2) - ShiftFromEdge, z);
+            this.StartPositions[2] = new Vector3(x + (width / 4), y + (height / 2) - ShiftFromEdge, z);
+            this.StartPositions[3] = new Vector3(x - (width / 4), y + (height / 2) - ShiftFromEdge, z);
 
-            this._startPositions[4] = new Vector3(x + (width / 4), y - (height / 2) + ShiftFromEdge, z);
-            this._startPositions[5] = new Vector3(x - (width / 4), y - (height / 2) + ShiftFromEdge, z);
+            this.StartPositions[4] = new Vector3(x + (width / 4), y - (height / 2) + ShiftFromEdge, z);
+            this.StartPositions[5] = new Vector3(x - (width / 4), y - (height / 2) + ShiftFromEdge, z);
         }
 
         /// <summary>
@@ -63,13 +72,13 @@ namespace Assets.Resources.Classes.Instantiator
         /// <returns>
         /// The player GameObject that was added to the game.
         /// </returns>
-        public GameObject AddPlayer()
+        public override GameObject GenerateBlob()
         {
             if (this.Count == 6)
             {
                 return null;
             }
-            Vector3 startPosition = this._startPositions[this.CurrentPlayers.Count];
+            Vector3 startPosition = this.StartPositions[this.CurrentPlayers.Count];
             Debug.Log(startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
             this.CurrentPlayers.Add(player.GetComponent<Player>());

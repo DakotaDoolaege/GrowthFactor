@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 186343471}
   - component: {fileID: 186343470}
   - component: {fileID: 186343473}
+  - component: {fileID: 186343474}
   m_Layer: 0
   m_Name: Grass (2)
   m_TagString: Wall
@@ -356,6 +357,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &186343474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186343469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3016032094484d64c81751ec3125a2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1637410285491869815, guid: 53fa0221a1ea6c04c9341f5d9e00189f, type: 3}
 --- !u!1001 &399841834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,7 +526,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &520081942
 GameObject:

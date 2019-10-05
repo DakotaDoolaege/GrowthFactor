@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
@@ -13,28 +14,31 @@ namespace Assets.Resources.Classes.Instantiator
      * observable should be the PlayerAction, which decides
      * when a Consumable is consumed.
      */
-    public class Instantiation : MonoBehaviour
+    public class ConsumableInstantiator : Instantiator
     {
-        public GameObject Prefab;
+        public const int NumStartPositions = 5; // Override NumStartPositions
         public int Level { get; set; } = 1;
-        public int Count { get; set; } = 0;
-        public IList<Vector3> StartPositions { get; set; }
-        public int NumStartPositions { get; set; } = 5;
+        public override int Count { get; set; } = 0;
         private System.Random _rnd;
 
         /// <summary>
         /// Start is called before the first frame
         /// </summary>
-        void Start()
+        public override void Start()
         {
-            StartPositions = new List<Vector3>();
+            base.Start();
             this._rnd = new System.Random();
-            this.SetStartPositions();
+            //this.SetStartPositions();
 
-            for (int i = 0; i < this.NumStartPositions; i++)
+            for (int i = 0; i < NumStartPositions; i++)
             {
-                this.GenerateBlobs();
+                this.GenerateBlob();
             }
+        }
+
+        protected override void InitializePositionArray()
+        {
+            this.StartPositions = new Vector3[NumStartPositions];
         }
         
         /// <summary>
@@ -42,7 +46,7 @@ namespace Assets.Resources.Classes.Instantiator
         /// </summary>
         void Update()
         {
-            this.GenerateBlobs();
+            this.GenerateBlob();
         }
 
         /// <summary>
@@ -50,28 +54,38 @@ namespace Assets.Resources.Classes.Instantiator
         /// </summary>
         public void ConsumeBlob()
         {
-            this.Count--;
+            GameObject[] food = GameObject.FindGameObjectsWithTag("Food");
+            GameObject[] powerup = GameObject.FindGameObjectsWithTag("PowerUp");
+            this.Count = food.Length + powerup.Length;
         }
 
         /// <summary>
         /// Generates the blobs in the start positions randomly
         /// </summary>
-        private void GenerateBlobs()
+        public override GameObject GenerateBlob()
         {
-            int index = this._rnd.Next(0, this.StartPositions.Count);
+            int index = this._rnd.Next(0, this.StartPositions.Length);
             Vector3 spawnPoint = this.StartPositions[index];
 
             if (this.CheckPositionEmpty(spawnPoint) && this.Count < this.CalculateMaxFood())
             {
-                GameObject a = Instantiate(this.Prefab, spawnPoint, Quaternion.identity);
+                GameObject blob = Instantiate(this.Prefab, spawnPoint, Quaternion.identity);
+
+                float xVelocity = (float) (Math.Pow(-1, this._rnd.Next(1, 3))) * (this._rnd.Next(0, 100) / 100.0f);
+                float yVelocity = (float) (Math.Pow(-1, this._rnd.Next(1, 3))) * (this._rnd.Next(0, 100) / 100.0f);
+                blob.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(xVelocity, yVelocity);
+
                 this.Count++;
+                return blob;
             }
+
+            return null;
         }
 
         /// <summary>
         /// Sets the start positions on the screen
         /// </summary>
-        public void SetStartPositions()
+        protected override void SetStartPositions()
         {
             float x = Camera.main.transform.position.x;
             float y = Camera.main.transform.position.y;
@@ -79,15 +93,15 @@ namespace Assets.Resources.Classes.Instantiator
             float height = Camera.main.orthographicSize * 2.0f;
             float width = Camera.main.aspect * height;
 
-            float shift = height / (2 * this.NumStartPositions);
+            float shift = height / (2 * NumStartPositions);
 
-            for (int i = 1; i <= this.NumStartPositions; i++)
+            for (int i = 1; i <= NumStartPositions; i++)
             {
                 float xPos = (float) (x);
-                float yPos = (float) (y - (height / 2) + ((height * i) / this.NumStartPositions)) - shift;
+                float yPos = (float) (y - (height / 2) + ((height * i) / NumStartPositions)) - shift;
 
                 Vector3 vector = new Vector3(xPos, yPos, 0);
-                this.StartPositions.Add(vector);
+                this.StartPositions[i - 1] = vector;
             }
         }
 
@@ -99,7 +113,7 @@ namespace Assets.Resources.Classes.Instantiator
         /// </returns>
         public int CalculateMaxFood()
         {
-            return this.Level % 3 + 5;
+            return this.Level % 3 + 10;
         }
 
         /// <summary>
