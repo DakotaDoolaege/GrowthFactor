@@ -151,6 +151,7 @@ namespace Assets.Resources.Classes.Blobs
 
             this.Instantiator.ConsumeBlob(this);
             Destroy(this.gameObject);
+
         }
     }
 }
