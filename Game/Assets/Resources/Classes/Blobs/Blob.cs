@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Assets.Resources.Classes.Instantiator;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,7 +43,18 @@ namespace Assets.Resources.Classes.Blobs
         public Vector2 LastVelocity;
         public Vector2 Acceleration;
 
+        public ConsumableInstantiator Instantiator { get; set; }
+
         public IEnumerator OnCollisionEvent { get; set; }
+
+        /// <summary>
+        /// Sets the instantiator instance variable
+        /// </summary>
+        private void SetInstantiator()
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("Driver");
+            this.Instantiator = obj.gameObject.GetComponent<ConsumableInstantiator>();
+        }
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -78,12 +90,15 @@ namespace Assets.Resources.Classes.Blobs
             {
                 this.RigidBody.mass = 1;
             }
+
+            // Set instantiation variable
+            this.SetInstantiator();
         }
 
         /// <summary>
         /// Updates the collider radius for the Blob object's collider
         /// </summary>
-        protected void UpdateColliderSize()
+        public void UpdateColliderSize()
         {
             Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
             this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
@@ -116,6 +131,21 @@ namespace Assets.Resources.Classes.Blobs
         public virtual Sprite GetSprite()
         {
             return SpriteFactory.BlobFactory(this.FoodValue, this.BlobType);
+        }
+
+        public void UpdateSize(Vector2? decrease = null)
+        {
+            Vector2 decreaseValue;
+            if (decrease == null)
+            {
+                decreaseValue = this.GetSize() - this.Renderer.size;
+            }
+            else
+            {
+                decreaseValue = (Vector2) decrease;
+            }
+            this.Renderer.size += decreaseValue;
+            this.UpdateColliderSize();
         }
 
         /// <summary>
