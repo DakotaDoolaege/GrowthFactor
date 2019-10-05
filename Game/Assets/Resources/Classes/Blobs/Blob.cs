@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Assets.Resources.Classes.Instantiator;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,8 +12,10 @@ namespace Assets.Resources.Classes.Blobs
     /*
      * TODO:
      *
-     * - Modify blobs so that they start with masses depending on their food value
-     * - Fix sprite sizing so we don't get very small blobs
+     * - Move consuming into just the Consumable class, so that on collision the
+     *   Consumable class takes care of all the consuming. It calls its action, which
+     *   calls the appropriate functionality on the Player, and then it calls the
+     *   appropriate functionality on itself.
      */
 
 
@@ -33,11 +37,24 @@ namespace Assets.Resources.Classes.Blobs
         public Sprite Icon;
         public SpriteRenderer Renderer;
         public CircleCollider2D Collider;
-        protected BlobType BlobType;
+        public BlobType BlobType;
         public abstract int FoodValue { get; set; }
         public const int MinimumFoodValue = 0;
         public Vector2 LastVelocity;
         public Vector2 Acceleration;
+
+        public ConsumableInstantiator Instantiator { get; set; }
+
+        public IEnumerator OnCollisionEvent { get; set; }
+
+        /// <summary>
+        /// Sets the instantiator instance variable
+        /// </summary>
+        private void SetInstantiator()
+        {
+            GameObject obj = GameObject.FindGameObjectWithTag("Driver");
+            this.Instantiator = obj.gameObject.GetComponent<ConsumableInstantiator>();
+        }
 
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -60,17 +77,28 @@ namespace Assets.Resources.Classes.Blobs
 
             // Generate the size for the blob
             this.SizeVector = this.GetSize();
-            this.transform.localScale = this.SizeVector;
+            this.Renderer.size = SizeVector;
+            //this.transform.localScale = this.SizeVector;
 
             // Adjust the collider
             this.Collider = this.GetComponent<CircleCollider2D>();
             UpdateColliderSize();
+
+            // Update the mass for the RigidBody to the FoodValue
+            this.RigidBody.mass = Math.Abs(this.FoodValue);
+            if (this.FoodValue == 0)
+            {
+                this.RigidBody.mass = 1;
+            }
+
+            // Set instantiation variable
+            this.SetInstantiator();
         }
 
         /// <summary>
         /// Updates the collider radius for the Blob object's collider
         /// </summary>
-        protected void UpdateColliderSize()
+        public void UpdateColliderSize()
         {
             Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
             this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
@@ -105,27 +133,42 @@ namespace Assets.Resources.Classes.Blobs
             return SpriteFactory.BlobFactory(this.FoodValue, this.BlobType);
         }
 
+        public void UpdateSize(Vector2? decrease = null)
+        {
+            Vector2 decreaseValue;
+            if (decrease == null)
+            {
+                decreaseValue = this.GetSize() - this.Renderer.size;
+            }
+            else
+            {
+                decreaseValue = (Vector2) decrease;
+            }
+            this.Renderer.size += decreaseValue;
+            this.UpdateColliderSize();
+        }
+
         /// <summary>
         /// Called once per frame to update the object
         /// </summary>
         public virtual void Update(){}
 
-        /// <summary>
-        /// Calculates the changes in the x-coordinate and y-coordinate of
-        /// the force vector upon collision with some object. The changes in
-        /// forces are calculated as follows:
-        ///
-        /// The x coordinate changes by mass * cos(theta) where mass is the
-        /// mass of the object being collided with and theta is the angle
-        /// between the positive x-axis and the vector of the velocity of
-        /// the collided with object.
-        ///
-        /// The y coordinate changes by mass * sin(theta) where mass is the
-        /// mass of the object being collided with and theta is the angle
-        /// between the positive x-axis and the vector of the velocity of
-        /// the collided with object.
-        /// </summary>
-        /// <param name="collision">The object being collided with</param>
+        ///// <summary>
+        ///// Calculates the changes in the x-coordinate and y-coordinate of
+        ///// the force vector upon collision with some object. The changes in
+        ///// forces are calculated as follows:
+        /////
+        ///// The x coordinate changes by mass * cos(theta) where mass is the
+        ///// mass of the object being collided with and theta is the angle
+        ///// between the positive x-axis and the vector of the velocity of
+        ///// the collided with object.
+        /////
+        ///// The y coordinate changes by mass * sin(theta) where mass is the
+        ///// mass of the object being collided with and theta is the angle
+        ///// between the positive x-axis and the vector of the velocity of
+        ///// the collided with object.
+        ///// </summary>
+        ///// <param name="collision">The object being collided with</param>
         //public void CalculateCollision2D(Collision2D collision)
         //{
         //    if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "Player")
@@ -157,11 +200,11 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         public void FixedUpdate()
         {
-            // Since this method deals with physics, it is a safe option to 
-            // calculate the object's acceleration here
-            this.Acceleration = (LastVelocity - this.RigidBody.velocity)
-                                / Time.fixedDeltaTime;
-            this.LastVelocity = this.RigidBody.velocity;
+            //// Since this method deals with physics, it is a safe option to 
+            //// calculate the object's acceleration here
+            //this.Acceleration = (LastVelocity - this.RigidBody.velocity)
+            //                    / Time.fixedDeltaTime;
+            //this.LastVelocity = this.RigidBody.velocity;
         }
     }
 }

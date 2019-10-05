@@ -70,10 +70,16 @@
     <Compile Include="Assets\Resources\Classes\Blobs\Collision.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Consumable.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\ConsumableAction.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\DefaultPlayerAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\DragAndDrop.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Food.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Player.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\PlayerAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\SpriteFactory.cs" />
+    <Compile Include="Assets\Resources\Classes\Driver\Driver.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\ConsumableInstantiator.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\Instantiator.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\PlayerInstantiator.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ExamplesList.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Highlight.cs" />
@@ -430,16 +436,10 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="OSCsharp">
-      <HintPath>C:/Users/arnol/f19torvalds/Game/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
+      <HintPath>C:/Users/samue/Documents/CMPT395/Project/f19torvalds/Game/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
     </Reference>
     <Reference Include="TUIOsharp">
-      <HintPath>C:/Users/arnol/f19torvalds/Game/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+      <HintPath>C:/Users/samue/Documents/CMPT395/Project/f19torvalds/Game/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

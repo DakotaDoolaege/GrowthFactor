@@ -28,18 +28,33 @@ namespace Assets.Resources.Classes.Blobs
         /// <returns></returns>
         protected virtual int GenerateFoodValue() => 0;
 
-        /// <summary>
-        /// Performs the appropriate actions upon a Player when that
-        /// Player object consumes the Consumable object holding the
-        /// current ConsumableAction object.
-        /// </summary>
-        /// <param name="player">The that consumes the Consumable object
-        /// holding the current ConsumableAction object</param>
-        public abstract void OnPlayerConsumption(Player player);
+        ///// <summary>
+        ///// Handles the event where a Player consumes A Consumable object
+        ///// holding the current ConsumableAction
+        ///// </summary>
+        ///// <param name="player">The Player consuming the Consumable
+        ///// object</param>
+        //public virtual void OnPlayerConsumption(Player player)
+        //{
+        //    // The only action the food has is to perform the collision
+        //    // event on the player
+        //    player.StartCoroutine(player.OnCollisionEvent);
+        //}
 
+        /// <summary>
+        /// Factory method pattern for getting a specific ConsumableAction
+        /// </summary>
+        /// <param name="type">The enum denoting the type of the action</param>
+        /// <returns>
+        /// A concrete action reflecting the argument enum
+        /// </returns>
         public static ConsumableAction GetAction(BlobType type)
         {
-            // Modify this for powerups later!
+            if (type == BlobType.Food)
+            {
+                return new Food();
+            }
+            /// Modify for powerup
             return new Food();
         }
     }

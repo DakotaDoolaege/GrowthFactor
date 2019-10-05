@@ -4,18 +4,23 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /*
+     * TODO
+     * - Move the Shrink coroutine and other coroutines needed into
+     *   the ConsumableAction class so that the Consumable can have
+     *   dynamic actions, depending on the action.
+     */
+
+
     /// <summary>
     /// Class <c>Consumable</c> is a class that represents objects that may
     /// be consumed by a Player object. These include PowerUps and Food.
     /// </summary>
     public class Consumable : Blob
     {
-        /*
-         * TODO
-         *
-         * - Add animation for when a Consumable gets consumed
-         */
         public ConsumableAction Action;
+        public const float MinSizeTolerance = 0.6f;
+        public const int ShrinkSpeed = 5;
 
         public override int FoodValue
         {
@@ -32,6 +37,14 @@ namespace Assets.Resources.Classes.Blobs
             base.Start();
         }
 
+        public override void Update()
+        {
+            if (this.FoodValue == 0)
+            {
+                StartCoroutine(this.Shrink());
+            }
+        }
+
         /// <summary>
         /// Gets the appropriate BlobType for the Blob
         /// </summary>
@@ -40,7 +53,11 @@ namespace Assets.Resources.Classes.Blobs
         /// </returns>
         public override BlobType GetBlobType()
         {
-            return BlobType.Food;
+            if (this.gameObject.tag == "Food")
+            {
+                return BlobType.Food;
+            }
+            return BlobType.PowerUp;
         }
 
         /// <summary>
@@ -54,29 +71,87 @@ namespace Assets.Resources.Classes.Blobs
             float maximum = (float) ConsumableAction.MaxFoodValue;
             float value = Math.Abs((float) this.FoodValue);
 
-            float size = 0.1f + (value / maximum);
+            float size = MinSizeTolerance + (value / (2.0f * maximum));
             return new Vector2(size, size);
         }
 
-        /// <summary>
-        /// Performs the appropriate action upon the player object when
-        /// the player object consumes the current Consumable object.
-        /// </summary>
-        /// <param name="player">The Player object that consumes the
-        /// Consumable object</param>
-        public void OnPlayerConsume(Player player)
-        {
-            this.Action.OnPlayerConsumption(player);
-            //StartCoroutine("Shrink");
-        }
+        ///// <summary>
+        ///// Performs the appropriate action upon the player object when
+        ///// the player object consumes the current Consumable object.
+        ///// </summary>
+        ///// <param name="player">The Player object that consumes the
+        ///// Consumable object</param>
+        //public void OnPlayerConsume(Player player)
+        //{
+        //    // Shrink the consumable
+        //    if (this.BlobType == BlobType.Food || this.BlobType == BlobType.PowerUp)
+        //    {
+        //        this.OnCollisionEvent = this.Shrink();
+        //    }
+        //    //player.SetOnCollisionEvents(this);
 
-        /// <summary>
-        /// Deals with collisions between some Object and a Consumable object
-        /// </summary>
-        /// <param name="collision">The object colliding with</param>
-        public void OnCollisionEnter2D(Collision2D collision)
+        //    // Call the action's action on the player, and start shrinking the
+        //    // consumable
+        //    this.Action.OnPlayerConsumption(player);
+        //    //StartCoroutine(this.OnCollisionEvent);
+        //}
+
+        public IEnumerator Shrink(int speed = ShrinkSpeed, 
+                                  float tolerance = MinSizeTolerance)
         {
-            //base.CalculateCollision2D(collision);
+            Vector2 decreaseValue;
+
+            while ((this.Renderer.size.x > tolerance || this.Renderer.size.y > tolerance))
+            {
+                if (this.FoodValue > 0)
+                {
+                    if (this.FoodValue - speed < 0)
+                    {
+                        //player.Grow(this.FoodValue);
+                        this.FoodValue = 0;
+                    }
+                    else
+                    {
+                        //player.Grow(speed);
+                        this.FoodValue -= speed;
+                    }
+                }
+                else if (this.FoodValue < 0)
+                {
+                    if (this.FoodValue + speed > 0)
+                    {
+                        //player.Grow(this.FoodValue);
+                        this.FoodValue = 0;
+                    }
+                    else
+                    {
+                        //player.Grow(speed);
+                        this.FoodValue += speed;
+                    }
+                }
+
+                decreaseValue = this.Renderer.size - this.GetSize();
+                this.Renderer.size -= decreaseValue;
+                this.UpdateColliderSize();
+                yield return null;
+            }
+
+            if (this.FoodValue == 0)
+            {
+                const float size = (1 / (2.0f * ConsumableAction.MaxFoodValue));
+                decreaseValue = new Vector2(size, size);
+                while ((this.Renderer.size.x >= 0 && this.Renderer.size.y >= 0))
+                {
+                    this.Renderer.size -= decreaseValue;
+                    //this.FoodValue -= 1;
+                    this.UpdateColliderSize();
+                    yield return null;
+                }
+            }
+
+            this.Instantiator.ConsumeBlob(this);
+            Destroy(this.gameObject);
+
         }
     }
 }
