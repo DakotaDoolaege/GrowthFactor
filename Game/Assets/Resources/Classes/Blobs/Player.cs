@@ -26,13 +26,13 @@ namespace Assets.Resources.Classes.Blobs
         /// The maximum radius of the renderer. Since the sprite is not a
         /// perfect circle, it is either the x or y axis.
         /// </summary>
-        public float MaxRadius
+        public float? MaxRadius
         {
             get
             {
-                float x = this.Renderer.size.x;
-                float y = this.Renderer.size.y;
-                return x > y ? x : y;
+                float? x = this.Renderer?.size.x;
+                float? y = this.Renderer?.size.y;
+                return (x > y ? x : y) ?? 0;
             }
         }
 

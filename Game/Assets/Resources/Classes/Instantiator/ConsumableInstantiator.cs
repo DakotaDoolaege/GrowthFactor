@@ -18,7 +18,7 @@ namespace Assets.Resources.Classes.Instantiator
     public class ConsumableInstantiator : Instantiator
     {
         public const int NumStartPositions = 5; // Override NumStartPositions
-        public int Level { get; set; } = 1;
+        public int Level { get; set; } = 0;
         private System.Random _rnd;
 
         /// <summary>

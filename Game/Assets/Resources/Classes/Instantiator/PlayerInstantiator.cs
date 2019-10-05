@@ -31,10 +31,10 @@ namespace Assets.Resources.Classes.Instantiator
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                this.GenerateBlob();
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    this.GenerateBlob();
+            //}
         }
 
         protected override void SetStartPositions()
