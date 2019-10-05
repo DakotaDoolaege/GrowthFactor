@@ -20,6 +20,7 @@ namespace Assets.Resources.Classes.Blobs
         public override int FoodValue { get; set; }
         public Vector3 StartPosition { get; set; }
         public PlayerAction Action { get; set; }
+        public int Score { get; set; }
 
         /// <summary>
         /// The maximum radius of the renderer. Since the sprite is not a

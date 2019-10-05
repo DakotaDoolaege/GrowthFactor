@@ -35,8 +35,6 @@ namespace Assets.Resources.Classes.Blobs
         {
             this.Action = ConsumableAction.GetAction(this.BlobType);
             base.Start();
-
-            // Register Instantiator observer with observable Consumable object
         }
 
         public override void Update()
@@ -101,7 +99,6 @@ namespace Assets.Resources.Classes.Blobs
         public IEnumerator Shrink(int speed = ShrinkSpeed, 
                                   float tolerance = MinSizeTolerance)
         {
-
             Vector2 decreaseValue;
 
             while ((this.Renderer.size.x > tolerance || this.Renderer.size.y > tolerance))

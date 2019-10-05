@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Assets.Resources.Classes.Blobs;
+using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
@@ -6,12 +8,14 @@ namespace Assets.Resources.Classes.Instantiator
     {
         public GameObject Prefab;
         protected Vector3[] StartPositions;
+        public IList<Blob> CurrentBlobs;
 
-        public abstract int Count { get; set; }
+        public int Count => this.CurrentBlobs.Count;
 
         // Start is called before the first frame update
         public virtual void Start()
         {
+            this.CurrentBlobs = new List<Blob>();
             this.InitializePositionArray();
             this.SetStartPositions();
         }

@@ -73,7 +73,7 @@
     <Compile Include="Assets\Resources\Classes\Blobs\Player.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\PlayerAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\SpriteFactory.cs" />
-    <Compile Include="Assets\Resources\Classes\Driver.cs" />
+    <Compile Include="Assets\Resources\Classes\Driver\Driver.cs" />
     <Compile Include="Assets\Resources\Classes\Instantiator\ConsumableInstantiator.cs" />
     <Compile Include="Assets\Resources\Classes\Instantiator\Instantiator.cs" />
     <Compile Include="Assets\Resources\Classes\Instantiator\PlayerInstantiator.cs" />

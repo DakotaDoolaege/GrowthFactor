@@ -7,15 +7,8 @@ namespace Assets.Resources.Classes.Instantiator
     public class PlayerInstantiator : Instantiator
     {
         public const int NumStartPositions = 6;
-        public IList<Blob> CurrentPlayers;
+        //public IList<Blob> CurrentBlobs;
         private const float ShiftFromEdge = 1.0f;
-
-        private int _count = 0; // Used to make the count readonly 
-        public override int Count
-        {
-            get => this.CurrentPlayers.Count;
-            set => this._count = value;
-        }
 
         protected override void InitializePositionArray()
         {
@@ -30,7 +23,7 @@ namespace Assets.Resources.Classes.Instantiator
         // Start is called before the first frame update
         public override void Start()
         {
-            this.CurrentPlayers = new List<Blob>();   
+            this.CurrentBlobs = new List<Blob>();   
             //this.SetStartPositions();
             base.Start();
         }
@@ -78,10 +71,10 @@ namespace Assets.Resources.Classes.Instantiator
             {
                 return null;
             }
-            Vector3 startPosition = this.StartPositions[this.CurrentPlayers.Count];
+            Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];
             Debug.Log(startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
-            this.CurrentPlayers.Add(player.GetComponent<Player>());
+            this.CurrentBlobs.Add(player.GetComponent<Player>());
 
             return player;
         }
