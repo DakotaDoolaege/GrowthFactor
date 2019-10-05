@@ -155,7 +155,6 @@ namespace Assets.Resources.Classes.Blobs
         /// <param name="collision">The object the Player collided with</param>
         public void OnCollisionEnter2D(Collision2D collision)
         {
-            UnityEngine.Debug.Log("Player: " + this.FoodValue.ToString());
             // Deal with colliding with a Food object
             if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "PowerUp")
             {

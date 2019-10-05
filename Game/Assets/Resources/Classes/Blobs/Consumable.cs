@@ -9,11 +9,6 @@ namespace Assets.Resources.Classes.Blobs
      * - Move the Shrink coroutine and other coroutines needed into
      *   the ConsumableAction class so that the Consumable can have
      *   dynamic actions, depending on the action.
-     *
-     * - Use observer pattern. Consumables are observables and the
-     *   instantiator is an observer which registers its ConsumeBlob()
-     *   with each consumable. When a consumable is consumed, it updates
-     *   the observers.
      */
 
 
@@ -106,7 +101,6 @@ namespace Assets.Resources.Classes.Blobs
         public IEnumerator Shrink(int speed = ShrinkSpeed, 
                                   float tolerance = MinSizeTolerance)
         {
-            Debug.Log("Food: " + this.FoodValue.ToString());
 
             Vector2 decreaseValue;
 
