@@ -10,12 +10,12 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public enum PlayerActionType {Default, NoRed, Shield}
 
-    /// <summary>
-    /// Delegate <c>ObserveConsumption</c> is used to register objects
-    /// with the PlayerAction that need to be updated when a Consumable
-    /// is consumed.
-    /// </summary>
-    public delegate void ObserveConsumption(Consumable consumable);
+    ///// <summary>
+    ///// Delegate <c>ObserveConsumption</c> is used to register objects
+    ///// with the PlayerAction that need to be updated when a Consumable
+    ///// is consumed.
+    ///// </summary>
+    //public delegate void ObserveConsumption(Consumable consumable);
 
     /// <summary>
     /// Class <c>PlayerAction</c> represents actions a Player can take on the
@@ -27,18 +27,18 @@ namespace Assets.Resources.Classes.Blobs
         public PlayerActionType Type { get; set; }
         public bool Consuming { get; set; }
 
-        /// <summary>
-        /// Event <c>ConsumedConsumable</c> is a delegate that is called
-        /// when a Consumable object gets consumed by the Player.
-        /// </summary>
-        public event ObserveConsumption ConsumedConsumable;
+        ///// <summary>
+        ///// Event <c>ConsumedConsumable</c> is a delegate that is called
+        ///// when a Consumable object gets consumed by the Player.
+        ///// </summary>
+        //public event ObserveConsumption ConsumedConsumable;
 
         /// <summary>
         /// Start is called once per frame.
         /// </summary>
         public virtual void Start()
         {
-            this.ConsumedConsumable += this.Player.Instantiator.ConsumeBlob;
+            //this.ConsumedConsumable += this.Player.Instantiator.ConsumeBlob;
         }
 
         //public abstract void ConsumePowerUpEvent();
@@ -78,8 +78,8 @@ namespace Assets.Resources.Classes.Blobs
 
             StopCoroutine(this.Player.OnCollisionEvent);
 
-            
-            this.ConsumedConsumable?.Invoke(consumable);
+
+            //this.ConsumedConsumable?.Invoke(consumable);
             this.Consuming = false;
         }
 
