@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
@@ -18,7 +19,6 @@ namespace Assets.Resources.Classes.Instantiator
     {
         public const int NumStartPositions = 5; // Override NumStartPositions
         public int Level { get; set; } = 1;
-        public override int Count { get; set; } = 0;
         private System.Random _rnd;
 
         /// <summary>
@@ -52,11 +52,14 @@ namespace Assets.Resources.Classes.Instantiator
         /// <summary>
         /// Action to perform when a blob is consumed
         /// </summary>
-        public void ConsumeBlob()
+        public void ConsumeBlob(Consumable consumable)
         {
-            GameObject[] food = GameObject.FindGameObjectsWithTag("Food");
-            GameObject[] powerup = GameObject.FindGameObjectsWithTag("PowerUp");
-            this.Count = food.Length + powerup.Length;
+            //GameObject[] food = GameObject.FindGameObjectsWithTag("Food");
+            //GameObject[] powerup = GameObject.FindGameObjectsWithTag("PowerUp");
+            //this.Count = food.Length + powerup.Length;
+
+            this.CurrentBlobs.Remove((Blob) consumable);
+            //this.Count = this.CurrentBlobs.Count;
         }
 
         /// <summary>
@@ -75,7 +78,8 @@ namespace Assets.Resources.Classes.Instantiator
                 float yVelocity = (float) (Math.Pow(-1, this._rnd.Next(1, 3))) * (this._rnd.Next(0, 100) / 100.0f);
                 blob.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(xVelocity, yVelocity);
 
-                this.Count++;
+                //this.Count++;
+                this.CurrentBlobs.Add(blob.gameObject.GetComponent<Blob>());
                 return blob;
             }
 
@@ -113,7 +117,7 @@ namespace Assets.Resources.Classes.Instantiator
         /// </returns>
         public int CalculateMaxFood()
         {
-            return this.Level % 3 + 10;
+            return this.Level % 3 + 9;
         }
 
         /// <summary>

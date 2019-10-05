@@ -15,7 +15,7 @@ namespace Assets.Resources.Classes.Blobs
     /// with the PlayerAction that need to be updated when a Consumable
     /// is consumed.
     /// </summary>
-    public delegate void ObserveConsumption();
+    public delegate void ObserveConsumption(Consumable consumable);
 
     /// <summary>
     /// Class <c>PlayerAction</c> represents actions a Player can take on the
@@ -79,7 +79,7 @@ namespace Assets.Resources.Classes.Blobs
             StopCoroutine(this.Player.OnCollisionEvent);
 
             
-            this.ConsumedConsumable?.Invoke();
+            this.ConsumedConsumable?.Invoke(consumable);
             this.Consuming = false;
         }
 
