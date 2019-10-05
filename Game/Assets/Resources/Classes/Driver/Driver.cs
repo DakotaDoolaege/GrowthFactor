@@ -29,8 +29,8 @@ namespace Assets.Resources.Classes.Driver
             this.TimerCount = GetLevelTime();
             Debug.Log("Start time: " + TimerCount);
 
-            this.PlayerInstantiator = this.gameObject.AddComponent<PlayerInstantiator>();
-            this.ConsumableInstantiator = this.gameObject.AddComponent<ConsumableInstantiator>();
+            this.PlayerInstantiator = this.gameObject.GetComponent<PlayerInstantiator>();
+            this.ConsumableInstantiator = this.gameObject.GetComponent<ConsumableInstantiator>();
 
             this.CountDown.Elapsed += this.IncrementTimerCount;
             this.CountDown.Start();
@@ -97,12 +97,13 @@ namespace Assets.Resources.Classes.Driver
             // here
 
             Debug.Log("LEVEL ENDS");
-
             this.UpdateScores();
 
-            // Pause Game Here
-            // Display information from level
-            // Go to next level
+
+            // Basically here we need to display the scores
+            // to get each player's score, just loop through the
+            // this.Players list (you'll need to cast them to Players
+            // before being able to access their scores)
         }
 
         /// <summary>

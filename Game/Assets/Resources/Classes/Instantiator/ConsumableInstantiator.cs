@@ -58,7 +58,10 @@ namespace Assets.Resources.Classes.Instantiator
             //GameObject[] powerup = GameObject.FindGameObjectsWithTag("PowerUp");
             //this.Count = food.Length + powerup.Length;
 
-            this.CurrentBlobs.Remove((Blob) consumable);
+            if (consumable.FoodValue == 0)
+            {
+                this.CurrentBlobs.Remove((Blob) consumable);
+            }
             //this.Count = this.CurrentBlobs.Count;
         }
 
