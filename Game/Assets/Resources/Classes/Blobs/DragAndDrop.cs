@@ -8,6 +8,9 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
+        public Vector2 startPos;
+        public Vector2 direction;
+        public bool directionChosen;
         private Rigidbody2D _body;
         private float _startPosX;
         private float _startPosY;
@@ -47,7 +50,6 @@ namespace Assets.Resources.Classes.Blobs
                 Vector3 mousePos = Input.mousePosition;
                 mousePos = Camera.main.ScreenToWorldPoint((mousePos));
                 _isHeld = true;
-
                 //this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
             }
 
@@ -75,6 +77,7 @@ namespace Assets.Resources.Classes.Blobs
                 StartCoroutine("SavePosition");
             }
         }
+
 
         /// <summary>
         /// Fixed update is called by the UnityEngine to update physics.
@@ -135,6 +138,8 @@ namespace Assets.Resources.Classes.Blobs
             }
         }
 
+
+
         /// <summary>
         /// OnMouseUp handles the event where the left mouse button is realesed
         /// from an object.
@@ -148,5 +153,6 @@ namespace Assets.Resources.Classes.Blobs
                 this._rigidBody.AddForce(vel);
             }
         }
+
     }
 }
