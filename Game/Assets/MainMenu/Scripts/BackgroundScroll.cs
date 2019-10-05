@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndlessScroll : MonoBehaviour { 
+public class BackgroundScroll : MonoBehaviour { 
 
     public float scrollingSpeed; // speed of scrolling background (negative to go right)
     Vector2 initialPosition; // begining position

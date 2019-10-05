@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MainMenu\PauseMenu.cs" />
-    <Compile Include="Assets\MainMenu\Scripts\EndlessScroll.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\BackgroundScroll.cs" />
     <Compile Include="Assets\MainMenu\Scripts\MainMenu.cs" />
     <Compile Include="Assets\MainMenu\Scripts\Parallax.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Blob.cs" />
