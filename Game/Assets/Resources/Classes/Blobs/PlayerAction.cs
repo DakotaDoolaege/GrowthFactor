@@ -11,7 +11,14 @@ namespace Assets.Resources.Classes.Blobs
     public enum PlayerActionType {Default, NoRed, Shield}
 
     /// <summary>
-    /// Class <c>PlayerAction</c> represents actions a Player can take ont he
+    /// Delegate <c>ObserveConsumption</c> is used to register objects
+    /// with the PlayerAction that need to be updated when a Consumable
+    /// is consumed.
+    /// </summary>
+    public delegate void ObserveConsumption();
+
+    /// <summary>
+    /// Class <c>PlayerAction</c> represents actions a Player can take on the
     /// food objects.
     /// </summary>
     public abstract class PlayerAction : MonoBehaviour
@@ -21,9 +28,18 @@ namespace Assets.Resources.Classes.Blobs
         public bool Consuming { get; set; }
 
         /// <summary>
+        /// Event <c>ConsumedConsumable</c> is a delegate that is called
+        /// when a Consumable object gets consumed by the Player.
+        /// </summary>
+        public event ObserveConsumption ConsumedConsumable;
+
+        /// <summary>
         /// Start is called once per frame.
         /// </summary>
-        public abstract void Start();
+        public virtual void Start()
+        {
+            this.ConsumedConsumable += this.Player.Instantiator.ConsumeBlob;
+        }
 
         //public abstract void ConsumePowerUpEvent();
 
@@ -55,14 +71,15 @@ namespace Assets.Resources.Classes.Blobs
                 return;
             }
 
-            if (consumable != null)
+            if (consumable != null && consumable.OnCollisionEvent != null)
             {
                 StopCoroutine(consumable.OnCollisionEvent);
             }
 
             StopCoroutine(this.Player.OnCollisionEvent);
 
-            this.Player.Instantiator.ConsumeBlob(); // Change this to observer pattern
+            
+            this.ConsumedConsumable?.Invoke();
             this.Consuming = false;
         }
 
@@ -98,7 +115,6 @@ namespace Assets.Resources.Classes.Blobs
         /// </returns>
         public virtual IEnumerator ConsumeFoodEvent(Blob consumable, int speed = Consumable.ShrinkSpeed)
         {
-            UnityEngine.Debug.Log("Player: " + this.Player.FoodValue);
             int value = consumable.FoodValue;
 
             while (value > 0)

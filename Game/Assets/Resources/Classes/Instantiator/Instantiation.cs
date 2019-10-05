@@ -3,6 +3,16 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
+    /*
+     * TODO
+     * - Implement observable pattern so that the instantiator
+     * can register with Consumables so that when they are
+     * consumed, we can update in a more appropriate manner.
+     *
+     * The instantiator should be the observer, and the
+     * observable should be the PlayerAction, which decides
+     * when a Consumable is consumed.
+     */
     public class Instantiation : MonoBehaviour
     {
         public GameObject Prefab;
@@ -43,6 +53,9 @@ namespace Assets.Resources.Classes.Instantiator
             this.Count--;
         }
 
+        /// <summary>
+        /// Generates the blobs in the start positions randomly
+        /// </summary>
         private void GenerateBlobs()
         {
             int index = this._rnd.Next(0, this.StartPositions.Count);
@@ -50,12 +63,14 @@ namespace Assets.Resources.Classes.Instantiator
 
             if (this.CheckPositionEmpty(spawnPoint) && this.Count < this.CalculateMaxFood())
             {
-                Debug.Log(spawnPoint);
                 GameObject a = Instantiate(this.Prefab, spawnPoint, Quaternion.identity);
                 this.Count++;
             }
         }
 
+        /// <summary>
+        /// Sets the start positions on the screen
+        /// </summary>
         public void SetStartPositions()
         {
             float x = Camera.main.transform.position.x;
@@ -64,19 +79,12 @@ namespace Assets.Resources.Classes.Instantiator
             float height = Camera.main.orthographicSize * 2.0f;
             float width = Camera.main.aspect * height;
 
-            Debug.Log("X: " + x);
-            Debug.Log("Y: " + y);
-            Debug.Log(Camera.main.rect);
-
             float shift = height / (2 * this.NumStartPositions);
 
             for (int i = 1; i <= this.NumStartPositions; i++)
             {
                 float xPos = (float) (x);
                 float yPos = (float) (y - (height / 2) + ((height * i) / this.NumStartPositions)) - shift;
-
-
-                Debug.Log(yPos);
 
                 Vector3 vector = new Vector3(xPos, yPos, 0);
                 this.StartPositions.Add(vector);

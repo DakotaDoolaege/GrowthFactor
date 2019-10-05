@@ -8,6 +8,7 @@ namespace Assets.Resources.Classes.Blobs
         public override void Start()
         {
             this.Type = PlayerActionType.Default;
+            base.Start();
         }
 
         public override void Consume(Consumable consumable)
