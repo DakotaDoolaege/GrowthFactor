@@ -43,7 +43,7 @@ namespace Assets.Resources.Classes.Blobs
         public Vector2 LastVelocity;
         public Vector2 Acceleration;
 
-        public Instantiation Instantiator { get; set; }
+        public ConsumableInstantiator Instantiator { get; set; }
 
         public IEnumerator OnCollisionEvent { get; set; }
 
@@ -53,7 +53,7 @@ namespace Assets.Resources.Classes.Blobs
         private void SetInstantiator()
         {
             GameObject obj = GameObject.FindGameObjectWithTag("Instantiator");
-            this.Instantiator = obj.gameObject.GetComponent<Instantiation>();
+            this.Instantiator = obj.gameObject.GetComponent<ConsumableInstantiator>();
         }
 
         /// <summary>

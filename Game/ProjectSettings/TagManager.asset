@@ -7,6 +7,7 @@ TagManager:
   - Food
   - Wall
   - Instantiator
+  - PowerUp
   layers:
   - Default
   - TransparentFX
