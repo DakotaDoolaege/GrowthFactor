@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Food
   - Wall
-  - Instantiator
   layers:
   - Default
   - TransparentFX
