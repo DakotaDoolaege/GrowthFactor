@@ -72,7 +72,7 @@ namespace Assets.Resources.Classes.Instantiator
                 return null;
             }
             Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];
-            Debug.Log(startPosition);
+            Debug.Log("START POS:" +startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
             this.CurrentBlobs.Add(player.GetComponent<Player>());
 
