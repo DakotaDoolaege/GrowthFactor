@@ -6,9 +6,6 @@ TagManager:
   tags:
   - Food
   - Wall
-  - Instantiator
-  - PowerUp
-  - Driver
   layers:
   - Default
   - TransparentFX
