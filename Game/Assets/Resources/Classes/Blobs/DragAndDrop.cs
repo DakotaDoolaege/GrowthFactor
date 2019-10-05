@@ -48,7 +48,7 @@ namespace Assets.Resources.Classes.Blobs
                 mousePos = Camera.main.ScreenToWorldPoint((mousePos));
                 _isHeld = true;
 
-                this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
+                //this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
             }
 
             if (Input.GetMouseButtonDown(0) && (this.CalculateMagnitude()))
@@ -66,8 +66,8 @@ namespace Assets.Resources.Classes.Blobs
             if (this._following)
             {
                 const float midpoint = 0.5f;
-                this.transform.position = Vector2.Lerp(this.transform.position,
-                    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
+                //this.transform.position = Vector2.Lerp(this.transform.position,
+                //    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
             }
 
             if (this._nextSave)
@@ -141,9 +141,12 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void OnMouseUp()
         {
-            _isHeld = false;
-            Vector2 vel = this._rigidBody.velocity;
-            this._rigidBody.AddForce(vel);
+            if (this._rigidBody != null)
+            {
+                _isHeld = false;
+                Vector2 vel = this._rigidBody.velocity;
+                this._rigidBody.AddForce(vel);
+            }
         }
     }
 }
