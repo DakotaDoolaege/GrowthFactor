@@ -191,7 +191,7 @@ namespace Assets.Resources.Classes.Driver
         /// </returns>
         private int GetWinningRadius()
         {
-            return 100 + this.Level * 5;
+            return 1 + this.Level * 3;
         }
     }
 }
