@@ -148,6 +148,8 @@ namespace Assets.Resources.Classes.Blobs
                     yield return null;
                 }
             }
+
+            this.Instantiator.ConsumeBlob(this);
             Destroy(this.gameObject);
         }
     }

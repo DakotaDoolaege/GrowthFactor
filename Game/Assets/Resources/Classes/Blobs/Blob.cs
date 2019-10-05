@@ -52,7 +52,7 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void SetInstantiator()
         {
-            GameObject obj = GameObject.FindGameObjectWithTag("Instantiator");
+            GameObject obj = GameObject.FindGameObjectWithTag("Driver");
             this.Instantiator = obj.gameObject.GetComponent<ConsumableInstantiator>();
         }
 
