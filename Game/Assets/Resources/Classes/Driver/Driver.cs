@@ -42,6 +42,7 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
+            NumPlayers = GameVariables.PlayerCount;
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
             this.HidePaused();
 
