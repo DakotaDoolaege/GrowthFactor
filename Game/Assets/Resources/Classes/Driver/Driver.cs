@@ -42,7 +42,8 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
-            NumPlayers = GameVariables.PlayerCount;
+
+            GetPlayerCount();
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
             this.HidePaused();
 
@@ -57,6 +58,7 @@ namespace Assets.Resources.Classes.Driver
 
             this.StartLevel();
         }
+
 
         /// <summary>
         /// Hides the level ended pause screen
@@ -182,6 +184,15 @@ namespace Assets.Resources.Classes.Driver
             this.LevelEnded = true;
 
             // Basically here we need to create the score screen I believe
+        }
+        
+        /// <summary>
+        /// Gets the number of players from the GameVariables if not preset in Inspector
+        /// </summary>
+        private void GetPlayerCount()
+        {
+            if(NumPlayers == 0)
+                NumPlayers =  GameVariables.PlayerCount;
         }
 
         /// <summary>
