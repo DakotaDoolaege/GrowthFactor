@@ -362,7 +362,7 @@ namespace TouchScript.Behaviors
         {
             //if ((transformMask & TransformGesture.TransformType.Translation) != 0) cachedTransform.position = targetPosition;
             Vector3 forceDirection = targetPosition - cachedTransform.position; 
-            this._rigidBody.AddForce(forceDirection * 20);
+            this._rigidBody.AddForce(forceDirection * 200f);
         }
 
         #endregion

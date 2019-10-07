@@ -626,14 +626,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MainMenu\PauseMenu.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\BackgroundScroll.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\Parallax.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Blob.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Collision.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Consumable.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\ConsumableAction.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\DefaultPlayerAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\DragAndDrop.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Food.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Player.cs" />
+    <Compile Include="Assets\Resources\Classes\Blobs\PlayerAction.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\SpriteFactory.cs" />
+    <Compile Include="Assets\Resources\Classes\Driver\Driver.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\ConsumableInstantiator.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\Instantiator.cs" />
+    <Compile Include="Assets\Resources\Classes\Instantiator\PlayerInstantiator.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ExamplesList.cs" />
     <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Highlight.cs" />
@@ -755,6 +765,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\BayatGames\Free Platform Game Assets\Readme.txt" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
     <None Include="Assets\TouchScript\Examples\_misc\Shaders\UnlitColor.shader" />
     <None Include="Assets\TouchScript\Shaders\Cursor.shader" />
