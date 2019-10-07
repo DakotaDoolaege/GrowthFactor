@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 7220184383197353801, guid: 7158a3189dbaec546bee2efb6fd9df54,
         type: 3}
       propertyPath: NumPlayers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7220184383197353801, guid: 7158a3189dbaec546bee2efb6fd9df54,
         type: 3}
