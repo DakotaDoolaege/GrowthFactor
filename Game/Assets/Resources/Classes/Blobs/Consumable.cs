@@ -20,7 +20,7 @@ namespace Assets.Resources.Classes.Blobs
     {
         public ConsumableAction Action;
         public const float MinSizeTolerance = 0.6f;
-        public const int ShrinkSpeed = 5;
+        public const int ShrinkSpeed = 25;
 
         public override int FoodValue
         {
