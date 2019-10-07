@@ -4,6 +4,7 @@ using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 using Assets.Resources.Classes.Instantiator;
 using UnityEngine.UI;
+using TMPro;
 //using UnityEngine.XR.WSA.Input;
 
 namespace Assets.Resources.Classes.Driver
@@ -12,6 +13,8 @@ namespace Assets.Resources.Classes.Driver
     {
         public Instantiator.Instantiator PlayerInstantiator;
         public Instantiator.Instantiator ConsumableInstantiator;
+
+        public TextMeshProUGUI ScoreDisplay;
         private int Level { get; set; } = 0;
         public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
         public int NumPlayers;
@@ -121,7 +124,7 @@ namespace Assets.Resources.Classes.Driver
         public int GetLevelTime()
         {
             int extraSecondsPerLevel = 5;
-            int baseSecondsPerLevel = 60;
+            int baseSecondsPerLevel = 5;
             return baseSecondsPerLevel + (this.Level * extraSecondsPerLevel);
         }
 
@@ -166,6 +169,7 @@ namespace Assets.Resources.Classes.Driver
                 if (player != null)
                 {
                     player.Score += player.FoodValue + this.TimerCount;
+                    ScoreDisplay.text = "Score: " + player.Score.ToString();
                 }
             }
         }
