@@ -124,7 +124,7 @@ namespace Assets.Resources.Classes.Driver
         public int GetLevelTime()
         {
             int extraSecondsPerLevel = 5;
-            int baseSecondsPerLevel = 5;
+            int baseSecondsPerLevel = 60;
             return baseSecondsPerLevel + (this.Level * extraSecondsPerLevel);
         }
 
