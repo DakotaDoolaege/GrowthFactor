@@ -62,8 +62,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EndLevelScript.cs" />
+    <Compile Include="Assets\GameVariables.cs" />
     <Compile Include="Assets\MainMenu\PauseMenu.cs" />
+    <Compile Include="Assets\MainMenu\PlayerSpotActivator.cs" />
     <Compile Include="Assets\MainMenu\Scripts\BackgroundScroll.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\ButtonHandler.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\DisableButton.cs" />
     <Compile Include="Assets\MainMenu\Scripts\MainMenu.cs" />
     <Compile Include="Assets\MainMenu\Scripts\Parallax.cs" />
     <Compile Include="Assets\Resources\Classes\Blobs\Blob.cs" />
