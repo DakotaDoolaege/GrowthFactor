@@ -22,16 +22,17 @@ namespace Assets.Resources.Classes.Blobs
             return rnd.Next(MinFoodValue, MaxFoodValue);
         }
 
-        /// <summary>
-        /// Handles the event where a Player consumes A Consumable object
-        /// holding the current ConsumableAction
-        /// </summary>
-        /// <param name="player">The Player consuming the Consumable
-        /// object</param>
-        public override void OnPlayerConsumption(Player player)
-        {
-            //player.Grow(this.FoodValue);
-            player.FoodValue += this.FoodValue;
-        }
+        ///// <summary>
+        ///// Handles the event where a Player consumes A Consumable object
+        ///// holding the current ConsumableAction
+        ///// </summary>
+        ///// <param name="player">The Player consuming the Consumable
+        ///// object</param>
+        //public override void OnPlayerConsumption(Player player)
+        //{
+        //    // The only action the food has is to perform the collision
+        //    // event on the player.
+        //    player.StartCoroutine(player.OnCollisionEvent);
+        //}
     }
 }
