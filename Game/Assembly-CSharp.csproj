@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\EndLevelScript.cs" />
     <Compile Include="Assets\GameVariables.cs" />
+    <Compile Include="Assets\GetScore.cs" />
     <Compile Include="Assets\MainMenu\PauseMenu.cs" />
     <Compile Include="Assets\MainMenu\PlayerSpotActivator.cs" />
     <Compile Include="Assets\MainMenu\Scripts\BackgroundScroll.cs" />
