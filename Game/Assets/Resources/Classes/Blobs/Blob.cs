@@ -42,7 +42,7 @@ namespace Assets.Resources.Classes.Blobs
         public const int MinimumFoodValue = 0;
         public Vector2 LastVelocity;
         private const float BaseMass = 35.0f;
-        private const float MassMultiplier = 3.0f;
+        private const float MassMultiplier = 15.2f;
         public float Mass { get; set; }
 
         public ConsumableInstantiator Instantiator { get; set; }
