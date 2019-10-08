@@ -85,7 +85,7 @@ namespace Assets.Resources.Classes.Blobs
             UpdateColliderSize();
 
             // Update the mass for the RigidBody to the FoodValue
-            this.RigidBody.mass = Math.Abs(this.FoodValue);
+            this.RigidBody.mass = Math.Abs(35 + (3 * this.FoodValue / ConsumableAction.MaxFoodValue));
             if (this.FoodValue == 0)
             {
                 this.RigidBody.mass = 1;
