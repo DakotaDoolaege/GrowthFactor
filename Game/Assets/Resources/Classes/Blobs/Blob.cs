@@ -41,7 +41,9 @@ namespace Assets.Resources.Classes.Blobs
         public abstract int FoodValue { get; set; }
         public const int MinimumFoodValue = 0;
         public Vector2 LastVelocity;
-        public Vector2 Acceleration;
+        private const float BaseMass = 35.0f;
+        private const float MassMultiplier = 3.0f;
+        public float Mass { get; set; }
 
         public ConsumableInstantiator Instantiator { get; set; }
 
@@ -85,11 +87,10 @@ namespace Assets.Resources.Classes.Blobs
             UpdateColliderSize();
 
             // Update the mass for the RigidBody to the FoodValue
-            this.RigidBody.mass = Math.Abs(35 + (3 * this.FoodValue / ConsumableAction.MaxFoodValue));
-            if (this.FoodValue == 0)
-            {
-                this.RigidBody.mass = 1;
-            }
+            float mass = Math.Abs(BaseMass + ((MassMultiplier * this.FoodValue)
+                                               / ConsumableAction.MaxFoodValue));
+            this.RigidBody.mass = mass;
+            this.Mass = mass;
 
             // Set instantiation variable
             this.SetInstantiator();
