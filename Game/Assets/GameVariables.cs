@@ -4,24 +4,29 @@ using UnityEngine;
 
 public static class GameVariables
 {
-    private static int playerCount, score; //Keeps data between scenes
+    private static int score; //Keeps data between scenes
+    private static List<Vector3> playerPositions = new List<Vector3>();
 
 
     /// <summary>
-    /// PlayerCount handles requests to change the number of players to be created
-    /// for the next game and also can be used to get the number of players at any point
+    /// PlayerPositions handles requests to change the number of players to be created
+    /// for the next game and also can be used to get the number of players and location at any point
     /// in the game for calculating score
     /// </summary>
-    public static int PlayerCount
+    public static List<Vector3> Players
     {
         get
         {
-            return playerCount;
+            return playerPositions;
         }
         set
         {
-            playerCount = value;
-            Debug.Log("Player count: "+ playerCount);
+            playerPositions = value;
+            Debug.Log("Player count: " + playerPositions.Count);
+            for (int i = 0; i < playerPositions.Count; i++)
+            {
+                Debug.Log("Player Location: " + playerPositions[i]);
+            }
         }
     }
 
