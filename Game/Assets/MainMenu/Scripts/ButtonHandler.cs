@@ -11,7 +11,7 @@ public class ButtonHandler : MonoBehaviour
     public bool active; //0 is off and 1 is activated
     public Button Player;
     private SpriteRenderer spriteRenderer;
-
+    
     void Start()
     {
         Player = GetComponent<Button>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
@@ -25,15 +25,21 @@ public class ButtonHandler : MonoBehaviour
         Player.image.overrideSprite = activated;
         if (active)
         {
-            GameVariables.PlayerCount--;
+            List<Vector3> positions = GameVariables.Players;
+            positions.Remove(transform.position);
+            GameVariables.Players = positions;
+
             active = false;
             Player.image.overrideSprite = deactivated;
         }
         else
         {
-            GameVariables.PlayerCount++;
+            List<Vector3> positions = GameVariables.Players;
+            positions.Add(transform.position);
+            GameVariables.Players = positions;
             active = true;
             Player.image.overrideSprite = activated;
+
         }
         }
 
