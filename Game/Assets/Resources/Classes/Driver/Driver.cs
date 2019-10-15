@@ -196,7 +196,7 @@ namespace Assets.Resources.Classes.Driver
         private void GetPlayerCount()
         {
             if(NumPlayers == 0)
-                NumPlayers =  GameVariables.PlayerCount;
+                NumPlayers =  GameVariables.Players.Count;
         }
 
         /// <summary>
