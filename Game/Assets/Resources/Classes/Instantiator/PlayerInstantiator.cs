@@ -2,6 +2,9 @@
 using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 
+
+//TODO: Refactor now that player positions are being pulled from the game variables (
+
 namespace Assets.Resources.Classes.Instantiator
 {
     public class PlayerInstantiator : Instantiator
@@ -60,7 +63,7 @@ namespace Assets.Resources.Classes.Instantiator
         }
 
         /// <summary>
-        /// Adds a player to the current game
+        /// Adds a player to the current game with position from list of chosen players
         /// </summary>
         /// <returns>
         /// The player GameObject that was added to the game.
@@ -71,7 +74,9 @@ namespace Assets.Resources.Classes.Instantiator
             {
                 return null;
             }
-            Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];
+            //Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];//changed this to pull locations from gamevariables
+            Vector3 startPosition = (Camera.main.ScreenToWorldPoint(GameVariables.Players[this.CurrentBlobs.Count]));
+            startPosition.z = 0;
             Debug.Log("START POS:" +startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
             this.CurrentBlobs.Add(player.GetComponent<Player>());
