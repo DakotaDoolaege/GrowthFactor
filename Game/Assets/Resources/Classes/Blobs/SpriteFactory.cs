@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
@@ -11,6 +12,8 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class SpriteFactory : MonoBehaviour
     {
+        public static Driver.Driver GameDriver = FindObjectOfType<Driver.Driver>();
+
         private void Start()
         {
         }
@@ -38,21 +41,16 @@ namespace Assets.Resources.Classes.Blobs
             {
                 case BlobType.Food:
                 {
-                    string foodType = (value < 0 ? NegativeFood : PositiveFood);
-                    int index = names.IndexOf(foodType);
-
-                    return spritesSheet[index];
+                    return value < 0 ? GameDriver.GameTheme.NegativeFood :
+                        GameDriver.GameTheme.PositiveFood;
                 }
                 case BlobType.Player:
                 {
-                    int index = names.IndexOf("Player");
-                    return spritesSheet[index];
+                    return GameDriver.GameTheme.Player;
                 }
-                case BlobType.PowerUp:
-                {
-                    int index = names.IndexOf(PowerUp);
-                    return spritesSheet[index];
-                }
+
+                // When PowerUps added, add a case for the BlobType.PowerUp Enum
+
                 default:
                     return null;
             }
