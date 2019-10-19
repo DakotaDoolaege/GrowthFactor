@@ -1,5 +1,7 @@
 /*
  * @author Valentin Simonov / http://va.lent.in/
+ * 
+ * NOTE: Manually added changes from pull request #306 (southrop) / https://github.com/TouchScript/TouchScript/pull/306/files
  */
 
 using System.Collections.Generic;
@@ -204,8 +206,9 @@ namespace TouchScript.Editor
 					var label = EditorGUI.BeginProperty(r, TEXT_SEND_MESSAGE_EVENTS, sendMessageEvents);
 					EditorGUI.BeginChangeCheck();
 					r = EditorGUI.PrefixLabel(r, label);
-					var sMask = (TouchManager.MessageType)EditorGUI.EnumMaskField(r, instance.SendMessageEvents);
-					if (EditorGUI.EndChangeCheck())
+                    var sMask = (TouchManager.MessageType)EditorGUI.EnumFlagsField(r, instance.SendMessageEvents); //Updated from Pull #306
+
+                    if (EditorGUI.EndChangeCheck())
 					{
 						instance.SendMessageEvents = sMask;
 						EditorUtility.SetDirty(instance);
