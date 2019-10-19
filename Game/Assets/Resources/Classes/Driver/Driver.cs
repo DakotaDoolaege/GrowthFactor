@@ -199,7 +199,7 @@ namespace Assets.Resources.Classes.Driver
 
         /// <summary>
         /// Setup routine for when a level has ended. Scores are updated here
-        /// and the remainder of the score screen should be constructed.
+        /// and the remainder of the score screen should be constructed. 
         /// </summary>
         public void OnEndLevel()
         {
