@@ -49,7 +49,7 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
-            this.GameTheme = ApplicationTheme.Theme;
+            this.GameTheme = ApplicationTheme.GetTheme();
             //GameTheme = new DefaultGameTheme();
             //GameTheme = new KnightTheme();
             //this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
