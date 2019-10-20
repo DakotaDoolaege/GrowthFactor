@@ -22,21 +22,7 @@ namespace Assets.Resources.Classes.Theme
         // PowerUps can be added here
         //public Sprite PowerUp { get; set; }
 
-        //public virtual void Start()
-        //{
-        //    this.Player = this.CreatePlayer();
-        //    this.PositiveFood = this.CreatePositiveFood();
-        //    this.NegativeFood = this.CreateNegativeFood();
-        //    this.Background = this.CreateBackground();
-        //}
-
-        public GameTheme()
-        {
-            this.Player = this.CreatePlayer();
-            this.PositiveFood = this.CreatePositiveFood();
-            this.NegativeFood = this.CreateNegativeFood();
-            this.Background = this.CreateBackground();
-        }
+        public GameTheme() { }
 
         /// <summary>
         /// Gets the Sprite to use for the background
@@ -44,7 +30,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use for the background
         /// </returns>
-        public abstract Sprite CreateBackground();
+        public abstract Sprite GetBackground();
 
         /// <summary>
         /// Gets the Sprite for the Player object
@@ -52,7 +38,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as a Player
         /// </returns>
-        public abstract Sprite CreatePlayer();
+        public abstract Sprite GetPlayer();
 
         /// <summary>
         /// Gets the Sprite for the positive Consumable object
@@ -60,7 +46,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the positive food
         /// </returns>
-        public abstract Sprite CreatePositiveFood();
+        public abstract Sprite GetPositiveFood();
 
         /// <summary>
         /// Gets the Sprite for the negative Consumable object
@@ -68,7 +54,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the negative food
         /// </returns>
-        public abstract Sprite CreateNegativeFood();
+        public abstract Sprite GetNegativeFood();
 
         // Once PowerUps are added, uncomment the following line
         //public abstract Sprite CreatePowerUp()
