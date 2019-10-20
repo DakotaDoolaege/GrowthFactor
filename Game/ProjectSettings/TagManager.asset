@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Food
   - Wall
+  - ShowOnLevelEnd
+  - Driver
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -38,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Background
   m_SortingLayers:
   - name: Default
     uniqueID: 0
