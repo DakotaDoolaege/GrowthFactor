@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Assets.Resources.Classes.Theme;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Resources.Classes
 {
@@ -11,19 +13,43 @@ namespace Assets.Resources.Classes
     public static class ApplicationTheme
     {
         public static LinkedList<GameTheme> Themes;
-        public static GameTheme Theme;
+        private static LinkedListNode<GameTheme> themeNode;
 
         static ApplicationTheme()
         {
             Themes = new LinkedList<GameTheme>();
 
             // Add all game themes to the linked list
-            Themes.AddLast(new DefaultGameTheme());
-            Themes.AddLast(new KnightTheme());
+            Themes.AddFirst(new DefaultGameTheme());
+            Themes.AddFirst(new KnightTheme());
 
-            Theme = Themes.Last.Value;
+            themeNode = Themes.First;
         }
 
-        
+        /// <summary>
+        /// Progresses the application theme to the next theme in the list
+        /// </summary>
+        public static void Next()
+        {
+            if (themeNode.Next == null)
+            {
+                themeNode = Themes.First;
+            }
+            else
+            {
+                themeNode = themeNode.Next;
+            }
+        }
+
+        /// <summary>
+        /// Returns the current application theme
+        /// </summary>
+        /// <returns>
+        /// The currently active application theme
+        /// </returns>
+        public static GameTheme GetTheme()
+        {
+            return themeNode.Value;
+        }
     }
 }
