@@ -3,6 +3,7 @@ using System.Timers;
 using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 using Assets.Resources.Classes.Instantiator;
+using Assets.Resources.Classes.Theme;
 using UnityEngine.UI;
 using TMPro;
 //using UnityEngine.XR.WSA.Input;
@@ -11,6 +12,9 @@ namespace Assets.Resources.Classes.Driver
 {
     public class Driver : MonoBehaviour
     {
+        public GameTheme GameTheme { get; set; }
+        private GameObject Background { get; set; }
+
         public Instantiator.Instantiator PlayerInstantiator;
         public Instantiator.Instantiator ConsumableInstantiator;
 
@@ -45,6 +49,11 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
+            this.GameTheme = ApplicationTheme.Theme;
+            //GameTheme = new DefaultGameTheme();
+            //GameTheme = new KnightTheme();
+            //this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
+            SetBackground();
 
             GetPlayerCount();
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
@@ -60,6 +69,18 @@ namespace Assets.Resources.Classes.Driver
             }
 
             this.StartLevel();
+        }
+
+        /// <summary>
+        /// Sets the game background from the GameTheme
+        /// </summary>
+        private void SetBackground()
+        {
+           this.Background = GameObject.FindGameObjectWithTag("Background");
+            
+           SpriteRenderer render = this.Background.GetComponent<SpriteRenderer>();
+
+            render.sprite = this.GameTheme.GetBackground();
         }
 
 
