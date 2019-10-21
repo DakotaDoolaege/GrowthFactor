@@ -3,15 +3,22 @@ using System.Timers;
 using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 using Assets.Resources.Classes.Instantiator;
+using Assets.Resources.Classes.Theme;
 using UnityEngine.UI;
-using UnityEngine.XR.WSA.Input;
+using TMPro;
+//using UnityEngine.XR.WSA.Input;
 
 namespace Assets.Resources.Classes.Driver
 {
     public class Driver : MonoBehaviour
     {
+        public GameTheme GameTheme { get; set; }
+        private GameObject Background { get; set; }
+
         public Instantiator.Instantiator PlayerInstantiator;
         public Instantiator.Instantiator ConsumableInstantiator;
+
+        public TextMeshProUGUI ScoreDisplay;
         private int Level { get; set; } = 0;
         public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
         public int NumPlayers;
@@ -42,6 +49,13 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
+            this.GameTheme = ApplicationTheme.Theme;
+            //GameTheme = new DefaultGameTheme();
+            //GameTheme = new KnightTheme();
+            //this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
+            SetBackground();
+
+            GetPlayerCount();
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
             this.HidePaused();
 
@@ -56,6 +70,19 @@ namespace Assets.Resources.Classes.Driver
 
             this.StartLevel();
         }
+
+        /// <summary>
+        /// Sets the game background from the GameTheme
+        /// </summary>
+        private void SetBackground()
+        {
+           this.Background = GameObject.FindGameObjectWithTag("Background");
+            
+           SpriteRenderer render = this.Background.GetComponent<SpriteRenderer>();
+
+            render.sprite = this.GameTheme.GetBackground();
+        }
+
 
         /// <summary>
         /// Hides the level ended pause screen
@@ -163,6 +190,7 @@ namespace Assets.Resources.Classes.Driver
                 if (player != null)
                 {
                     player.Score += player.FoodValue + this.TimerCount;
+                    ScoreDisplay.text = "Score: " + player.Score.ToString();
                 }
             }
         }
@@ -181,6 +209,15 @@ namespace Assets.Resources.Classes.Driver
             this.LevelEnded = true;
 
             // Basically here we need to create the score screen I believe
+        }
+        
+        /// <summary>
+        /// Gets the number of players from the GameVariables if not preset in Inspector
+        /// </summary>
+        private void GetPlayerCount()
+        {
+            if(NumPlayers == 0)
+                NumPlayers =  GameVariables.Players.Count;
         }
 
         /// <summary>
