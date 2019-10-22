@@ -41,12 +41,12 @@ namespace Assets.Resources.Classes.Blobs
             {
                 case BlobType.Food:
                 {
-                    return value < 0 ? GameDriver.GameTheme.NegativeFood :
-                        GameDriver.GameTheme.PositiveFood;
+                    return value < 0 ? GameDriver.GameTheme.GetNegativeFood() :
+                        GameDriver.GameTheme.GetPositiveFood();
                 }
                 case BlobType.Player:
                 {
-                    return GameDriver.GameTheme.Player;
+                    return GameDriver.GameTheme.GetPlayer();
                 }
 
                 // When PowerUps added, add a case for the BlobType.PowerUp Enum
