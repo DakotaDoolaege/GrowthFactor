@@ -5,32 +5,57 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Theme
 {
+    /// <summary>
+    /// Class <c>KnightTheme</c> is a class that holds the Knight theme
+    /// for the game
+    /// </summary>
     public class KnightTheme : GameTheme
     {
-        // The name of the Player Sprite in the Sprite TileSheet
-        private const string PlayerName = "Complete";
+        private IList<Sprite> NegativeFoods { get; }
+        private IList<Sprite> PositiveFoods { get; }
 
-        // The name of the Positive Food Sprite in the Sprite TileSheet
-        private const string PositiveFoodName = "Complete";
-
-        // The name of the Negative Food Sprite in the Sprite TileSheet
-        private const string NegativeFoodName = "Complete";
+        private readonly System.Random _random = new System.Random();
 
         // The name of the image to use as the background
-        private const string BackgroundFile = "LevelResources/Backgrounds/Space2-4k";
+        private const string BackgroundFile = "Painted HQ 2D Forest Medieval Background/Day";
 
-        // The name of the file containing the sliced Sprite objects
-        private const string SpriteFile = "Low_Swordman/1.Sprite/Complete";
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public KnightTheme() : base()
+        {
+            // Set up the negative foods
+            this.NegativeFoods = new List<Sprite>();
 
-        // Get the list of all sprites in the sheet
-        private static readonly IList<Sprite> SpritesSheet =
-            UnityEngine.Resources.LoadAll<Sprite>(SpriteFile);
+            string negativeFoodName =
+                "Match 3 - Dark Monsters - Infinite Monster Builder/Monsters/Monster_";
 
-        // Create the list of names in the exact order of the list of sprites
-        private static readonly IList<string> Names = (from sprite in
-            SpritesSheet select sprite.name).ToList();
+            for (int i = 1; i < 4; i++)
+            {
+                Sprite sprite = UnityEngine.Resources.Load<Sprite>(negativeFoodName + i.ToString());
+                this.NegativeFoods.Add(sprite);
+            }
 
-        public override Sprite CreateBackground()
+            // Set up the positive foods
+            this.PositiveFoods = new List<Sprite>();
+
+            string prefix = "MagicpotionsFree/";
+            string[] positiveFoodNames = { "potionblue04", "potionyellow04", "potionred04" };
+
+            foreach (string name in positiveFoodNames)
+            {
+                Sprite sprite = UnityEngine.Resources.Load<Sprite>(prefix + name);
+                this.PositiveFoods.Add(sprite);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Sprite to use for the background
+        /// </summary>
+        /// <returns>
+        /// The Sprite to use for the background
+        /// </returns>
+        public override Sprite GetBackground()
         {
             return UnityEngine.Resources.Load<Sprite>(BackgroundFile);
         }
@@ -41,10 +66,11 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as a Player
         /// </returns>
-        public override Sprite CreatePlayer()
+        public override Sprite GetPlayer()
         {
-            int index = Names.IndexOf(PlayerName);
-            return SpritesSheet[index];
+            const string playerSheet = "Low_Swordman/1.Sprite/Complete";
+
+            return UnityEngine.Resources.Load<Sprite>(playerSheet);
         }
 
         /// <summary>
@@ -53,11 +79,13 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the positive food
         /// </returns>
-        public override Sprite CreatePositiveFood()
+        public override Sprite GetPositiveFood()
         {
-            int index = Names.IndexOf(PositiveFoodName);
+            //const string positiveFoodSheet = "MagicpotionsFree/potionblue04";
 
-            return SpritesSheet[index];
+            //return UnityEngine.Resources.Load<Sprite>(positiveFoodSheet);
+            int ind = this._random.Next() % this.PositiveFoods.Count;
+            return this.PositiveFoods[ind];
         }
 
         /// <summary>
@@ -66,11 +94,12 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the negative food
         /// </returns>
-        public override Sprite CreateNegativeFood()
+        public override Sprite GetNegativeFood()
         {
-            int index = Names.IndexOf(NegativeFoodName);
+            int ind = this._random.Next() % this.NegativeFoods.Count;
+            Debug.Log("Random: " + ind);
 
-            return SpritesSheet[index];
+            return this.NegativeFoods[ind];
         }
     }
 }

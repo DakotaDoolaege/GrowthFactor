@@ -9,6 +9,7 @@ TagManager:
   - ShowOnLevelEnd
   - Driver
   - Background
+  - ThemeSwitcher
   layers:
   - Default
   - TransparentFX

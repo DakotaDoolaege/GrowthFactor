@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Theme
 {
+    /// <summary>
+    /// Class <c>DefaultGameTheme</c> is a class that holds the default
+    /// theme for the game
+    /// </summary>
     public class DefaultGameTheme : GameTheme
     {
         // The name of the Player Sprite in the Sprite TileSheet
@@ -36,7 +40,7 @@ namespace Assets.Resources.Classes.Theme
         //    base.Start();
         //}
 
-        public override Sprite CreateBackground()
+        public override Sprite GetBackground()
         {
             return UnityEngine.Resources.Load<Sprite>(BackgroundFile);
         }
@@ -47,7 +51,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as a Player
         /// </returns>
-        public override Sprite CreatePlayer()
+        public override Sprite GetPlayer()
         {
             int index = Names.IndexOf(PlayerName);
 
@@ -60,7 +64,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the positive food
         /// </returns>
-        public override Sprite CreatePositiveFood()
+        public override Sprite GetPositiveFood()
         {
             int index = Names.IndexOf(PositiveFoodName);
 
@@ -73,7 +77,7 @@ namespace Assets.Resources.Classes.Theme
         /// <returns>
         /// The Sprite to use as the negative food
         /// </returns>
-        public override Sprite CreateNegativeFood()
+        public override Sprite GetNegativeFood()
         {
             int index = Names.IndexOf(NegativeFoodName);
 
