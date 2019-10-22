@@ -2022,6 +2022,7 @@ RectTransform:
   - {fileID: 1434636203486430384}
   - {fileID: 641836860}
   - {fileID: 1445207725}
+  - {fileID: 880638654}
   m_Father: {fileID: 887528205}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
