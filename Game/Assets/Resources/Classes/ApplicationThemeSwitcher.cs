@@ -4,6 +4,7 @@ namespace Assets.Resources.Classes
 {
     public class ApplicationThemeSwitcher : MonoBehaviour
     {
+        public int Index = 0;
         public void Start()
         {
 
@@ -11,7 +12,7 @@ namespace Assets.Resources.Classes
 
         public void SwitchTheme()
         {
-            ApplicationTheme.Next();
+            ApplicationTheme.SwitchTheme(this.Index);
         }
     }
 }
