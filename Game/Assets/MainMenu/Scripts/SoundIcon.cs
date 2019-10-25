@@ -8,8 +8,6 @@ namespace Assets.MainMenu.Scripts
         public Sprite MutedIcon;
 
         public Sprite SoundOnIcon;
-
-        private bool isMuted = false;
         private Image image;
 
         /// <summary>
@@ -26,17 +24,18 @@ namespace Assets.MainMenu.Scripts
         /// </summary>
         public void SwitchImage()
         {
-            if (! this.isMuted && this.MutedIcon != null && this.image != null)
+            float tol = 0.05f;
+            bool isMuted = AudioListener.volume > tol;
+
+            if (! isMuted && this.MutedIcon != null && this.image != null)
             {
                 this.image.sprite = MutedIcon;
             }
 
-            else if (this.isMuted && this.SoundOnIcon != null && this.image != null)
+            else if (isMuted && this.SoundOnIcon != null && this.image != null)
             {
                 this.image.sprite = SoundOnIcon;
             }
-
-            this.isMuted = !this.isMuted;
         }
     }
 }
