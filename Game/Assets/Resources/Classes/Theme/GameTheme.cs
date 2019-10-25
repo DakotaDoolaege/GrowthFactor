@@ -19,10 +19,24 @@ namespace Assets.Resources.Classes.Theme
 
         public Sprite Background { get; set; }
 
+        // Set the deactive player for the player picker
+        public virtual string DeactivePlayer { get; } = "";
+
         // PowerUps can be added here
         //public Sprite PowerUp { get; set; }
 
         public GameTheme() { }
+
+        /// <summary>
+        /// Gets the deactive player for the player picker prefab
+        /// </summary>
+        /// <returns>
+        /// The deactive player for the player picker prefab
+        /// </returns>
+        public virtual Sprite GetDeactivePlayer()
+        {
+            return UnityEngine.Resources.Load<Sprite>(DeactivePlayer);
+        }
 
         /// <summary>
         /// Gets the Sprite to use for the background

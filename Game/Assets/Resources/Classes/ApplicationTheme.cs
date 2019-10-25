@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Assets.Resources.Classes.Theme;
 using UnityEngine;
@@ -12,33 +14,28 @@ namespace Assets.Resources.Classes
     /// </summary>
     public static class ApplicationTheme
     {
-        public static LinkedList<GameTheme> Themes;
-        private static LinkedListNode<GameTheme> themeNode;
+        public static IList<GameTheme> Themes;
+        public static GameTheme CurrentTheme;
+        private const int DEFAULT_THEME_INDEX = 1;
 
         static ApplicationTheme()
         {
-            Themes = new LinkedList<GameTheme>();
+            Themes = new List<GameTheme> {new DefaultGameTheme(), new KnightTheme()};
 
             // Add all game themes to the linked list
-            Themes.AddFirst(new DefaultGameTheme());
-            Themes.AddFirst(new KnightTheme());
 
-            themeNode = Themes.First;
+            CurrentTheme = Themes[DEFAULT_THEME_INDEX];
         }
 
-        /// <summary>
-        /// Progresses the application theme to the next theme in the list
-        /// </summary>
-        public static void Next()
+        public static void SwitchTheme(int index)
         {
-            if (themeNode.Next == null)
+            if (index >= Themes.Count || index < 0)
             {
-                themeNode = Themes.First;
+                throw new ArgumentException("Index is out of range", nameof(index));
             }
-            else
-            {
-                themeNode = themeNode.Next;
-            }
+
+
+            CurrentTheme = Themes[index];
         }
 
         /// <summary>
@@ -49,7 +46,7 @@ namespace Assets.Resources.Classes
         /// </returns>
         public static GameTheme GetTheme()
         {
-            return themeNode.Value;
+            return CurrentTheme;
         }
     }
 }
