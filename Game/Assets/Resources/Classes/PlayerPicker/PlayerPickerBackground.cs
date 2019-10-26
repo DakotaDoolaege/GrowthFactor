@@ -18,6 +18,8 @@ namespace Assets.Resources.Classes.PlayerPicker
             this.spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
             this.spriteRenderer.sprite = ApplicationTheme.CurrentTheme.GetBackground();
+
+            ApplicationTheme.ScaleBackground(this.gameObject, ApplicationTheme.CurrentTheme.GetBackground());
         }
     }
 }

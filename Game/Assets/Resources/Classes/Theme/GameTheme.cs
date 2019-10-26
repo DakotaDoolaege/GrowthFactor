@@ -39,6 +39,17 @@ namespace Assets.Resources.Classes.Theme
         }
 
         /// <summary>
+        /// Gets the active player for the player picker prefab
+        /// </summary>
+        /// <returns>
+        /// The active player for the player picker prefab
+        /// </returns>
+        public virtual Sprite GetActivePlayer()
+        {
+            return ApplicationTheme.CurrentTheme.GetPlayer();
+        }
+
+        /// <summary>
         /// Gets the Sprite to use for the background
         /// </summary>
         /// <returns>
@@ -69,6 +80,13 @@ namespace Assets.Resources.Classes.Theme
         /// The Sprite to use as the negative food
         /// </returns>
         public abstract Sprite GetNegativeFood();
+
+        /// <summary>
+        /// Refreshes the theme, so that if a theme has multiple elements,
+        /// we can update the current one each time the theme selector button
+        /// is pressed
+        /// </summary>
+        public virtual void Refresh() { }
 
         // Once PowerUps are added, uncomment the following line
         //public abstract Sprite CreatePowerUp()
