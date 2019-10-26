@@ -1,35 +1,28 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public bool isMuted = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// Mutes or Unmutes game sound
     /// </summary>
     public void Mute()
     {
-        if (isMuted == false)
+        if (this.isMuted == false)
         {
             AudioListener.volume = 0;
-            isMuted = true;
+            this.isMuted = true;
         }
-        else {
-            AudioListener.volume = 0.4f;
-            isMuted = false;
+
+        else 
+        {
+            AudioListener.volume = 0.7f;
+            this.isMuted = false;
+
         }
     }
-    
 }

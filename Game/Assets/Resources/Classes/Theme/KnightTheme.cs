@@ -17,7 +17,10 @@ namespace Assets.Resources.Classes.Theme
         private readonly System.Random _random = new System.Random();
 
         // The name of the image to use as the background
-        private const string BackgroundFile = "Painted HQ 2D Forest Medieval Background/Day";
+        private const string BACKGROUND_FILE = "Painted HQ 2D Forest Medieval Background/Day";
+
+        // Set the deactive player for the player picker
+        public override string DeactivePlayer { get; } = "Low_Swordman/1.Sprite/Hat-Helmet";
 
         /// <summary>
         /// Constructor
@@ -57,7 +60,7 @@ namespace Assets.Resources.Classes.Theme
         /// </returns>
         public override Sprite GetBackground()
         {
-            return UnityEngine.Resources.Load<Sprite>(BackgroundFile);
+            return UnityEngine.Resources.Load<Sprite>(BACKGROUND_FILE);
         }
 
         /// <summary>
