@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerInstantiator: {fileID: 0}
   ConsumableInstantiator: {fileID: 0}
+  ScoreDisplay: {fileID: 0}
   NumPlayers: 0
 --- !u!114 &7748415563128485297
 MonoBehaviour:
@@ -74,3 +75,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1637410285491869815, guid: 53fa0221a1ea6c04c9341f5d9e00189f, type: 3}
+  PauseButton: {fileID: 7484107019651489034, guid: 855c5d947daa9d54093c9917a4b5408c,
+    type: 3}

@@ -280,6 +280,30 @@ PrefabInstance:
       propertyPath: ScoreDisplay
       value: 
       objectReference: {fileID: 1367217996}
+    - target: {fileID: 7220184383197353801, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: LevelCanvas
+      value: 
+      objectReference: {fileID: 6335659893754982487, guid: 22132c8c5ffa91846b9356a9e0f14f34,
+        type: 3}
+    - target: {fileID: 3388017558150653582, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: PauseButton
+      value: 
+      objectReference: {fileID: 4592890935262132830, guid: f5373f84b1a31eb48a2f222d0999127f,
+        type: 3}
+    - target: {fileID: 3388017558150653582, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: ButtonCanvas
+      value: 
+      objectReference: {fileID: 6335659893754982487, guid: 22132c8c5ffa91846b9356a9e0f14f34,
+        type: 3}
+    - target: {fileID: 3388017558150653582, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: LevelCanvas
+      value: 
+      objectReference: {fileID: 6335659893754982487, guid: 22132c8c5ffa91846b9356a9e0f14f34,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7158a3189dbaec546bee2efb6fd9df54, type: 3}
 --- !u!1 &499246936
