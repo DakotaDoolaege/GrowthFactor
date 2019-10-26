@@ -22,7 +22,7 @@ namespace Assets.Resources.Classes.Blobs
     /// <summary>
     /// Enum <c>BlobType</c> represents each type that a blob may be
     /// </summary>
-    public enum BlobType {Food, Player, PowerUp}
+    public enum BlobType {Food, Player, PowerUp, Pause}
 
 
     /// <summary>
@@ -32,6 +32,7 @@ namespace Assets.Resources.Classes.Blobs
     public abstract class Blob : MonoBehaviour
     {
         // public int FoodValue { get; set; }
+
         public Rigidbody2D RigidBody;
         public Vector2 SizeVector;
         public Sprite Icon;

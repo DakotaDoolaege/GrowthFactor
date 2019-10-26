@@ -22,10 +22,10 @@ public static class GameVariables
         set
         {
             playerPositions = value;
-            Debug.Log("Player count: " + playerPositions.Count);
+            //Debug.Log("Player count: " + playerPositions.Count);
             for (int i = 0; i < playerPositions.Count; i++)
             {
-                Debug.Log("Player Location: " + playerPositions[i]);
+                //Debug.Log("Player Location: " + playerPositions[i]);
             }
         }
     }

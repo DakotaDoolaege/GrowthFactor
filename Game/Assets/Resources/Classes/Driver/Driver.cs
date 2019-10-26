@@ -18,6 +18,7 @@ namespace Assets.Resources.Classes.Driver
         public Instantiator.Instantiator PlayerInstantiator;
         public Instantiator.Instantiator ConsumableInstantiator;
 
+
         public TextMeshProUGUI ScoreDisplay;
         private int Level { get; set; } = 0;
         public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
@@ -159,7 +160,7 @@ namespace Assets.Resources.Classes.Driver
         public void IncrementTimerCount(object source, ElapsedEventArgs e)
         {
             this.TimerCount--;
-            Debug.Log(this.TimerCount);
+            //Debug.Log(this.TimerCount);
 
             if (this.TimerCount == 0)
             {
