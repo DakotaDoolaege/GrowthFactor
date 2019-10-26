@@ -81,6 +81,8 @@ namespace Assets.Resources.Classes.Driver
            SpriteRenderer render = this.Background.GetComponent<SpriteRenderer>();
 
             render.sprite = this.GameTheme.GetBackground();
+
+            ApplicationTheme.ScaleBackground(this.Background, this.GameTheme.GetBackground());
         }
 
 

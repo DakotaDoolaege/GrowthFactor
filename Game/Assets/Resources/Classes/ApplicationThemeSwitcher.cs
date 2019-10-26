@@ -14,5 +14,10 @@ namespace Assets.Resources.Classes
         {
             ApplicationTheme.SwitchTheme(this.Index);
         }
+
+        public void RefreshThemes()
+        {
+            ApplicationTheme.RefreshThemes();
+        }
     }
 }

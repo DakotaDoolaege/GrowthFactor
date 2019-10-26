@@ -25,7 +25,7 @@ namespace Assets.Resources.Classes.PlayerPicker
 
             if (this.handler != null)
             {
-                this.handler.activated = ApplicationTheme.CurrentTheme.GetPlayer();
+                this.handler.activated = ApplicationTheme.CurrentTheme.GetActivePlayer();
                 this.handler.deactivated = ApplicationTheme.CurrentTheme.GetDeactivePlayer();
             }
 
