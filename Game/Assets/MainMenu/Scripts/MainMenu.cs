@@ -28,4 +28,39 @@ public class MainMenu : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current 
     }
+
+    /// <summary>
+    /// Loads the main menu
+    /// </summary>
+    public void ReturnToMenu()
+    {
+        string menuName = "Menu";
+        StartCoroutine(LoadMainMenu(menuName));
+    }
+
+    /// <summary>
+    /// Loads the theme picker menu
+    /// </summary>
+    public void LoadThemesMenu()
+    {
+        string themeMenu = "ThemePickerMenu";
+        StartCoroutine(LoadMainMenu(themeMenu));
+    }
+
+    /// <summary>
+    /// Loads the scene with the name menuName
+    /// </summary>
+    /// <param name="menuName">The name of the scene to load</param>
+    /// <returns>
+    /// IEnumerator in order to have to coroutine load the menu in the background
+    /// </returns>
+    IEnumerator LoadMainMenu(string menuName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(menuName);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
 }

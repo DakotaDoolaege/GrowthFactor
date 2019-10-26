@@ -53,7 +53,7 @@ namespace Assets.Resources.Classes.Driver
             //GameTheme = new DefaultGameTheme();
             //GameTheme = new KnightTheme();
             //this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
-            SetBackground();
+            this.SetBackground();
 
             GetPlayerCount();
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
