@@ -18,6 +18,11 @@ public class ButtonHandler : MonoBehaviour
     }
 
 
+    public void PauseGame()
+    {
+        Debug.Log("STOPING THE GAME!!");
+    }
+
     /// <summary>
     /// Used to update the player count and also the sprite for each player position
     /// </summary>

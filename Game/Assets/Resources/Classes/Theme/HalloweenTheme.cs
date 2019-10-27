@@ -75,7 +75,7 @@ namespace Assets.Resources.Classes.Theme
 
             string backgroundFile = path + file + BACKGROUND_FILE;
 
-            Debug.Log(backgroundFile);
+            //Debug.Log(backgroundFile);
 
             this.background = UnityEngine.Resources.Load<Sprite>(backgroundFile);
         }

@@ -40,14 +40,20 @@ namespace Assets.Resources.Classes.Blobs
             switch (type)
             {
                 case BlobType.Food:
-                {
-                    return value < 0 ? GameDriver.GameTheme.GetNegativeFood() :
-                        GameDriver.GameTheme.GetPositiveFood();
-                }
+                    {
+                        return value < 0 ? GameDriver.GameTheme.GetNegativeFood() :
+                            GameDriver.GameTheme.GetPositiveFood();
+                    }
                 case BlobType.Player:
-                {
-                    return GameDriver.GameTheme.GetPlayer();
-                }
+                    {
+                        return GameDriver.GameTheme.GetPlayer();
+                    }
+                case BlobType.Pause:
+                    {
+                        IList<Sprite> SpritesSheet = UnityEngine.Resources.LoadAll<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048.png");
+                        //return UnityEngine.Resources.Load<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048.png");
+                        return spritesSheet[56];
+                    }
 
                 // When PowerUps added, add a case for the BlobType.PowerUp Enum
 
