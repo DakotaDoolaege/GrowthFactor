@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Theme
@@ -21,7 +22,7 @@ namespace Assets.Resources.Classes.Theme
         private const string NegativeFoodName = "NegativeFood";
 
         // The name of the image to use as the background
-        private const string BackgroundFile = "LevelResources/Backgrounds/Space2-4k";
+        private const string BackgroundFile = "DefaultTheme/DefaultBG";
 
         // The name of the file containing the sliced Sprite objects
         private const string SpriteFile = "BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048";
@@ -32,14 +33,27 @@ namespace Assets.Resources.Classes.Theme
         // Create the list of names in the exact order of the list of sprites
         private static readonly IList<string> Names = (from sprite in SpritesSheet select sprite.name).ToList();
 
-        //public override void Start()
-        //{
-        //    this.SpritesSheet = UnityEngine.Resources.LoadAll<Sprite>(SpriteFile);
-        //    this.Names = (from sprite in SpritesSheet select sprite.name).ToList();
+        public override string DeactivePlayer { get; } = "Iconic2048x2048_136";
 
-        //    base.Start();
-        //}
+        /// <summary>
+        /// Gets the deactive player for the player picker prefab
+        /// </summary>
+        /// <returns>
+        /// The deactive player for the player picker prefab
+        /// </returns>
+        public override Sprite GetDeactivePlayer()
+        {
+            int index = Names.IndexOf(DeactivePlayer);
 
+            return SpritesSheet[index];
+        }
+
+        /// <summary>
+        /// Gets the Sprite to use for the background
+        /// </summary>
+        /// <returns>
+        /// The Sprite to use for the background
+        /// </returns>
         public override Sprite GetBackground()
         {
             return UnityEngine.Resources.Load<Sprite>(BackgroundFile);
