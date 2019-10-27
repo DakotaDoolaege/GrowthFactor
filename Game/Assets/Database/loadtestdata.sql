@@ -1,0 +1,10 @@
+INSERT INTO SinglePlayer VALUES ('Test1', julianday('2019-10-01 08:48'), 100, 1);
+INSERT INTO SinglePlayer VALUES ('Test2', julianday('2018-10-24'), 250, 2);
+INSERT INTO SinglePlayer VALUES ('Chungus', julianday('now'), 9001, 12);
+INSERT INTO SinglePlayer VALUES ('ur mom', julianday('2019-10-12'), 350, 4);
+INSERT INTO SinglePlayer VALUES ('birdie', julianday('2019-10-24 14:00'), 1000, 10);
+INSERT INTO SinglePlayer VALUES ('pacman', julianday('2005-01-01 01:01'), 468, 2);
+INSERT INTO SinglePlayer VALUES ('OompaLoompa', julianday('2019-01-31'), 861, 6);
+INSERT INTO SinglePlayer VALUES ('pikachu', julianday('2019-10-11 15:59'), 6974, 19);
+INSERT INTO SinglePlayer VALUES ('fido', julianday('2019-10-23 21:12'), 1234, 14);
+INSERT INTO SinglePlayer VALUES ('gary', julianday('2017-12-31 23:59'), 6428, 39);
