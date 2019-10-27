@@ -19,10 +19,35 @@ namespace Assets.Resources.Classes.Theme
 
         public Sprite Background { get; set; }
 
+        // Set the deactive player for the player picker
+        public virtual string DeactivePlayer { get; } = "";
+
         // PowerUps can be added here
         //public Sprite PowerUp { get; set; }
 
         public GameTheme() { }
+
+        /// <summary>
+        /// Gets the deactive player for the player picker prefab
+        /// </summary>
+        /// <returns>
+        /// The deactive player for the player picker prefab
+        /// </returns>
+        public virtual Sprite GetDeactivePlayer()
+        {
+            return UnityEngine.Resources.Load<Sprite>(DeactivePlayer);
+        }
+
+        /// <summary>
+        /// Gets the active player for the player picker prefab
+        /// </summary>
+        /// <returns>
+        /// The active player for the player picker prefab
+        /// </returns>
+        public virtual Sprite GetActivePlayer()
+        {
+            return ApplicationTheme.CurrentTheme.GetPlayer();
+        }
 
         /// <summary>
         /// Gets the Sprite to use for the background
@@ -55,6 +80,13 @@ namespace Assets.Resources.Classes.Theme
         /// The Sprite to use as the negative food
         /// </returns>
         public abstract Sprite GetNegativeFood();
+
+        /// <summary>
+        /// Refreshes the theme, so that if a theme has multiple elements,
+        /// we can update the current one each time the theme selector button
+        /// is pressed
+        /// </summary>
+        public virtual void Refresh() { }
 
         // Once PowerUps are added, uncomment the following line
         //public abstract Sprite CreatePowerUp()

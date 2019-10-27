@@ -49,11 +49,11 @@ namespace Assets.Resources.Classes.Driver
         // Start is called before the first frame update
         void Start()
         {
-            this.GameTheme = ApplicationTheme.Theme;
+            this.GameTheme = ApplicationTheme.GetTheme();
             //GameTheme = new DefaultGameTheme();
             //GameTheme = new KnightTheme();
             //this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
-            SetBackground();
+            this.SetBackground();
 
             GetPlayerCount();
             this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
@@ -81,6 +81,8 @@ namespace Assets.Resources.Classes.Driver
            SpriteRenderer render = this.Background.GetComponent<SpriteRenderer>();
 
             render.sprite = this.GameTheme.GetBackground();
+
+            ApplicationTheme.ScaleBackground(this.Background, this.GameTheme.GetBackground());
         }
 
 
