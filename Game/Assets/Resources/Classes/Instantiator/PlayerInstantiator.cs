@@ -12,6 +12,7 @@ namespace Assets.Resources.Classes.Instantiator
 
         public GameObject LevelCanvas;
         public GameObject PauseButton;
+        public bool paused = false;
 
         public const int NumStartPositions = 6;
         //public IList<Blob> CurrentBlobs;

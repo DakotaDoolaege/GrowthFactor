@@ -23,15 +23,6 @@ namespace Assets.Resources.Classes.Blobs
         public PlayerAction Action { get; set; }
         public int Score { get; set; }
 
-
-
-        public void PauseClick()
-        {
-            //this.Grow(50);
-            UnityEngine.Debug.Log("Pausing gameHELLLLOOOOOOOOO");
-        }
-        
-        
         
         /// <summary>
         /// Start is called before the first frame to initialize the object
@@ -65,6 +56,12 @@ namespace Assets.Resources.Classes.Blobs
             //this.RigidBody.mass = PlayerMass;
             //this.StartPosition = this.transform.position;
         }
+
+        public void PauseGame()
+        {
+            GameVariables.Paused = true;
+        }
+
 
         /// <summary>
         /// Uses factory method pattern to add an action to the player
