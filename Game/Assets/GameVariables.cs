@@ -6,7 +6,7 @@ public static class GameVariables
 {
     private static int score; //Keeps data between scenes
     private static List<Vector3> playerPositions = new List<Vector3>();
-
+    private static bool paused;
 
     /// <summary>
     /// PlayerPositions handles requests to change the number of players to be created
@@ -44,6 +44,22 @@ public static class GameVariables
         set
         {
             score = value;
+        }
+    }
+
+
+    /// <summary>
+    /// Tracks if the game is active or not
+    /// </summary>
+    public static bool Paused
+    {
+        get
+        {
+            return paused;
+        }
+        set
+        {
+            paused = value;
         }
     }
 

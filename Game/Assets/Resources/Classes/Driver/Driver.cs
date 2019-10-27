@@ -43,9 +43,14 @@ namespace Assets.Resources.Classes.Driver
         public bool LevelEnded { get; set; } = false;
 
         /// <summary>
+        /// Array of objects to show when the pause screen is shown
+        /// </summary>
+        private GameObject _pauseMenu;
+        
+        /// <summary>
         /// Array of objects to show when the level ended screen is show
         /// </summary>
-        private GameObject[] _pauseObjects;
+        private GameObject[] _endObjects;
 
         // Start is called before the first frame update
         void Start()
@@ -57,8 +62,10 @@ namespace Assets.Resources.Classes.Driver
             this.SetBackground();
 
             GetPlayerCount();
-            this._pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
+            this._pauseMenu = GameObject.FindGameObjectWithTag("ShowOnPause");
+            this._endObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
             this.HidePaused();
+            this.HideEnded();
 
             this.PlayerInstantiator = this.gameObject.GetComponent<PlayerInstantiator>();
             this.ConsumableInstantiator = this.gameObject.GetComponent<ConsumableInstantiator>();
@@ -88,25 +95,54 @@ namespace Assets.Resources.Classes.Driver
 
 
         /// <summary>
-        /// Hides the level ended pause screen
+        /// Hides the pause screen
         /// </summary>
         public void HidePaused()
         {
             Time.timeScale = 1;
-            foreach (GameObject obj in this._pauseObjects)
+            this._pauseMenu.SetActive(false); 
+           
+            // foreach (GameObject obj in this._pauseObjects)
+           // {
+           //     obj.SetActive(false);
+           // }
+        }
+
+        /// <summary>
+        /// Hides the level ended pause screen
+        /// </summary>
+        public void HideEnded()
+        {
+            Time.timeScale = 1;
+            foreach (GameObject obj in this._endObjects)
             {
                 obj.SetActive(false);
             }
+        }
+  
+        /// <summary>
+        /// Shows the pause screen
+        /// </summary>
+        public void ShowPaused()
+        {
+
+            // foreach (GameObject obj in this._pauseObjects)
+            // {
+            //     Debug.Log("here");
+            //     obj.SetActive(true);
+            // }
+            this._pauseMenu.SetActive(true); 
+            Time.timeScale = 0;
         }
 
         /// <summary>
         /// Shows the level ended pause screen
         /// </summary>
-        public void ShowPaused()
+        public void ShowEnded()
         {
             Time.timeScale = 0;
 
-            foreach (GameObject obj in this._pauseObjects)
+            foreach (GameObject obj in this._endObjects)
             {
                 obj.SetActive(true);
             }
@@ -133,10 +169,19 @@ namespace Assets.Resources.Classes.Driver
         void Update()
         {
             this.CheckWin();
-
+            
             if (this.LevelEnded)
             {
+                this.ShowEnded();
+            }
+
+            if (GameVariables.Paused)
+            {
                 this.ShowPaused();
+            }
+            else
+            {
+                this.HidePaused();
             }
 
         }
