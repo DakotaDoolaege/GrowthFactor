@@ -10,6 +10,7 @@ TagManager:
   - Driver
   - Background
   - ThemeSwitcher
+  - ShowOnPause
   layers:
   - Default
   - TransparentFX

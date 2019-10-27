@@ -9,6 +9,11 @@ namespace Assets.Resources.Classes.Instantiator
 {
     public class PlayerInstantiator : Instantiator
     {
+
+        public GameObject LevelCanvas;
+        public GameObject PauseButton;
+        public bool paused = false;
+
         public const int NumStartPositions = 6;
         //public IList<Blob> CurrentBlobs;
         private const float ShiftFromEdge = 1.0f;
@@ -26,6 +31,17 @@ namespace Assets.Resources.Classes.Instantiator
         // Start is called before the first frame update
         public override void Start()
         {
+            GameObject Canvas = Instantiate(LevelCanvas, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+            for (int i = 0; i < GameVariables.Players.Count; i++)
+            {
+                Vector3 startPosition = GameVariables.Players[i];
+                startPosition.x = startPosition.x - 1920 -200;//remove offset n replace with proper function
+                startPosition.y = startPosition.y - 1080;
+
+                GameObject Pausebtn = Instantiate(PauseButton, startPosition, Quaternion.identity) as GameObject;
+                Pausebtn.transform.SetParent(Canvas.transform, false);
+            }
+
             this.CurrentBlobs = new List<Blob>();   
             //this.SetStartPositions();
             base.Start();
@@ -49,8 +65,8 @@ namespace Assets.Resources.Classes.Instantiator
             float height = Camera.main.orthographicSize * 2.0f;
             float width = Camera.main.aspect * height;
 
-            Debug.Log(height);
-            Debug.Log(width);
+            //Debug.Log(height);
+            //Debug.Log(width);
 
             this.StartPositions[0] = new Vector3(x + (width / 2) - ShiftFromEdge, y, z);
             this.StartPositions[1] = new Vector3(x - (width / 2) + ShiftFromEdge, y, z);
@@ -77,8 +93,10 @@ namespace Assets.Resources.Classes.Instantiator
             //Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];//changed this to pull locations from gamevariables
             Vector3 startPosition = (Camera.main.ScreenToWorldPoint(GameVariables.Players[this.CurrentBlobs.Count]));
             startPosition.z = 0;
-            Debug.Log("START POS:" +startPosition);
+            //Debug.Log("START POS:" +startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
+            startPosition.y = startPosition.y - 2;
+            GameObject Button = Instantiate(PauseButton, startPosition, Quaternion.identity);
             this.CurrentBlobs.Add(player.GetComponent<Player>());
 
             return player;
