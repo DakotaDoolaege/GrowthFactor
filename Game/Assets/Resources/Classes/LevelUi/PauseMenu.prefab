@@ -76,12 +76,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: 'Main
+  m_Text: 'Save
 
 
 
 
-    Menu'
+    Scores'
 --- !u!1 &3355151789139184262
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7032627dcba76a04b9b19fb95dae72e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoresOverlay: {fileID: 0}
 --- !u!222 &5969107212178875945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -355,7 +356,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5337205950004956537}
-        m_MethodName: MainMenu
+        m_MethodName: SaveMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -590,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7032627dcba76a04b9b19fb95dae72e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoresOverlay: {fileID: 0}
 --- !u!1 &7143482038068390652
 GameObject:
   m_ObjectHideFlags: 0
