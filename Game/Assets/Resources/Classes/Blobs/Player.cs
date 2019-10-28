@@ -43,7 +43,7 @@ namespace Assets.Resources.Classes.Blobs
         {
             base.Start();
             this.AddAction();
-            UnityEngine.Debug.Log(this.Action.Player == this);
+            //UnityEngine.Debug.Log(this.Action.Player == this);
             this.FoodValue = InitialPlayerValue;
             this.RigidBody.mass = PlayerMass;
             this.StartPosition = this.transform.position;

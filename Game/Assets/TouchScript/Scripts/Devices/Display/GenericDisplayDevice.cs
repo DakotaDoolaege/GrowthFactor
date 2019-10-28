@@ -1,5 +1,7 @@
 /*
  * @author Valentin Simonov / http://va.lent.in/
+ * 
+ * NOTE: Manually added changes from pull request #306 (southrop) / https://github.com/TouchScript/TouchScript/pull/306/files
  */
 
 using System.Text.RegularExpressions;
@@ -76,7 +78,9 @@ namespace TouchScript.Devices.Display
                 // Mobiles / fullscreen
                 case RuntimePlatform.Android:
                 case RuntimePlatform.IPhonePlayer:
+#if !UNITY_2018_2_OR_NEWER
                 case RuntimePlatform.TizenPlayer:
+#endif
                 case RuntimePlatform.WSAPlayerARM:
                 case RuntimePlatform.WSAPlayerX64:
                 case RuntimePlatform.WSAPlayerX86:
@@ -102,9 +106,15 @@ namespace TouchScript.Devices.Display
                     nativeResolution = new Vector2(res.width, res.height);
                     break;
                 // Probably TVs
+#if !UNITY_2017_3_OR_NEWER
                 case RuntimePlatform.SamsungTVPlayer:
+#endif
+#if UNITY_5_6_OR_NEWER
                 case RuntimePlatform.Switch:
+#endif
+#if !UNITY_2018_1_OR_NEWER
                 case RuntimePlatform.WiiU:
+#endif
                 case RuntimePlatform.XboxOne:
                 case RuntimePlatform.tvOS:
                     // This has not been tested and is probably wrong.
@@ -112,9 +122,11 @@ namespace TouchScript.Devices.Display
                     res = Screen.currentResolution;
                     nativeResolution = new Vector2(res.width, res.height);
                     break;
+#if !UNITY_2018_3_OR_NEWER
                 case RuntimePlatform.PSP2:
                     nativeResolution = new Vector2(960, 544);
                     break;
+#endif
                 default:
                     // This has not been tested and is probably wrong.
                     if (getHighestResolution(out nativeResolution)) break;
@@ -190,16 +202,24 @@ namespace TouchScript.Devices.Display
                 // Mobiles / fullscreen
                 case RuntimePlatform.Android:
                 case RuntimePlatform.IPhonePlayer:
+#if !UNITY_2018_2_OR_NEWER
                 case RuntimePlatform.TizenPlayer:
+#endif
                 case RuntimePlatform.WSAPlayerARM:
                 case RuntimePlatform.WSAPlayerX64:
                 case RuntimePlatform.WSAPlayerX86:
                     // We just hope that mobiles report their DPI correctly
                     break;
                 // Probably TVs
+#if !UNITY_2017_3_OR_NEWER
                 case RuntimePlatform.SamsungTVPlayer:
+#endif
+#if UNITY_5_6_OR_NEWER
                 case RuntimePlatform.Switch:
+#endif
+#if !UNITY_2018_1_OR_NEWER
                 case RuntimePlatform.WiiU:
+#endif
                 case RuntimePlatform.XboxOne:
                 case RuntimePlatform.tvOS:
                     // This has not been tested and is probably wrong.
@@ -216,9 +236,11 @@ namespace TouchScript.Devices.Display
                         nativeDPI = 40;
                     }
                     break;
+#if !UNITY_2018_3_OR_NEWER
                 case RuntimePlatform.PSP2:
                     nativeDPI = 220.68f;
                     break;
+#endif
                 default:
                     // This has not been tested and is probably wrong.
                     nativeDPI = 160;
