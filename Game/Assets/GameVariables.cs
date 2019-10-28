@@ -8,6 +8,10 @@ public static class GameVariables
     private static List<Vector3> playerPositions = new List<Vector3>();
     private static bool paused;
 
+
+
+
+
     /// <summary>
     /// PlayerPositions handles requests to change the number of players to be created
     /// for the next game and also can be used to get the number of players and location at any point
