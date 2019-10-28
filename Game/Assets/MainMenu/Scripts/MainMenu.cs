@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement; // change scenes
 
 /// <summary>
@@ -29,6 +30,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current 
     }
 
+    public void ShowScore()
+    {
+        //Rect buttonRect = new Rect();
+        //PopupWindow.Show(buttonRect, new ScoreWindow());
+        SceneManager.LoadScene("Scores");
+    }
     /// <summary>
     /// Loads the main menu
     /// </summary>
@@ -62,5 +69,6 @@ public class MainMenu : MonoBehaviour
         {
             yield return null;
         }
+
     }
 }

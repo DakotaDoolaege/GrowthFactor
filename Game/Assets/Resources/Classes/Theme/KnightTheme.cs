@@ -100,7 +100,7 @@ namespace Assets.Resources.Classes.Theme
         public override Sprite GetNegativeFood()
         {
             int ind = this._random.Next() % this.NegativeFoods.Count;
-            Debug.Log("Random: " + ind);
+            //Debug.Log("Random: " + ind);
 
             return this.NegativeFoods[ind];
         }

@@ -60,3 +60,7 @@ Game/*.symbols.zip
 
 # Crashlytics generated file
 Game/crashlytics-build.properties
+
+# Database files
+Game/[Aa]ssets/Database/*.db
+Game/[Aa]ssets/Database/*.db.meta

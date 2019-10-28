@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8973062694152771815}
   - component: {fileID: 8973062694152771812}
   - component: {fileID: 8973062694152771813}
-  - component: {fileID: 364977432045516476}
   - component: {fileID: 8973062694152771817}
+  - component: {fileID: 2533120233161928976}
   m_Layer: 0
   m_Name: PlaySpotActivator
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8973062694152771817}
-        m_MethodName: SetStatus
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 364977432045516476}
+      - m_Target: {fileID: 2533120233161928976}
         m_MethodName: UpdateScale
         m_Mode: 1
         m_Arguments:
@@ -141,18 +141,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &364977432045516476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8973062694152771810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c94e63dbc2b4d3468bf08daec4d76c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8973062694152771817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +157,15 @@ MonoBehaviour:
   deactivated: {fileID: 0}
   active: 0
   Player: {fileID: 8973062694152771813}
+--- !u!114 &2533120233161928976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973062694152771810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c94e63dbc2b4d3468bf08daec4d76c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
