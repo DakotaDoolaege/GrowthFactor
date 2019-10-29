@@ -53,11 +53,35 @@ public class EndLevelScript : MonoBehaviour
             {
             Debug.Log("Creating keyboard");
                 Vector3 startPosition = GameVariables.Players[i];
-                startPosition.x = startPosition.x - 1920;//remove offset n replace with proper function
-                startPosition.y = startPosition.y;
+            Debug.Log(startPosition);
+                if(startPosition.y > 1500)
+            {
+                Debug.Log("TOP!");
+                startPosition.y = startPosition.y - 50;
+                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
+                Keyboard.transform.SetParent(gameObject.transform, false);
 
+            }
+            else if(startPosition.x < 500)
+            {
+                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
+                Keyboard.transform.SetParent(gameObject.transform, false);
+
+            }
+            else if(startPosition.x > 3000)
+            {
+                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+                Keyboard.transform.SetParent(gameObject.transform, false);
+
+            }
+            else
+            {
+                startPosition.y = startPosition.y + 50;
                 GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.identity) as GameObject;
                 Keyboard.transform.SetParent(gameObject.transform, false);
+
+            }
+
             Debug.Log("Setting parent to:" + gameObject.name);
             }
     }
