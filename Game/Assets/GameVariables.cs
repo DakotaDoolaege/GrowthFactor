@@ -6,7 +6,62 @@ public static class GameVariables
 {
     private static int score; //Keeps data between scenes
     private static List<Vector3> playerPositions = new List<Vector3>();
+    private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
     private static bool paused;
+
+public class PlayerStation
+    {
+        private string Score;
+        private Vector3 Position;
+
+        public void SetScore(string Score)
+        {
+            this.Score = Score;
+        }
+
+        public void SetPosition(Vector3 Position)
+        {
+            this.Position = Position;
+        }
+
+        public string GetScore()
+        {
+            return this.Score;
+        }
+
+        public Vector3 GetPosition()
+        {
+            return this.Position;
+        }
+    }
+
+
+
+
+        /// <summary>
+        /// List of players 
+        /// </summary>
+    public static List<PlayerStation> PlayerList
+    {
+        get
+        {
+            return GamePlayers;
+        }
+        set
+        {
+            GamePlayers = value;
+            Debug.Log("Player count: " + GamePlayers.Count);
+            for (int i = 0; i < GamePlayers.Count; i++)
+            {
+                Debug.Log("Player Location: " + GamePlayers[i]);
+            }
+        }
+    }
+
+
+
+
+
 
     /// <summary>
     /// PlayerPositions handles requests to change the number of players to be created
