@@ -21,6 +21,8 @@ namespace Assets.Resources.Classes.Blobs
         public ConsumableAction Action;
         public const float MinSizeTolerance = 0.6f;
         public const int ShrinkSpeed = 25;
+        private System.Random rand;
+        public bool IsDragging { get; set; } = false;
 
         public override int FoodValue
         {
@@ -33,8 +35,37 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         public override void Start()
         {
+            this.rand = new System.Random();
+            InvokeRepeating("AddVelocity", 0, 1);
             this.Action = ConsumableAction.GetAction(this.BlobType);
             base.Start();
+        }
+
+        public override void FixedUpdate()
+        {
+        }
+
+        /// <summary>
+        /// Adds random velocity to the consumable object
+        /// </summary>
+        private void AddVelocity()
+        {
+            if (! this.IsDragging)
+            {
+                // If the player is not currently dragging this consumable, then we can add
+                // random velocity
+                int divisor = this.rand.Next(30, 101);
+                const int maxVelocity = 25;
+                const int minVelocity = 0;
+
+                float x = (float) (this.rand.Next(minVelocity, maxVelocity) *
+                                   Math.Pow((-1), this.rand.Next(0, 2)) / divisor);
+
+                float y = (float) (this.rand.Next(minVelocity, maxVelocity) * 
+                                   Math.Pow((-1), this.rand.Next(0, 2)) / divisor);
+                
+                this.RigidBody.velocity += (new Vector2(x, y));
+            }
         }
 
         public override void Update()
