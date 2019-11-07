@@ -34,6 +34,7 @@ public class ButtonHandler : MonoBehaviour
             positions.Remove(transform.position);
             GameVariables.Players = positions;
 
+
             active = false;
             Player.image.overrideSprite = deactivated;
         }
@@ -42,6 +43,14 @@ public class ButtonHandler : MonoBehaviour
             List<Vector3> positions = GameVariables.Players;
             positions.Add(transform.position);
             GameVariables.Players = positions;
+
+            List<GameVariables.PlayerStation> GameStations = GameVariables.PlayerList;
+            GameVariables.PlayerStation Station = new GameVariables.PlayerStation();
+            Station.SetPosition(transform.position);
+            GameStations.Add(Station);
+            GameVariables.PlayerList = GameStations;
+            Debug.Log("Players counter" + GameVariables.PlayerList.Count);
+            
             active = true;
             Player.image.overrideSprite = activated;
 

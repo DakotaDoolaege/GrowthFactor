@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayGame
+      value: StartLevel
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -665,7 +665,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 614
+      value: 768
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -1224,7 +1224,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 607
+      value: 768
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -1563,7 +1563,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -913
+      value: -767
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -2059,7 +2059,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -898
+      value: -768
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}

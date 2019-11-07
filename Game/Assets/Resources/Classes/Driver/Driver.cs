@@ -173,11 +173,14 @@ namespace Assets.Resources.Classes.Driver
             if (this.LevelEnded)
             {
                 this.ShowEnded();
+                this.UpdateScores();
+
             }
 
             if (GameVariables.Paused)
             {
                 this.ShowPaused();
+                this.UpdateScores();
             }
             else
             {
@@ -237,10 +240,20 @@ namespace Assets.Resources.Classes.Driver
                 Player player = blob as Player;
                 if (player != null)
                 {
-                    player.Score += player.FoodValue + this.TimerCount;
-                    ScoreDisplay.text = "Score: " + player.Score.ToString();
+                    player.Score = player.FoodValue; //+ this.TimerCount;
+                    //ScoreDisplay.text = "Score: " + player.Score.ToString();
+
                 }
             }
+
+            List<GameVariables.PlayerStation> GameStations= GameVariables.PlayerList;
+
+            for (int i = 0; i < GameStations.Count; i++)
+            {
+                Player player = this.Players[i]  as Player;
+                GameStations[i].SetScore("Score: " + player.Score.ToString());
+            }
+
         }
 
         /// <summary>
@@ -249,6 +262,7 @@ namespace Assets.Resources.Classes.Driver
         /// </summary>
         public void OnEndLevel()
         {
+            Debug.Log("LEVEL END");
             // Do whatever needs to be done when the level ends
             // here
 
