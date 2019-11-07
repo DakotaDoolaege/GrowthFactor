@@ -5,6 +5,10 @@ namespace Assets.Resources.Classes.Blobs
 {
     /// <summary>
     /// Class <c>DragAndDrop</c> models a Drag-And-Drop behaviour
+    ///
+    /// Note that this file is deprecated and is only kept so that we can
+    /// test the game with a mouse and are not forced to test with a touch
+    /// screen.
     /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
