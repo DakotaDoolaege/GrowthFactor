@@ -14,9 +14,21 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-        // call to coroutine
-        StartCoroutine("Wait");
-        
+            // call to coroutine
+            StartCoroutine("Wait");
+    }
+    
+    /// <summary>
+    /// Loads main game scene when player clicks play button
+    /// </summary>
+    public void StartLevel()
+    {
+        //check if there is any players selected
+        if (GameVariables.Players.Count > 0)
+        {
+            // call to coroutine
+            StartCoroutine("Wait");
+        }
     }
 
     /// <summary>
