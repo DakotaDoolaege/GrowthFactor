@@ -8,25 +8,25 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public class DragAndDrop : MonoBehaviour
     {
-        public Vector2 startPos;
-        public Vector2 direction;
-        public bool directionChosen;
-        private Rigidbody2D _body;
-        private float _startPosX;
-        private float _startPosY;
-        private bool _isHeld = false;
+        public Vector2 StartPos;
+        public Vector2 Direction;
+        public bool DirectionChosen;
+        private Rigidbody2D body;
+        private float startPosX;
+        private float startPosY;
+        private bool isHeld = false;
 
-        [SerializeField] float _offset = 0.05f;
+        [SerializeField] float offset = 0.05f;
 
-        private Vector2 _lastPosition;
-        [SerializeField] private const float SaveDelay = 0.2f;
-        [SerializeField] private const float Power = 5f;
-        private bool _nextSave = true;
+        private Vector2 lastPosition;
+        [SerializeField] private const float SAVE_DELAY = 0.2f;
+        [SerializeField] private const float POWER = 5f;
+        private bool nextSave = true;
 
-        private bool _following;
-        private Rigidbody2D _rigidBody;
-        private Vector2 _direction;
-        private bool _canBePushed;
+        private bool following;
+        private Rigidbody2D rigidBody;
+        private Vector2 direction;
+        private bool canBePushed;
 
 
         /// <summary>
@@ -34,10 +34,10 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void Start()
         {
-            this._following = false;
-            this._offset += 10;
-            this._lastPosition = this.transform.position;
-            this._rigidBody = this.GetComponent<Rigidbody2D>();
+            this.following = false;
+            this.offset += 10;
+            this.lastPosition = this.transform.position;
+            this.rigidBody = this.GetComponent<Rigidbody2D>();
         }
 
         /// <summary>
@@ -45,34 +45,34 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void Update()
         {
-            if (_isHeld)
+            if (isHeld)
             {
                 Vector3 mousePos = Input.mousePosition;
                 mousePos = Camera.main.ScreenToWorldPoint((mousePos));
-                _isHeld = true;
+                isHeld = true;
                 //this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
             }
 
             if (Input.GetMouseButtonDown(0) && (this.CalculateMagnitude()))
             {
-                this._following = true;
+                this.following = true;
             }
 
             if (Input.GetMouseButtonUp(0) && (this.CalculateMagnitude()))
             {
-                this._following = false;
-                this._direction = (Vector2) this.transform.position - this._lastPosition;
-                this._canBePushed = true;
+                this.following = false;
+                this.direction = (Vector2) this.transform.position - this.lastPosition;
+                this.canBePushed = true;
             }
 
-            if (this._following)
+            if (this.following)
             {
                 const float midpoint = 0.5f;
                 //this.transform.position = Vector2.Lerp(this.transform.position,
                 //    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
             }
 
-            if (this._nextSave)
+            if (this.nextSave)
             {
                 StartCoroutine("SavePosition");
             }
@@ -84,16 +84,16 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void FixedUpdate()
         {
-            if (this._canBePushed)
+            if (this.canBePushed)
             {
-                this._canBePushed = false;
-                this._rigidBody.velocity = this._direction * Power;
+                this.canBePushed = false;
+                this.rigidBody.velocity = this.direction * POWER;
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                Vector2 vel = this._rigidBody.velocity;
-                this._rigidBody.AddForce(vel);
+                Vector2 vel = this.rigidBody.velocity;
+                this.rigidBody.AddForce(vel);
             }
         }
 
@@ -109,15 +109,15 @@ namespace Assets.Resources.Classes.Blobs
         /// </returns>
         private IEnumerator SavePosition()
         {
-            this._nextSave = false;
-            this._lastPosition = this.transform.position;
-            yield return new WaitForSeconds(SaveDelay);
-            this._nextSave = true;
+            this.nextSave = false;
+            this.lastPosition = this.transform.position;
+            yield return new WaitForSeconds(SAVE_DELAY);
+            this.nextSave = true;
         }
 
         private bool CalculateMagnitude()
         {
-            return (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position).magnitude <= this._offset;
+            return (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position).magnitude <= this.offset;
         }
 
         /// <summary>
@@ -131,14 +131,16 @@ namespace Assets.Resources.Classes.Blobs
                 Vector3 mousePos = Input.mousePosition;
                 mousePos = Camera.main.ScreenToWorldPoint((mousePos));
 
-                this._startPosX = mousePos.x - this.transform.localPosition.x;
-                this._startPosY = mousePos.y - this.transform.localPosition.y;
+                this.startPosX = mousePos.x - this.transform.localPosition.x;
+                this.startPosY = mousePos.y - this.transform.localPosition.y;
 
-                this._isHeld = true;
+                this.isHeld = true;
+
+                //// If we are dragging the object, notify the consumable
+                //Consumable consumable = this.gameObject.GetComponent<Consumable>();
+                //consumable.IsDragging = true;
             }
         }
-
-
 
         /// <summary>
         /// OnMouseUp handles the event where the left mouse button is realesed
@@ -146,12 +148,16 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void OnMouseUp()
         {
-            if (this._rigidBody != null)
+            if (this.rigidBody != null)
             {
-                _isHeld = false;
-                Vector2 vel = this._rigidBody.velocity;
-                this._rigidBody.AddForce(vel);
+                isHeld = false;
+                Vector2 vel = this.rigidBody.velocity;
+                this.rigidBody.AddForce(vel);
             }
+
+            //// If we stop dragging the object, notify the consumable
+            //Consumable consumable = this.gameObject.GetComponent<Consumable>();
+            //consumable.IsDragging = false;
         }
 
     }
