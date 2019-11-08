@@ -16,7 +16,7 @@ namespace Assets.Resources.Classes
     {
         public static IList<GameTheme> Themes;
         public static GameTheme CurrentTheme;
-        private const int DEFAULT_THEME_INDEX = 1;
+        private const int DEFAULT_THEME_INDEX = 0;
 
         static ApplicationTheme()
         {
