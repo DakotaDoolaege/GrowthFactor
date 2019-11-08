@@ -12,7 +12,6 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class HalloweenTheme : GameTheme
     {
-        public override string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/HalloweenBackground";
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 
@@ -146,6 +145,15 @@ namespace Assets.Resources.Classes.Theme
         public override void Refresh()
         {
             this.SetBackground();
+        }
+
+        public override GameObject GetMainMenuBackground()
+        {
+            string file = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 3);
+
+            GameObject parallax = UnityEngine.Resources.Load<GameObject>(file);
+            parallax = GameObject.Instantiate(parallax);
+            return parallax;
         }
     }
 }
