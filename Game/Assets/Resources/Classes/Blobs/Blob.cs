@@ -200,7 +200,7 @@ namespace Assets.Resources.Classes.Blobs
         /// <summary>
         /// FixedUpdate() is called a by the UnityEngine to deal with physics
         /// </summary>
-        public void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             //// Since this method deals with physics, it is a safe option to 
             //// calculate the object's acceleration here
