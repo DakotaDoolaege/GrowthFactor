@@ -1,4 +1,5 @@
-﻿using Assets.MainMenu.Background;
+﻿using System;
+using Assets.MainMenu.Background;
 using UnityEngine;
 
 namespace Assets.Resources.Classes
@@ -20,6 +21,25 @@ namespace Assets.Resources.Classes
         public void RefreshThemes()
         {
             ApplicationTheme.RefreshThemes();
+            Camera.main.GetComponent<MainMenuBackground>().Refresh();
+        }
+
+        public void RefreshGuiElements()
+        {
+            GameObject[] refreshItems = GameObject.FindGameObjectsWithTag("RefreshOnThemeUpdate");
+
+            foreach(GameObject refreshObject in refreshItems)
+            {
+                try
+                {
+                    BackButton back = refreshObject.GetComponent<BackButton>();
+                    back.Refresh();
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
         }
     }
 }

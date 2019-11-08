@@ -12,15 +12,25 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class HalloweenTheme : GameTheme
     {
+        // Set GUI elements for theme
+        public override int DefaultLargeButtonIndex { get; } = 5;
+        public override int DefaultSoundIconIndex { get; } = 2;
+        public override int DefaultMuteIconIndex { get; } = 14;
+        public override int DefaultAdminIconIndex { get; } = 6;
+        public override int DefaultBackButtonIndex { get; } = 82;
+
+        // Backgrounds
         public override string MainMenuBackgroundPrefab { get; set; }
+        private const string BACKGROUND_FILE = "_game_background";
+        private Sprite background;
+
+        // In-game sprites
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 
+        // Random number generator for randomly selecting backgrounds and players
         private readonly System.Random _random = new System.Random();
 
-        // The name of the image to use as the background
-        private const string BACKGROUND_FILE = "_game_background";
-        private Sprite background;
 
         // Set the active and deactive player for the player picker
         public string ActivePlayer { get; } = "Halloween/CandyGameItems/PNG/ico/24";
@@ -154,7 +164,7 @@ namespace Assets.Resources.Classes.Theme
 
         public void SetMainMenuBackground()
         {
-            this.MainMenuBackgroundPrefab = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 3);
+            this.MainMenuBackgroundPrefab = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 4);
 
             //GameObject parallax = UnityEngine.Resources.Load<GameObject>(file);
             //parallax = GameObject.Instantiate(parallax);

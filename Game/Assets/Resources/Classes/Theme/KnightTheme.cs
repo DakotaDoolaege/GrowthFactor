@@ -11,14 +11,23 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class KnightTheme : GameTheme
     {
+        // Set GUI elements for theme
+        public override int DefaultLargeButtonIndex { get; } = 8;
+        public override int DefaultSoundIconIndex { get; } = 3;
+        public override int DefaultMuteIconIndex { get; } = 15;
+        public override int DefaultAdminIconIndex { get; } = 7;
+        public override int DefaultBackButtonIndex { get; } = 83;
+
+        // Backgrounds
         public override string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/KnightThemeMenuBackground";
+        private const string BACKGROUND_FILE = "Painted HQ 2D Forest Medieval Background/Day";
+
+        // In-game sprites
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 
+        // Random number generator for generating random baddies and consumables
         private readonly System.Random _random = new System.Random();
-
-        // The name of the image to use as the background
-        private const string BACKGROUND_FILE = "Painted HQ 2D Forest Medieval Background/Day";
 
         // Set the deactive player for the player picker
         public override string DeactivePlayer { get; } = "Low_Swordman/1.Sprite/Hat-Helmet";
