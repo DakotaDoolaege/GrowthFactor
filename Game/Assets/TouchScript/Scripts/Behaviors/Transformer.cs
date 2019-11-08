@@ -5,6 +5,7 @@
  */
 
 using System;
+using Assets.Resources.Classes.Blobs;
 using TouchScript.Gestures;
 using TouchScript.Gestures.TransformGestures;
 using TouchScript.Gestures.TransformGestures.Base;
@@ -371,15 +372,19 @@ namespace TouchScript.Behaviors
 
         private void stateChangedHandler(object sender, GestureStateChangeEventArgs gestureStateChangeEventArgs)
         {
+            Consumable consumable = this.gameObject.GetComponent<Consumable>();
             switch (gestureStateChangeEventArgs.State)
             {
                 case Gesture.GestureState.Possible:
                     stateManual();
                     break;
                 case Gesture.GestureState.Changed:
+                    consumable.IsDragging = true;
                     manualUpdate();
                     break;
                 case Gesture.GestureState.Ended:
+                    consumable.IsDragging = false;
+                    break;
                 case Gesture.GestureState.Cancelled:
                     stateAutomatic();
                     break;

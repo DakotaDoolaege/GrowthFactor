@@ -12,6 +12,7 @@ TagManager:
   - ThemeSwitcher
   - ShowOnPause
   - ScoresOverlay
+  - MainMenuBackground
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public abstract class GameTheme
     {
+        public virtual string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/DefaultBackground";
         public Sprite Player { get; set; }
         public Sprite PositiveFood { get; set; }
         public Sprite NegativeFood { get; set; }
@@ -87,6 +88,13 @@ namespace Assets.Resources.Classes.Theme
         /// is pressed
         /// </summary>
         public virtual void Refresh() { }
+
+        public GameObject GetMainMenuBackground()
+        {
+            GameObject background = UnityEngine.Resources.Load<GameObject>(this.MainMenuBackgroundPrefab);
+            background = GameObject.Instantiate(background);
+            return background;
+        }
 
         // Once PowerUps are added, uncomment the following line
         //public abstract Sprite CreatePowerUp()
