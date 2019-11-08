@@ -127,6 +127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayButton
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -262,11 +267,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayButton
-      objectReference: {fileID: 0}
     - target: {fileID: 364977432045516476, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_Enabled
@@ -289,6 +289,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player4
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -428,11 +433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Player4
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -602,6 +602,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player3
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -742,20 +747,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+    - target: {fileID: 8973062694152771812, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
-      propertyPath: m_Name
-      value: Player3
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: Driver
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771812, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efe625004cb95d744a42fb2c0723e7ae, type: 3}
@@ -972,6 +972,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player0
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1112,11 +1117,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Player0
-      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: Player0
@@ -1161,6 +1161,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player5
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1300,11 +1305,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Player5
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -1500,6 +1500,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1640,11 +1645,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Name
-      value: Player2
-      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: Driver
@@ -1669,6 +1669,7 @@ GameObject:
   - component: {fileID: 1688777833}
   - component: {fileID: 1688777832}
   - component: {fileID: 1688777831}
+  - component: {fileID: 1688777839}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -1971,6 +1972,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbdd0fe3be7f674ba189d6c3f52ca8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1688777839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688777829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8de2ee001da0c40a6427a52ad06b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010842755 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
@@ -1996,6 +2009,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346636686}
     m_Modifications:
+    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771813, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2136,20 +2154,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
+    - target: {fileID: 8973062694152771812, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
-      propertyPath: m_Name
-      value: Player1
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771817, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: Driver
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973062694152771812, guid: efe625004cb95d744a42fb2c0723e7ae,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efe625004cb95d744a42fb2c0723e7ae, type: 3}
