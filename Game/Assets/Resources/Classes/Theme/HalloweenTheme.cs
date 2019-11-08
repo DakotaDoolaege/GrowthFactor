@@ -12,6 +12,7 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class HalloweenTheme : GameTheme
     {
+        public override string MainMenuBackgroundPrefab { get; set; }
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 
@@ -30,7 +31,10 @@ namespace Assets.Resources.Classes.Theme
         /// </summary>
         public HalloweenTheme() : base()
         {
-            // Set the background
+            // Set the main menu's background 
+            this.SetMainMenuBackground();
+
+            // Set the in-game background
             this.SetBackground();
 
             // Set up the negative foods
@@ -147,13 +151,13 @@ namespace Assets.Resources.Classes.Theme
             this.SetBackground();
         }
 
-        public override GameObject GetMainMenuBackground()
+        public void SetMainMenuBackground()
         {
-            string file = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 3);
+            this.MainMenuBackgroundPrefab = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 3);
 
-            GameObject parallax = UnityEngine.Resources.Load<GameObject>(file);
-            parallax = GameObject.Instantiate(parallax);
-            return parallax;
+            //GameObject parallax = UnityEngine.Resources.Load<GameObject>(file);
+            //parallax = GameObject.Instantiate(parallax);
+            //return parallax;
         }
     }
 }
