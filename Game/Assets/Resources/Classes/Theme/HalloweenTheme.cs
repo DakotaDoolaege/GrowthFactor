@@ -149,6 +149,7 @@ namespace Assets.Resources.Classes.Theme
         public override void Refresh()
         {
             this.SetBackground();
+            this.SetMainMenuBackground();
         }
 
         public void SetMainMenuBackground()
