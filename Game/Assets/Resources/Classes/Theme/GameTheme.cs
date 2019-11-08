@@ -89,7 +89,7 @@ namespace Assets.Resources.Classes.Theme
         /// </summary>
         public virtual void Refresh() { }
 
-        public GameObject GetMainMenuBackground()
+        public virtual GameObject GetMainMenuBackground()
         {
             GameObject background = UnityEngine.Resources.Load<GameObject>(this.MainMenuBackgroundPrefab);
             background = GameObject.Instantiate(background);
