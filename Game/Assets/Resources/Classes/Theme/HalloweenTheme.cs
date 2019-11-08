@@ -12,6 +12,7 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class HalloweenTheme : GameTheme
     {
+        public override string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/HalloweenBackground";
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 

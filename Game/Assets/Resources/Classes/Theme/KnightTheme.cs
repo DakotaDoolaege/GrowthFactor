@@ -11,6 +11,7 @@ namespace Assets.Resources.Classes.Theme
     /// </summary>
     public class KnightTheme : GameTheme
     {
+        public override string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/KnightThemeMenuBackground";
         private IList<Sprite> NegativeFoods { get; }
         private IList<Sprite> PositiveFoods { get; }
 

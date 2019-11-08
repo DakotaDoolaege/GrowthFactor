@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.MainMenu.Background;
+using UnityEngine;
 
 namespace Assets.Resources.Classes
 {
@@ -13,6 +14,7 @@ namespace Assets.Resources.Classes
         public void SwitchTheme()
         {
             ApplicationTheme.SwitchTheme(this.Index);
+            Camera.main.GetComponent<MainMenuBackground>().Refresh();
         }
 
         public void RefreshThemes()
