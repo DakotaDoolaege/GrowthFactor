@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 574041746100826790}
   - component: {fileID: 574041746100826785}
   - component: {fileID: 574041746100826784}
+  - component: {fileID: 6703964684602212450}
   m_Layer: 5
   m_Name: AdminButton
   m_TagString: Untagged
@@ -396,6 +397,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &6703964684602212450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574041746100826814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2cd2893b8a1dd46af576d8f466537a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &574041746375183145
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,10 +585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e5b3783c1d4454db5dd4ad75c73624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MutedIcon: {fileID: 7624035699317130590, guid: 66e9c80335fb4584e9bb6f0319900f4b,
-    type: 3}
-  SoundOnIcon: {fileID: -7747287092744849336, guid: 66e9c80335fb4584e9bb6f0319900f4b,
-    type: 3}
 --- !u!82 &574041746375183187
 AudioSource:
   m_ObjectHideFlags: 0
@@ -788,6 +797,7 @@ GameObject:
   - component: {fileID: 1450086424698231938}
   - component: {fileID: 1450086424698231965}
   - component: {fileID: 1450086424698231964}
+  - component: {fileID: 2456763439534989569}
   m_Layer: 5
   m_Name: ScoresButton
   m_TagString: Untagged
@@ -812,7 +822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0000060797}
+  m_AnchoredPosition: {x: 0, y: -5}
   m_SizeDelta: {x: 405.7, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1450086424698231962
@@ -1094,6 +1104,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2456763439534989569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450086424698231966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8acb753ebbf9c4281b767e640866a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 
 --- !u!1 &1450086424977681126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1133,7 @@ GameObject:
   - component: {fileID: 1450086424977681130}
   - component: {fileID: 1450086424977681125}
   - component: {fileID: 1450086424977681124}
+  - component: {fileID: 8955722974095340637}
   m_Layer: 5
   m_Name: ThemesButton
   m_TagString: Untagged
@@ -1134,7 +1158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -121.7}
+  m_AnchoredPosition: {x: 0, y: -134}
   m_SizeDelta: {x: 405.7, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1450086424977681122
@@ -1412,6 +1436,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8955722974095340637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450086424977681126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8acb753ebbf9c4281b767e640866a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 
 --- !u!1 &1450086424982856790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,6 +1985,7 @@ GameObject:
   - component: {fileID: 6115101845827640696}
   - component: {fileID: 6115101845827640699}
   - component: {fileID: 6115101845827640698}
+  - component: {fileID: 3775378285653140015}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -2239,3 +2277,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3775378285653140015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115101845827640692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8acb753ebbf9c4281b767e640866a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: 
