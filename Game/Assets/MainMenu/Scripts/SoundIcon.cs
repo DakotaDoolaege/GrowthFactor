@@ -1,13 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Resources.Classes;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.MainMenu.Scripts
 {
     public class SoundIcon : MonoBehaviour
     {
-        public Sprite MutedIcon;
-
-        public Sprite SoundOnIcon;
         private Image image;
 
         /// <summary>
@@ -16,6 +14,7 @@ namespace Assets.MainMenu.Scripts
         void Start()
         {
             this.image = this.gameObject.GetComponent<Image>();
+            this.image.sprite = ApplicationTheme.CurrentTheme.GetSoundIcon();
         }
 
         /// <summary>
@@ -27,14 +26,14 @@ namespace Assets.MainMenu.Scripts
             float tol = 0.05f;
             bool isMuted = AudioListener.volume > tol;
 
-            if (! isMuted && this.MutedIcon != null && this.image != null)
+            if (! isMuted && this.image != null)
             {
-                this.image.sprite = MutedIcon;
+                this.image.sprite = ApplicationTheme.CurrentTheme.GetMuteIcon();
             }
 
-            else if (isMuted && this.SoundOnIcon != null && this.image != null)
+            else if (isMuted && this.image != null)
             {
-                this.image.sprite = SoundOnIcon;
+                this.image.sprite = ApplicationTheme.CurrentTheme.GetSoundIcon();
             }
         }
     }
