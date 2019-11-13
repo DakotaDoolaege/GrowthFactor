@@ -38,8 +38,7 @@ public class EndLevelScript : MonoBehaviour
         gameObject.transform.parent.gameObject.SetActive(false);
 
         GameVariables.Paused = false;
-        GameVariables.Players = new List<Vector3>();
-        GameVariables.PlayerList = new List<GameVariables.PlayerStation>();
+        GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
     }
 
@@ -48,9 +47,9 @@ public class EndLevelScript : MonoBehaviour
 
         GameObject overlay = gameObject.transform.gameObject;
         overlay.transform.Translate(new Vector3(0, 0, 0));
-        for (int i = 0; i < GameVariables.Players.Count; i++)
+        for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
         {
-            Vector3 startPosition = GameVariables.Players[i];
+            Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
             Debug.Log(startPosition);
             if (startPosition.y > 1500)
             {
@@ -58,14 +57,14 @@ public class EndLevelScript : MonoBehaviour
                 GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
                 Keyboard.transform.SetParent(gameObject.transform, false);
                 TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerList[i].GetScore();
+                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
             }
             else if (startPosition.x < 500)
             {
                 GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
                 Keyboard.transform.SetParent(gameObject.transform, false);
                 TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerList[i].GetScore();
+                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
 
             }
             else if (startPosition.x > 3000)
@@ -73,7 +72,7 @@ public class EndLevelScript : MonoBehaviour
                 GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
                 Keyboard.transform.SetParent(gameObject.transform, false);
                 TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerList[i].GetScore();
+                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
 
             }
             else
@@ -82,7 +81,7 @@ public class EndLevelScript : MonoBehaviour
                 GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.identity) as GameObject;
                 Keyboard.transform.SetParent(gameObject.transform, false);
                 TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerList[i].GetScore();
+                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
 
             }
             
