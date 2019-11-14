@@ -43,6 +43,13 @@ public class PlayerStation : IEquatable<PlayerStation>
             return this.Name;
         }
 
+        public void SaveScore()
+        {
+            if (this.Score > 0 && this.Name != "")
+            {
+                Debug.Log("Saving score for " + this.Name + " = " + this.Score);
+            }
+        }
         public bool Equals(PlayerStation other)
         {
             if (other == null)
