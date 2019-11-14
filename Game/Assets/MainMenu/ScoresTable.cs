@@ -12,19 +12,21 @@ public class ScoresTable : MonoBehaviour
 
     private void Awake()
     {
-        entryContainer = transform.Find("EntryContainer");
-        entryTemplate = entryContainer.Find("EntryTemplate");
-        DB = GameObject.Find("DBScript").GetComponent<Database>();
+        this.entryContainer = transform.Find("EntryContainer");
+        this.entryTemplate = this.entryContainer.Find("EntryTemplate");
 
-        IList scores = (ArrayList) DB.TopSingle();
+        // THis is the database script, of which there should only be ONE instance
+        this.DB = GameObject.Find("DBScript").GetComponent<Database>();
 
-        entryTemplate.gameObject.SetActive(false);
+        IList scores = (ArrayList) this.DB.TopSingle();
+
+        this.entryTemplate.gameObject.SetActive(false);
 
         float templateHeight = 20f;
         for (int i = 0; i < scores.Count; i++)
         {
             // Create and place entries
-            Transform entryTransform = Instantiate(entryTemplate, entryContainer);
+            Transform entryTransform = Instantiate(this.entryTemplate, this.entryContainer);
             RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i - 80);
             entryTransform.gameObject.SetActive(true);
