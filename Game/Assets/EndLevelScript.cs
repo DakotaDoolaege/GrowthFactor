@@ -3,91 +3,133 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; // change scenes
 using TMPro;
+using UnityEngine.UI;
 
 
 public class EndLevelScript : MonoBehaviour
 {
-    public GameObject PlayerPanel;
-    public void ResumeGame()
-    {
-        GameVariables.Paused = false;
-    }
+	public GameObject PlayerPanel;
+	public int PlayerNumber;
+	public void ResumeGame()
+	{
+		GameVariables.Paused = false;
+	}
 
-    public void NextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current 
-    }
+	public void NextLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current 
+	}
 
-    public void RestartLevel()
-    {
-        GameVariables.Paused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
-    }
+	public void RestartLevel()
+	{
+		GameVariables.Paused = false;
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
+	}
 
-    public void SaveMenu()
-    {
-        gameObject.SetActive(false);
-        CreatePlayerPanels();
-        gameObject.SetActive(true);
-        GameVariables.Paused = false;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
-    }
-    public void MainMenu()
-    {
-        gameObject.SetActive(false);
-        gameObject.transform.parent.gameObject.SetActive(false);
+	public void SaveMenu()
+	{
+		gameObject.SetActive(false);
+		CreatePlayerPanels();
+		gameObject.SetActive(true);
+		GameVariables.Paused = false;
+		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
+	}
 
-        GameVariables.Paused = false;
-        GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
-    }
+	public void MainMenu()
+	{
+		gameObject.SetActive(false);
+		gameObject.transform.parent.gameObject.SetActive(false);
+		//Need to add methods for adding name and score to the player object, or should I just call database script from here, no need to add to player object
+		
+		Debug.Log(transform.GetComponent<EndLevelScript>().PlayerNumber);
+	   
 
-    private void CreatePlayerPanels()
-    {
 
-        GameObject overlay = gameObject.transform.gameObject;
-        overlay.transform.Translate(new Vector3(0, 0, 0));
-        for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
-        {
-            Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
-            Debug.Log(startPosition);
-            if (startPosition.y > 1500)
-            {
-                startPosition.y = startPosition.y - 50;
-                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
-                Keyboard.transform.SetParent(gameObject.transform, false);
-                TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
-            }
-            else if (startPosition.x < 500)
-            {
-                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
-                Keyboard.transform.SetParent(gameObject.transform, false);
-                TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+		Debug.Log("Text for name: " + gameObject.transform.GetChild(1).gameObject.transform.GetChild(2));
+		SaveScores();
+		GameVariables.Paused = false;
+		GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
+	}
 
-            }
-            else if (startPosition.x > 3000)
-            {
-                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
-                Keyboard.transform.SetParent(gameObject.transform, false);
-                TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+	public void SaveName(Text Name)
+	{
+		Debug.Log("WE GOT IT!!" + Name.text);
+	}
 
-            }
-            else
-            {
-                startPosition.y = startPosition.y + 50;
-                GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.identity) as GameObject;
-                Keyboard.transform.SetParent(gameObject.transform, false);
-                TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-                Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+	private void SaveScores()
+	{
+		Debug.Log("Object is: " + transform.parent);// savescoresoverlay
+		int PlayerNum;
+		foreach (Transform child in transform.parent)
+		{
+			if (child.name == "PlayerInputPanel(Clone)")
+			{
+				Debug.Log("Child is: " + child + "Child playernumber is: " + child.GetComponent<EndLevelScript>().PlayerNumber);
+				Debug.Log("Child position: " + child.transform.position + "corresponding playerstation location: " + GameVariables.PlayerStations[child.GetComponent<EndLevelScript>().PlayerNumber].GetPosition());
+				Debug.Log("name is: " + child.transform.GetChild(1).gameObject.transform.GetChild(2).GetComponent<Text>().text);
 
-            }
-            
+				PlayerNum = child.GetComponent<EndLevelScript>().PlayerNumber;
+				
+					
+				GameVariables.PlayerStations[PlayerNum].SetName(child.transform.GetChild(1).gameObject.transform.GetChild(2).GetComponent<Text>().text);
 
-            Debug.Log("Setting parent to:" + gameObject.name);
-        }
-    }
+				GameVariables.PlayerStations[PlayerNum].SaveScore();
+			}
+		}
+
+	}
+
+	private void CreatePlayerPanels()
+	{
+
+		GameObject overlay = gameObject.transform.gameObject;
+		overlay.transform.Translate(new Vector3(0, 0, 0));
+		for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
+		{
+			Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
+			Debug.Log(startPosition);
+			if (startPosition.y > 1500)
+			{
+				startPosition.y = startPosition.y - 50;
+				GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
+				Keyboard.transform.SetParent(gameObject.transform, false);
+				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+				Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+			}
+			else if (startPosition.x < 500)
+			{
+				GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
+				Keyboard.transform.SetParent(gameObject.transform, false);
+				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+				Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+
+			}
+			else if (startPosition.x > 3000)
+			{
+				GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+				Keyboard.transform.SetParent(gameObject.transform, false);
+				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+				Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+
+			}
+			else
+			{
+				startPosition.y = startPosition.y + 50;
+				GameObject Keyboard = Instantiate(PlayerPanel, startPosition, Quaternion.identity) as GameObject;
+				Keyboard.transform.SetParent(gameObject.transform, false);
+				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+				Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+
+			}
+			
+
+			Debug.Log("Setting parent to:" + gameObject.name);
+		}
+	}
 
 }
