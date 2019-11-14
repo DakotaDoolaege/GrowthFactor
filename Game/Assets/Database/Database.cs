@@ -29,7 +29,7 @@ public class Database : MonoBehaviour
         this.conStr = "URI=file:" + this.dbFile;
         bool needCreate = false;
 
-        Debug.Log(this.conStr);         // Check
+        //Debug.Log(this.conStr);         // Check
         // If DB doesn't exist, make it
         if (! File.Exists(this.dbFile))
         {
@@ -42,7 +42,7 @@ public class Database : MonoBehaviour
         this.dbCon = new SqliteConnection(this.conStr);
         if (this.dbCon.State == ConnectionState.Open)
             return;
-        Debug.Log("Opening connection...");
+        //Debug.Log("Opening connection...");
         this.dbCon.Open();
         this.isOpen = true;
 
