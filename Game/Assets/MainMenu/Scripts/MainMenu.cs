@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     public void StartLevel()
     {
         //check if there is any players selected
-        if (GameVariables.Players.Count > 0)
+        if (GameVariables.PlayerStations.Count > 0)
         {
             // call to coroutine
             StartCoroutine("Wait");

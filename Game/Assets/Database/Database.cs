@@ -29,7 +29,7 @@ public class Database : MonoBehaviour
         this.conStr = "URI=file:" + this.dbFile;
         bool needCreate = false;
 
-        Debug.Log(this.conStr);         // Check
+        //Debug.Log(this.conStr);         // Check
         // If DB doesn't exist, make it
         if (! File.Exists(this.dbFile))
         {
