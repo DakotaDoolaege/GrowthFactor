@@ -103,8 +103,8 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Renderer: {fileID: 0}
   Collider: {fileID: 0}
+  BlobType: 0
   LastVelocity: {x: 0, y: 0}
-  Acceleration: {x: 0, y: 0}
 --- !u!58 &5582903486511551895
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -154,10 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b7a116d5897d9468ed421e67954058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0}
-  direction: {x: 0, y: 0}
-  directionChosen: 0
-  _offset: 0.05
+  StartPos: {x: 0, y: 0}
+  Direction: {x: 0, y: 0}
+  DirectionChosen: 0
+  offset: 0.05
 --- !u!114 &-763729491980882798
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -630,11 +630,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template_2D
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: C:\Users\dakot\Documents\CMPT395\f19torvalds\Game\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 002e875fbeb8d601
   metroApplicationDescription: Template_2D
   wsaImages: {}
   metroTileShortName: 

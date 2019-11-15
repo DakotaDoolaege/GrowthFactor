@@ -246,12 +246,12 @@ namespace Assets.Resources.Classes.Driver
                 }
             }
 
-            List<GameVariables.PlayerStation> GameStations= GameVariables.PlayerList;
+            List<GameVariables.PlayerStation> GameStations= GameVariables.PlayerStations;
 
             for (int i = 0; i < GameStations.Count; i++)
             {
                 Player player = this.Players[i]  as Player;
-                GameStations[i].SetScore("Score: " + player.Score.ToString());
+                GameStations[i].SetScore(player.Score);
             }
 
         }
@@ -279,7 +279,7 @@ namespace Assets.Resources.Classes.Driver
         private void GetPlayerCount()
         {
             if(NumPlayers == 0)
-                NumPlayers =  GameVariables.Players.Count;
+                NumPlayers =  GameVariables.PlayerStations.Count;
         }
 
         /// <summary>

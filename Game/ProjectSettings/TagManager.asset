@@ -4,17 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - PlayerPanel
   - Food
-  - Wall
-  - ShowOnLevelEnd
-  - Driver
-  - Background
-  - ThemeSwitcher
-  - ShowOnPause
-  - ScoresOverlay
-  - MainMenuBackground
-  - RefreshOnThemeUpdate
-  - Database
   layers:
   - Default
   - TransparentFX
@@ -47,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - Background
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
