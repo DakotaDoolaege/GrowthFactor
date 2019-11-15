@@ -98,7 +98,7 @@ public class Database : MonoBehaviour
         IList records = new ArrayList();
         while (results.Read())
         {
-            IList entry = new ArrayList();
+            IList<string> entry = new List<string>();
             string name = results.GetValue(0).ToString();
             string score = results.GetValue(2).ToString();
             string level = results.GetValue(3).ToString();

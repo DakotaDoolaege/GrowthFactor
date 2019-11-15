@@ -8,6 +8,11 @@ namespace Assets.Resources.MainMenuIcons
 {
     public class TextButton : MonoBehaviour
     {
+        /**
+         * TODO:
+         * - Make TextButton get the Text child object and set its text to 
+         *   the text specified in this class
+         */
         public string Text;
         private Image Image { get; set; }
 
