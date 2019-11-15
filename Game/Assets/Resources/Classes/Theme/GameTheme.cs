@@ -23,6 +23,7 @@ namespace Assets.Resources.Classes.Theme
         public virtual int DefaultMuteIconIndex { get; } = 12;
         public virtual int DefaultAdminIconIndex { get; } = 4;
         public virtual int DefaultBackButtonIndex { get; } = 80;
+        public virtual int DefaultScoresButtonIndex { get; } = 138;
 
         // Backgrounds
         public virtual string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/DefaultBackground";
@@ -118,27 +119,32 @@ namespace Assets.Resources.Classes.Theme
 
         public virtual Sprite GetButtonLarge()
         {
-            return this.SpritesSheet[DefaultLargeButtonIndex];
+            return this.SpritesSheet[this.DefaultLargeButtonIndex];
         }
 
         public virtual Sprite GetSoundIcon()
         {
-            return this.IconicSpritesSheet[DefaultSoundIconIndex];
+            return this.IconicSpritesSheet[this.DefaultSoundIconIndex];
         }
 
         public virtual Sprite GetMuteIcon()
         {
-            return this.IconicSpritesSheet[DefaultMuteIconIndex];
+            return this.IconicSpritesSheet[this.DefaultMuteIconIndex];
         }
 
         public virtual Sprite GetAdminIcon()
         {
-            return this.IconicSpritesSheet[DefaultAdminIconIndex];
+            return this.IconicSpritesSheet[this.DefaultAdminIconIndex];
         }
 
         public virtual Sprite GetBackIcon()
         {
-            return this.IconicSpritesSheet[DefaultBackButtonIndex];
+            return this.IconicSpritesSheet[this.DefaultBackButtonIndex];
+        }
+
+        public virtual Sprite GetScoresIcon()
+        {
+            return this.IconicSpritesSheet[this.DefaultScoresButtonIndex];
         }
 
         // Once PowerUps are added, uncomment the following line

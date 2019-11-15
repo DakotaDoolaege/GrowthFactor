@@ -1,4 +1,5 @@
-﻿using Assets.Resources.Classes;
+﻿using System;
+using Assets.Resources.Classes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,28 +24,34 @@ public class ScoreEntry : MonoBehaviour
     public int PlayerNumber;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        //this.Icon = this.gameObject.GetComponent<Image>();
         this.Icon = this.gameObject.transform.Find("Image").GetComponent<Image>();
         this.Icon.sprite = ApplicationTheme.CurrentTheme.GetButtonLarge();
         RectTransform image = this.Icon.transform as RectTransform;
-        image.sizeDelta = new Vector2(370.0f, 128.0f);
+        image.sizeDelta = new Vector2(253.0f, 80.0f);
 
         this.Text = this.gameObject.transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-        this.SetText();
-        this.Text.transform.position = image.position;
+        try
+        {
+            this.SetText();
+            this.Text.transform.position = image.position;
+            this.gameObject.SetActive(true);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void SetText()
     {
         IList<string> entries = Scores.GetScore(PlayerNumber);
-        string entryText = "Player: " + entries[2] + "\n";
-        entryText += "Score: " + entries[0] + "\n";
-        entryText += "Level: " + entries[1];
+        string entryText = (this.PlayerNumber + 1) + ".\t" + entries[2] + "\n";
+        entryText += "\tScore: " + entries[0] + "\n";
+        entryText += "\tLevel: " + entries[1];
 
         this.Text.text = entryText;
-        //this.Text.text = "test";
     }
 }

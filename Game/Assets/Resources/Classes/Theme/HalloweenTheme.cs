@@ -18,6 +18,7 @@ namespace Assets.Resources.Classes.Theme
         public override int DefaultMuteIconIndex { get; } = 14;
         public override int DefaultAdminIconIndex { get; } = 6;
         public override int DefaultBackButtonIndex { get; } = 82;
+        public override int DefaultScoresButtonIndex { get; } = 140;
 
         // Backgrounds
         public override string MainMenuBackgroundPrefab { get; set; }
