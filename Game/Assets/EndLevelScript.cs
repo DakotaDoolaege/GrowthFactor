@@ -37,15 +37,9 @@ public class EndLevelScript : MonoBehaviour
 
 	public void MainMenu()
 	{
-		gameObject.SetActive(false);
-		gameObject.transform.parent.gameObject.SetActive(false);
-		//Need to add methods for adding name and score to the player object, or should I just call database script from here, no need to add to player object
-		
-		Debug.Log(transform.GetComponent<EndLevelScript>().PlayerNumber);
-	   
+		//gameObject.SetActive(false);
+		//gameObject.transform.parent.gameObject.SetActive(false);
 
-
-		Debug.Log("Text for name: " + gameObject.transform.GetChild(1).gameObject.transform.GetChild(2));
 		SaveScores();
 		GameVariables.Paused = false;
 		GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
@@ -73,6 +67,10 @@ public class EndLevelScript : MonoBehaviour
 
 	private void CheckLast()
 	{
+
+		//will check to see if all players have exited or entered a name
+
+		MainMenu();
 
 	}
 
