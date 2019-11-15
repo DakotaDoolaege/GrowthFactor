@@ -469,6 +469,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Mute
       objectReference: {fileID: 0}
+    - target: {fileID: 7731011740895839353, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3662231932180820113, guid: 66e9c80335fb4584e9bb6f0319900f4b,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 3026478811222089043, guid: 39147ffbffe6dd24cb839c00938f4c71, type: 3}
     - {fileID: 530599059223175336, guid: 39147ffbffe6dd24cb839c00938f4c71, type: 3}
