@@ -30,9 +30,12 @@ public class ButtonHandler : MonoBehaviour
         Player.image.overrideSprite = activated;
         if (active)
         {
-            List<Vector3> positions = GameVariables.Players;
-            positions.Remove(transform.position);
-            GameVariables.Players = positions;
+            List<GameVariables.PlayerStation> GameStations = GameVariables.PlayerStations;
+            GameVariables.PlayerStation Station = new GameVariables.PlayerStation();
+            Station.SetPosition(transform.position);
+            GameStations.Remove(Station);
+            GameVariables.PlayerStations = GameStations;
+            Debug.Log("Players counter after remove:" + GameVariables.PlayerStations.Count);
 
 
             active = false;
@@ -40,16 +43,13 @@ public class ButtonHandler : MonoBehaviour
         }
         else
         {
-            List<Vector3> positions = GameVariables.Players;
-            positions.Add(transform.position);
-            GameVariables.Players = positions;
-
-            List<GameVariables.PlayerStation> GameStations = GameVariables.PlayerList;
+            List<GameVariables.PlayerStation> GameStations = GameVariables.PlayerStations;
             GameVariables.PlayerStation Station = new GameVariables.PlayerStation();
             Station.SetPosition(transform.position);
             GameStations.Add(Station);
-            GameVariables.PlayerList = GameStations;
-            Debug.Log("Players counter" + GameVariables.PlayerList.Count);
+            GameVariables.PlayerStations = GameStations;
+            Debug.Log("Players counter" + GameVariables.PlayerStations.Count + "player position: " + Station.GetPosition());
+
             
             active = true;
             Player.image.overrideSprite = activated;

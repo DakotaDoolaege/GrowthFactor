@@ -1,47 +1,113 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+ 
+/// <summary>
+/// Contains values and objects that need to exist for entire games or passed between unrelated scripts
+/// </summary>
 public static class GameVariables
 {
-    private static int score; //Keeps data between scenes
-    private static List<Vector3> playerPositions = new List<Vector3>();
     private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
     private static bool paused;
+	private static int PlayersReady; //used to track that all players are ready to move to next scene
+	private static Database DB;
 
-public class PlayerStation
+	/// <summary>
+	/// PlayerStation objects are active players that can be passed between scenes, they contain the location, name and score and related methods
+	/// </summary>
+public class PlayerStation : IEquatable<PlayerStation>
     {
-        private string Score;
+        private int Score;
         private Vector3 Position;
+        private string Name;
 
-        public void SetScore(string Score)
+		/// <summary>
+		/// Sets the score for the player
+		/// </summary>
+		/// <param name="Score"></param>
+        public void SetScore(int Score)
         {
             this.Score = Score;
         }
 
+		/// <summary>
+		/// Sets the position of the player
+		/// </summary>
+		/// <param name="Position"></param>
         public void SetPosition(Vector3 Position)
         {
             this.Position = Position;
         }
 
-        public string GetScore()
+		/// <summary>
+		/// Sets the name for the player
+		/// </summary>
+		/// <param name="Name"></param>
+        public void SetName(string Name) 
+        {
+            this.Name = Name;
+        }
+
+		/// <summary>
+		/// Gets the score for the player
+		/// </summary>
+		/// <returns></returns>
+        public int GetScore()
         {
             return this.Score;
         }
 
+		/// <summary>
+		/// Gets the position
+		/// </summary>
+		/// <returns></returns>
         public Vector3 GetPosition()
         {
             return this.Position;
         }
+
+		/// <summary>
+		/// Gets the name of the player
+		/// </summary>
+		/// <returns></returns>
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+		/// <summary>
+		/// Saves the score of the player and their name to the database
+		/// </summary>
+        public void SaveScore()
+        {
+            if (this.Name != null && this.Score > 0)
+            {
+				DB = GameObject.Find("DBScript").GetComponent<Database>();
+				DB.InsertScore(this.Name, this.Score.ToString(), "1");
+            }
+        }
+
+		/// <summary>
+		/// Tests if one player equals another by comparing their location 
+		/// </summary>
+		/// <param name="other"></param>
+		/// <returns></returns>
+        public bool Equals(PlayerStation other)
+        {
+            if (other == null)
+                return false;
+            if (this.Position == other.Position)
+                return true;
+            else
+                return false;
+        }
     }
 
-
-
-
-        /// <summary>
-        /// List of players 
-        /// </summary>
-    public static List<PlayerStation> PlayerList
+    /// <summary>
+    /// List of players 
+    /// </summary>
+    public static List<PlayerStation> PlayerStations
     {
         get
         {
@@ -50,58 +116,8 @@ public class PlayerStation
         set
         {
             GamePlayers = value;
-            Debug.Log("Player count: " + GamePlayers.Count);
-            for (int i = 0; i < GamePlayers.Count; i++)
-            {
-                Debug.Log("Player Location: " + GamePlayers[i]);
-            }
         }
     }
-
-
-
-
-
-
-    /// <summary>
-    /// PlayerPositions handles requests to change the number of players to be created
-    /// for the next game and also can be used to get the number of players and location at any point
-    /// in the game for calculating score
-    /// </summary>
-    public static List<Vector3> Players
-    {
-        get
-        {
-            return playerPositions;
-        }
-        set
-        {
-            playerPositions = value;
-            //Debug.Log("Player count: " + playerPositions.Count);
-            for (int i = 0; i < playerPositions.Count; i++)
-            {
-                //Debug.Log("Player Location: " + playerPositions[i]);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Score is a variable that can be modified at any point in the game 
-    /// Created for holding score between scenes
-    /// TODO: Need to build this out and use it, maybe replace with list of sccores for each player?
-    /// </summary>
-    public static int Score
-    {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            score = value;
-        }
-    }
-
 
     /// <summary>
     /// Tracks if the game is active or not
@@ -117,5 +133,21 @@ public class PlayerStation
             paused = value;
         }
     }
+
+    /// <summary>
+    /// Tracks if all players in the game are ready to move to the next scene
+    /// </summary>
+    public static int Ready
+    {
+        get
+        {
+            return PlayersReady;
+        }
+        set
+        {
+            PlayersReady = value;
+        }
+    }
+
 
 }

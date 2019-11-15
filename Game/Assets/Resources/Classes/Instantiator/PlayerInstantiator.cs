@@ -32,9 +32,9 @@ namespace Assets.Resources.Classes.Instantiator
         public override void Start()
         {
             GameObject Canvas = Instantiate(LevelCanvas, new Vector3(0,0,0), Quaternion.identity) as GameObject;
-            for (int i = 0; i < GameVariables.Players.Count; i++)
+            for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
             {
-                Vector3 startPosition = GameVariables.Players[i];
+                Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
                 startPosition.x = startPosition.x - 1920 -200;//remove offset n replace with proper function
                 startPosition.y = startPosition.y - 1080;
 
@@ -91,7 +91,7 @@ namespace Assets.Resources.Classes.Instantiator
                 return null;
             }
             //Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];//changed this to pull locations from gamevariables
-            Vector3 startPosition = (Camera.main.ScreenToWorldPoint(GameVariables.Players[this.CurrentBlobs.Count]));
+            Vector3 startPosition = (Camera.main.ScreenToWorldPoint(GameVariables.PlayerStations[this.CurrentBlobs.Count].GetPosition()));
             startPosition.z = 0;
             //Debug.Log("START POS:" +startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
