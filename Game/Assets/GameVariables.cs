@@ -7,6 +7,7 @@ public static class GameVariables
 {
     private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
     private static bool paused;
+	private static int submitted; //used to track that all players are ready to move to next scene
 
 public class PlayerStation : IEquatable<PlayerStation>
     {
