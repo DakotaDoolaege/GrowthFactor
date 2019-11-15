@@ -25,7 +25,7 @@ public class Database : MonoBehaviour
 
     private void MakeConnection()
     {
-        this.dbFile = Application.dataPath + "/Database/test_db.db";
+        this.dbFile = Application.dataPath + "/Database/PlayerScores.db";
         this.conStr = "URI=file:" + this.dbFile;
         bool needCreate = false;
 
@@ -35,14 +35,14 @@ public class Database : MonoBehaviour
         {
             needCreate = true;
             SqliteConnection.CreateFile(dbFile);
-            Debug.Log("DB doesn't exist. Creating...");
+            //Debug.Log("DB doesn't exist. Creating...");
         }
 
         // Open a connection to the database
         this.dbCon = new SqliteConnection(this.conStr);
         if (this.dbCon.State == ConnectionState.Open)
             return;
-        Debug.Log("Opening connection...");
+        //Debug.Log("Opening connection...");
         this.dbCon.Open();
         this.isOpen = true;
 
@@ -53,22 +53,29 @@ public class Database : MonoBehaviour
             string testDataScript = File.ReadAllText(Application.dataPath + "/Database/loadtestdata.sql");
 
             IDbCommand makeTables = this.dbCon.CreateCommand();
-            //makeTables.Connection = this.dbCon;
             makeTables.CommandText = createScript;
             makeTables.ExecuteNonQuery();
-            Debug.Log("Creating tables...");
+            makeTables.Dispose();
+            //Debug.Log("Creating tables...");
 
+            // This next block populates with test data. Delete before handover
             IDbCommand testData = this.dbCon.CreateCommand();
             testData.CommandText = testDataScript;
             testData.ExecuteNonQuery();
-            Debug.Log("Populating with test data...");
+            testData.Dispose();
+            //Debug.Log("Populating with test data...");
 
             needCreate = false;
         }
-        //TopSingle();
-        //CloseConn();
 
-        //Debug.Log();
+        // Test InsertScores method
+        //InsertScore("TEST_NAME", "9999", "99");
+
+        // Test RemoveScore method
+        //RemoveScore("TEST_NAME");
+
+        // Test purging of old scores
+        //PurgeOld();
     }
 
     // Update is called once per frame
@@ -79,7 +86,13 @@ public class Database : MonoBehaviour
 
     public IList TopSingle()
     {
-        string query = "SELECT * FROM SinglePlayer ORDER BY - Score LIMIT 10";
+        /* Query:
+         * SELECT *
+         * FROM Scores
+         * ORDER BY -Score
+         * LIMIT 10
+         */ 
+        string query = "SELECT * FROM Scores ORDER BY - Score LIMIT 10";
         IDataReader results = Query(query);
 
         IList records = new ArrayList();
@@ -93,14 +106,57 @@ public class Database : MonoBehaviour
             entry.Add(level);
             entry.Add(name);
             records.Add(entry);
-
-            string output = name + ": " + score;
-            double diff = JulianDay() - double.Parse(results.GetValue(1).ToString());
-            output += ", " + diff.ToString() + " days ago";
-            Debug.Log(output);
+            
+            //string output = name + ": " + score;
+            //double diff = JulianDay() - double.Parse(results.GetValue(1).ToString());
+            //output += ", " + diff.ToString() + " days ago";
+            //Debug.Log(output);
         }
         results.Close();
         return records;
+    }
+
+    public void InsertScore(string player, string score, string level)
+    {
+        /* Query:
+         * INSERT INTO Scores
+         * VALUES (player, julianday('now'), score, level)
+         */ 
+        string cmdText = "INSERT INTO Scores VALUES ('" + player + "', ";
+        cmdText += "julianday('now'), " + score + ", " + level + ");";
+
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
+    }
+
+    public void RemoveScore(string player)
+    {
+        /* Query:
+         * DELETE FROM Scores
+         * WHERE Name LIKE player
+         */ 
+        string cmdText = "DELETE FROM Scores WHERE Name LIKE '" + player + "'";
+
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
+    }
+
+    public void PurgeOld()
+    {
+        /* Query:
+         * DELETE FROM Scores
+         * WHERE julianday('now') - Datetime > 180
+         */
+        string cmdText = "DELETE FROM Scores WHERE julianday('now') - Datetime > 180";
+
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
     }
 
     private IDataReader Query(string queryText)
@@ -119,6 +175,7 @@ public class Database : MonoBehaviour
         IDbCommand query = this.dbCon.CreateCommand();
         query.CommandText = queryStr;
         IDataReader result = query.ExecuteReader();
+        query.Dispose();
         double julianDay = 0.0;
         while (result.Read())
         {
@@ -127,9 +184,10 @@ public class Database : MonoBehaviour
         return julianDay;
     }
 
-    public void CloseConn()
+    public void CloseConnection()
     {
-        Debug.Log("Closing connection...");
+        //Debug.Log("Closing connection...");
         this.dbCon.Close();
+        this.isOpen = false;
     }
 }
