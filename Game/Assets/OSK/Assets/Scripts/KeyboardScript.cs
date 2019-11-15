@@ -12,7 +12,7 @@ public class KeyboardScript : MonoBehaviour
     public void alphabetFunction(string alphabet)
     {
 
-        Debug.Log("touched!");
+        //Debug.Log("touched!");
         TextField.text=TextField.text + alphabet;
 
     }
