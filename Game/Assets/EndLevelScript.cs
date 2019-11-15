@@ -52,9 +52,28 @@ public class EndLevelScript : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 	}
 
+
 	public void SaveName(Text Name)
 	{
-		Debug.Log("WE GOT IT!!" + Name.text);
+		string username = Name.text;
+
+		int PlayerNum = transform.GetComponent<EndLevelScript>().PlayerNumber;
+		if (Profanity.ValidateName(username))
+		{
+			GameVariables.PlayerStations[PlayerNum].SetName(username);
+			Name.transform.parent.parent.gameObject.SetActive(false);
+			CheckLast();
+		}
+		else
+		{
+			Debug.Log("We can't use " + username);
+			//Todo: clear input and alert user to change their name
+		}
+ }
+
+	private void CheckLast()
+	{
+
 	}
 
 	private void SaveScores()
@@ -72,7 +91,6 @@ public class EndLevelScript : MonoBehaviour
 				PlayerNum = child.GetComponent<EndLevelScript>().PlayerNumber;
 				
 					
-				GameVariables.PlayerStations[PlayerNum].SetName(child.transform.GetChild(1).gameObject.transform.GetChild(2).GetComponent<Text>().text);
 
 				GameVariables.PlayerStations[PlayerNum].SaveScore();
 			}
