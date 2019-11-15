@@ -66,6 +66,7 @@ public class EndLevelScript : MonoBehaviour
 	{
 		SaveScores();
 		GameVariables.Paused = false;
+		GameVariables.Ready = 0;
 		GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 	}
@@ -83,6 +84,7 @@ public class EndLevelScript : MonoBehaviour
 			GameVariables.PlayerStations[PlayerNum].SetName(username);
 			Name.transform.parent.parent.gameObject.SetActive(false);
 			GameVariables.Ready++;
+
 			if( GameVariables.Ready == GameVariables.PlayerStations.Count) //Calls main menu if all players have finished
 				MainMenu();
 		}
@@ -91,6 +93,18 @@ public class EndLevelScript : MonoBehaviour
 			//Todo: clear input and alert user to change their name
 		}
  }
+
+	/// <summary>
+	/// Doesn't save users score, just deactivates their PlayerStation
+	/// </summary>
+	/// <param name="Name"></param>
+	public void NoSave(GameObject PlayerStation)
+	{
+			GameVariables.Ready++;
+			PlayerStation.SetActive(false);
+			if( GameVariables.Ready == GameVariables.PlayerStations.Count) //Calls main menu if all players have finished
+				MainMenu();
+	}
 
 	/// <summary>
 	/// Saves the scores for the PlayerStations to the database
