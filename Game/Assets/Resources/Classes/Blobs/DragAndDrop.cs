@@ -71,7 +71,7 @@ namespace Assets.Resources.Classes.Blobs
 
             if (this.following)
             {
-                const float midpoint = 0.5f;
+                //const float midpoint = 0.5f;
                 //this.transform.position = Vector2.Lerp(this.transform.position,
                 //    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
             }

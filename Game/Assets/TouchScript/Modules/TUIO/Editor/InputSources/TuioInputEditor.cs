@@ -41,8 +41,17 @@ namespace TouchScript.Editor.InputSources
             var label = EditorGUI.BeginProperty(r, INPUT_TYPES, supportedInputs);
             EditorGUI.BeginChangeCheck();
             r = EditorGUI.PrefixLabel(r, label);
+
+#if UNITY_2017_3_OR_NEWER
+            var sMask = (TuioInput.InputType)EditorGUI.EnumFlagsField(r, instance.SupportedInputs);
+
+#else
             var sMask = (TuioInput.InputType)EditorGUI.EnumMaskField(r, instance.SupportedInputs);
-            if (EditorGUI.EndChangeCheck())
+
+#endif
+
+
+			if (EditorGUI.EndChangeCheck())
             {
                 instance.SupportedInputs = sMask;
                 EditorUtility.SetDirty(instance);
