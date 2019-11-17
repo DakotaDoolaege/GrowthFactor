@@ -46,7 +46,8 @@ public class MainMenu : MonoBehaviour
     {
         //Rect buttonRect = new Rect();
         //PopupWindow.Show(buttonRect, new ScoreWindow());
-        SceneManager.LoadScene("Scores");
+        //SceneManager.LoadScene("Scores");
+        SceneManager.LoadScene("Scoreboard");
     }
     /// <summary>
     /// Loads the main menu

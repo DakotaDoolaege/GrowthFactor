@@ -14,16 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 9c4cfae07ed66b6488a4163c742f629a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 444128040eaff5049bc8a1cf1761cb92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scores.unity
     guid: c0eab583a5102674398460a1b49bba83
   - enabled: 1
     path: Assets/Scenes/ThemePickerMenu.unity
     guid: 5709e81ae09ebf44980ed9547817f04b
+  - enabled: 1
+    path: Assets/Scenes/Scoreboard.unity
+    guid: 46e643d86b3dc67448ac4f2e660813fa
   m_configObjects: {}
