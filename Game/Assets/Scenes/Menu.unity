@@ -120,6 +120,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &47403399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 574041746375183190, guid: 39147ffbffe6dd24cb839c00938f4c71,
+    type: 3}
+  m_PrefabInstance: {fileID: 574041746941520914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e5b3783c1d4454db5dd4ad75c73624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &245196356
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +144,7 @@ GameObject:
   - component: {fileID: 245196357}
   m_Layer: 0
   m_Name: DBScript
-  m_TagString: Untagged
+  m_TagString: Database
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +187,7 @@ GameObject:
   - component: {fileID: 573052647}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,6 +279,18 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478012, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478012, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
+      propertyPath: emulateSecondMousePointer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
@@ -546,6 +570,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22341586, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
 --- !u!1001 &574041746941520914
@@ -647,14 +679,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 573052647}
+      objectReference: {fileID: 47403399}
     - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Mute
+      value: ToggleSound
       objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 574041746375183151, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731011740895839353, guid: 39147ffbffe6dd24cb839c00938f4c71,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3662231932180820113, guid: 66e9c80335fb4584e9bb6f0319900f4b,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 3026478811222089043, guid: 39147ffbffe6dd24cb839c00938f4c71, type: 3}
     - {fileID: 530599059223175336, guid: 39147ffbffe6dd24cb839c00938f4c71, type: 3}
