@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using Mono.Data.Sqlite;
 using UnityEngine;
 
@@ -16,6 +18,7 @@ public class Database : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
+        // Preserve connection across scene loads
         DontDestroyOnLoad(this.gameObject);
 
         //Debug.Log("DB Connection open? " + this.isOpen);
@@ -76,6 +79,11 @@ public class Database : MonoBehaviour
 
         // Test purging of old scores
         //PurgeOld();
+
+        // Test hashing
+        Debug.Log(Sha256Hash("password"));
+        Debug.Log(GetHash("Admin"));
+        Debug.Log(Authenticate("Admin", "password"));
     }
 
     // Update is called once per frame
@@ -189,5 +197,51 @@ public class Database : MonoBehaviour
         //Debug.Log("Closing connection...");
         this.dbCon.Close();
         this.isOpen = false;
+    }
+
+    public bool Authenticate(string username, string password)
+    {
+        /* Query:
+         * 
+         */
+        string hash = Sha256Hash(password);
+        string storedHash = GetHash(username);
+
+        return (hash == storedHash);
+    }
+
+    private string Sha256Hash(string input)
+    {
+        using (SHA256 digest = SHA256.Create() )
+        {
+            // Compute hash as byte array
+            byte[] bytes = digest.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Convert byte array to string
+            StringBuilder hash = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+        }
+    }
+
+    private string GetHash(string user)
+    {
+        /* Query:
+         * SELECT Hash
+         * FROM Admin
+         * WHERE Username = user
+         */
+
+        string cmdText = "SELECT Hash FROM Admin WHERE Username = '" + user + "'";
+        IDataReader result = Query(cmdText);
+        while (result.Read())
+        {
+            // Note: Username is primary key; should only be one result
+            return result.GetString(0);
+        }
+        return "NULL";
     }
 }
