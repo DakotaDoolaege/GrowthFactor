@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// Class <c>Tutorial</c> displays the tutorial images to the user
+/// </summary>
 public class Tutorial : MonoBehaviour
 {
     IList<Sprite> TutorialImages { get; set; }
     SpriteRenderer Renderer { get; set; }
     private int Index { get; set;} = 0;
     private Sprite CurrentImage { get => this.TutorialImages[this.Index]; }
+    public bool AtBeginning{ get => this.Index == 0; }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame to initialize the object
+    /// </summary>
     void Start()
     {
         this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
@@ -24,6 +31,9 @@ public class Tutorial : MonoBehaviour
         this.Renderer.sprite = this.TutorialImages[this.Index];
     }
 
+    /// <summary>
+    /// Cycles the tutorial to the next image in the list
+    /// </summary>
     public void NextImage()
     {
         if (this.Index + 1 < this.TutorialImages.Count)
@@ -33,6 +43,9 @@ public class Tutorial : MonoBehaviour
         this.Renderer.sprite = this.CurrentImage;
     }
 
+    /// <summary>
+    /// Cycles the tutorial to the previous image in the list
+    /// </summary>
     public void PreviousImage()
     {
         if (this.Index - 1 >= 0)
@@ -40,11 +53,5 @@ public class Tutorial : MonoBehaviour
             this.Index--;
         }
         this.Renderer.sprite = this.CurrentImage;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
