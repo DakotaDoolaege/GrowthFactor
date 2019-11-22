@@ -14,8 +14,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-            // call to coroutine
-            StartCoroutine("Wait");
+        // call to coroutine
+        StartCoroutine("Wait");
     }
     
     /// <summary>
