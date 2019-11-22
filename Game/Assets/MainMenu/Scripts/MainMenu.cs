@@ -67,6 +67,11 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(LoadMainMenu(themeMenu));
     }
 
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
     /// <summary>
     /// Loads the scene with the name menuName
     /// </summary>
