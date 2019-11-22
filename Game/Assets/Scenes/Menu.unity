@@ -225,6 +225,16 @@ MonoBehaviour:
     soundVolume: 1
     soundLoop: 1
     soundSource: {fileID: 0}
+  - soundName: PlayerEatPostive
+    soundClip: {fileID: 8300000, guid: 8fba8b7f23def30459811cce3fc60788, type: 3}
+    soundVolume: 1
+    soundLoop: 0
+    soundSource: {fileID: 0}
+  - soundName: PlayerEatNegative
+    soundClip: {fileID: 8300000, guid: ad2a03578360ae048b7e852a57dfe305, type: 3}
+    soundVolume: 1
+    soundLoop: 0
+    soundSource: {fileID: 0}
 --- !u!1001 &605375687
 PrefabInstance:
   m_ObjectHideFlags: 0
