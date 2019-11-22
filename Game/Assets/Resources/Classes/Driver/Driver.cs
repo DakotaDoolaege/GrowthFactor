@@ -18,24 +18,18 @@ namespace Assets.Resources.Classes.Driver
 		public Instantiator.Instantiator PlayerInstantiator;
 		public Instantiator.Instantiator ConsumableInstantiator;
 
-
 		public TextMeshProUGUI ScoreDisplay;
-		private int Level { get; set; } = 0;
+		public int Level = 0;
 		public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
-		public int NumPlayers;
+		public int NumPlayers { get => GameVariables.PlayerStations.Count; }
 		public const int MillisecondsPerSecond = 1000;
-
-		/// <summary>
-		/// The actual timer that counts down in real time
-		/// </summary>
-		public Timer CountDown { get; } = new Timer(MillisecondsPerSecond);
 
 		/// <summary>
 		/// The variable that keeps track of the game seconds. It is an integer
 		/// that we decrement every time the CountDown variable decreases by a
 		/// second. Once this reaches 0, it's game over.
 		/// </summary>
-		public int TimerCount { get; set; }
+		public float TimerCount { get; set; }
 
 		/// <summary>
 		/// Flag that determines when the level has ended or not
@@ -56,12 +50,9 @@ namespace Assets.Resources.Classes.Driver
 		void Start()
 		{
 			this.GameTheme = ApplicationTheme.GetTheme();
-			//GameTheme = new DefaultGameTheme();
-			//GameTheme = new KnightTheme();
-			//this.GameTheme = this.gameObject.AddComponent<DefaultGameTheme>();
 			this.SetBackground();
 
-			GetPlayerCount();
+			// GetPlayerCount();
 			this._pauseMenu = GameObject.FindGameObjectWithTag("ShowOnPause");
 			this._endObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
 			this.HidePaused();
@@ -93,7 +84,6 @@ namespace Assets.Resources.Classes.Driver
 			ApplicationTheme.ScaleBackground(this.Background, this.GameTheme.GetBackground());
 		}
 
-
 		/// <summary>
 		/// Hides the pause screen
 		/// </summary>
@@ -101,11 +91,6 @@ namespace Assets.Resources.Classes.Driver
 		{
 			Time.timeScale = 1;
 			this._pauseMenu.SetActive(false);
-
-			// foreach (GameObject obj in this._pauseObjects)
-			// {
-			//     obj.SetActive(false);
-			// }
 		}
 
 		/// <summary>
@@ -125,12 +110,7 @@ namespace Assets.Resources.Classes.Driver
 		/// </summary>
 		public void ShowPaused()
 		{
-
-			// foreach (GameObject obj in this._pauseObjects)
-			// {
-			//     Debug.Log("here");
-			//     obj.SetActive(true);
-			// }
+			// this.CountDown.Stop();
 			this._pauseMenu.SetActive(true);
 			Time.timeScale = 0;
 		}
@@ -155,14 +135,7 @@ namespace Assets.Resources.Classes.Driver
 		{
 			Level++;
 			((ConsumableInstantiator)this.ConsumableInstantiator).Level++;
-
-			this.TimerCount = GetLevelTime();
-
-			// Calls this.IncrementTimerCount every time 1000 milliseconds
-			// has ellapsed
-
-			this.CountDown.Elapsed += this.IncrementTimerCount;
-			this.CountDown.Start();
+			this.TimerCount = this.GetLevelTime();
 		}
 
 		// Update is called once per frame
@@ -170,11 +143,10 @@ namespace Assets.Resources.Classes.Driver
 		{
 			this.CheckWin();
 
-			if (this.LevelEnded)
+			if (this.LevelEnded || this.TimerCount <= 0.0f)
 			{
 				this.ShowEnded();
 				this.UpdateScores();
-
 			}
 
 			if (GameVariables.Paused)
@@ -187,36 +159,18 @@ namespace Assets.Resources.Classes.Driver
 				this.HidePaused();
 			}
 
+			this.TimerCount -= Time.deltaTime;
 		}
 
 		/// <summary>
 		/// Gets the allowable time per level
 		/// </summary>
 		/// <returns></returns>
-		public int GetLevelTime()
+		public float GetLevelTime()
 		{
-			int extraSecondsPerLevel = 5;
-			int baseSecondsPerLevel = 60;
+			float extraSecondsPerLevel = 5.0f;
+			float baseSecondsPerLevel = 20.0f;
 			return baseSecondsPerLevel + (this.Level * extraSecondsPerLevel);
-		}
-
-		/// <summary>
-		/// Counts down the timer, ending the level when the timer reaches 0
-		/// </summary>
-		/// <param name="source">The timer calling the function</param>
-		/// <param name="e">The arguments passed when the timer calls the function</param>
-		public void IncrementTimerCount(object source, ElapsedEventArgs e)
-		{
-			if (!GameVariables.Paused)
-			{
-				this.TimerCount--;
-				//Debug.Log(this.TimerCount);
-			}
-
-			if (this.TimerCount == 0)
-			{
-				this.OnEndLevel();
-			}
 		}
 
 		/// <summary>
@@ -228,7 +182,7 @@ namespace Assets.Resources.Classes.Driver
 			{
 				if (blob.Renderer != null && ((Player)blob).MaxRadius >= this.GetWinningRadius())
 				{
-					this.OnEndLevel();
+					this.LevelEnded = true;
 				}
 			}
 		}
@@ -260,40 +214,14 @@ namespace Assets.Resources.Classes.Driver
 		}
 
 		/// <summary>
-		/// Setup routine for when a level has ended. Scores are updated here
-		/// and the remainder of the score screen should be constructed. 
-		/// </summary>
-		public void OnEndLevel()
-		{
-			Debug.Log("LEVEL END");
-			// Do whatever needs to be done when the level ends
-			// here
-
-			this.UpdateScores();
-
-			this.LevelEnded = true;
-
-			// Basically here we need to create the score screen I believe
-		}
-
-		/// <summary>
-		/// Gets the number of players from the GameVariables if not preset in Inspector
-		/// </summary>
-		private void GetPlayerCount()
-		{
-			if (NumPlayers == 0)
-				NumPlayers = GameVariables.PlayerStations.Count;
-		}
-
-		/// <summary>
 		/// Determines the radius a player must get to win
 		/// </summary>
 		/// <returns>
 		/// The radius that determines when a player wins
 		/// </returns>
-		private int GetWinningRadius()
+		private float GetWinningRadius()
 		{
-			return 1 + this.Level * 3;
+			return 3.0f + this.Level;
 		}
 	}
 }

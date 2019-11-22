@@ -17,7 +17,10 @@ namespace Assets.Resources.Classes.Theme
         public override int DefaultMuteIconIndex { get; } = 15;
         public override int DefaultAdminIconIndex { get; } = 7;
         public override int DefaultBackButtonIndex { get; } = 83;
+        public override int DefaultForwardButtonIndex { get; } = 71;
+
         public override int DefaultScoresButtonIndex { get; } = 141;
+        public override int DefaultTutorialButtonIndex { get; } = 31;
 
         // Backgrounds
         public override string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/KnightThemeMenuBackground";
