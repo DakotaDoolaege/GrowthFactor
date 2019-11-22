@@ -23,7 +23,9 @@ namespace Assets.Resources.Classes.Theme
         public virtual int DefaultMuteIconIndex { get; } = 12;
         public virtual int DefaultAdminIconIndex { get; } = 4;
         public virtual int DefaultBackButtonIndex { get; } = 80;
+        public virtual int DefaultForwardButtonIndex { get; } = 68;
         public virtual int DefaultScoresButtonIndex { get; } = 138;
+        public virtual int DefaultTutorialButtonIndex {get;} = 28;
 
         // Backgrounds
         public virtual string MainMenuBackgroundPrefab { get; set; } = "MainMenuBackgrounds/DefaultBackground";
@@ -137,14 +139,26 @@ namespace Assets.Resources.Classes.Theme
             return this.IconicSpritesSheet[this.DefaultAdminIconIndex];
         }
 
-        public virtual Sprite GetBackIcon()
+        public virtual Sprite GetArrowIcon(ArrowButtonType type)
         {
-            return this.IconicSpritesSheet[this.DefaultBackButtonIndex];
+            if (type == ArrowButtonType.BACK)
+            {
+                return this.IconicSpritesSheet[this.DefaultBackButtonIndex];
+            }
+            else
+            {
+                return this.IconicSpritesSheet[this.DefaultForwardButtonIndex];
+            }
         }
 
         public virtual Sprite GetScoresIcon()
         {
             return this.IconicSpritesSheet[this.DefaultScoresButtonIndex];
+        }
+
+        public virtual Sprite GetTutorialIcon()
+        {
+            return this.IconicSpritesSheet[this.DefaultTutorialButtonIndex];
         }
 
         // Once PowerUps are added, uncomment the following line

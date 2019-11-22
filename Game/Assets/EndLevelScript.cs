@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement; // change scenes
 using TMPro;
 using UnityEngine.UI;
+using Assets.Resources.Classes.Driver;
 
 
 /// <summary>
@@ -69,6 +70,7 @@ public class EndLevelScript : MonoBehaviour
 		GameVariables.Ready = 0;
 		GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
+		// Destroy(FindObjectOfType<Driver>());
 	}
 
 	/// <summary>

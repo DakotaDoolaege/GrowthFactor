@@ -14,8 +14,8 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayGame()
     {
-            // call to coroutine
-            StartCoroutine("Wait");
+        // call to coroutine
+        StartCoroutine("Wait");
     }
     
     /// <summary>
@@ -65,6 +65,11 @@ public class MainMenu : MonoBehaviour
     {
         string themeMenu = "ThemePickerMenu";
         StartCoroutine(LoadMainMenu(themeMenu));
+    }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 
     /// <summary>

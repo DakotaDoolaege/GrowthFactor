@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets.Resources.Classes.Blobs;
+using Assets.Resources.Classes.Driver;
 using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
@@ -29,6 +30,11 @@ namespace Assets.Resources.Classes.Instantiator
             base.Start();
             this._rnd = new System.Random();
             //this.SetStartPositions();
+            
+            // Get the level from the game driver
+            var obj = GameObject.FindGameObjectWithTag("Driver");
+            Driver.Driver driver = obj.gameObject.GetComponent<Driver.Driver>();
+            this.Level = driver.Level;            
 
             for (int i = 0; i < NumStartPositions; i++)
             {
@@ -120,7 +126,7 @@ namespace Assets.Resources.Classes.Instantiator
         /// </returns>
         public int CalculateMaxFood()
         {
-            return this.Level % 3 + 9;
+            return this.Level + 9;
         }
 
         /// <summary>

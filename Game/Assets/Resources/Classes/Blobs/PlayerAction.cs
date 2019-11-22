@@ -26,6 +26,7 @@ namespace Assets.Resources.Classes.Blobs
         public Player Player { get; set; }
         public PlayerActionType Type { get; set; }
         public bool Consuming { get; set; }
+        private AudioManager Audio { get; set; }
 
         ///// <summary>
         ///// Event <c>ConsumedConsumable</c> is a delegate that is called
@@ -38,6 +39,7 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         public virtual void Start()
         {
+            this.Audio = FindObjectOfType<AudioManager>();
             //this.ConsumedConsumable += this.Player.Instantiator.ConsumeBlob;
         }
 
@@ -98,10 +100,13 @@ namespace Assets.Resources.Classes.Blobs
 
                 if (consumable.FoodValue > 0) // select different sound effect if food is positive or negative
                 {
-                    FindObjectOfType<AudioManager>().Play("PlayerEatPostive");
+                    // FindObjectOfType<AudioManager>().Play("PlayerEatPostive");
+                    this.Audio.Play("PlayerEatPostive");
                 }
-                else {
-                    FindObjectOfType<AudioManager>().Play("PlayerEatNegative");
+                else if (consumable.FoodValue < 0)
+                {
+                    // FindObjectOfType<AudioManager>().Play("PlayerEatNegative");
+                    this.Audio.Play("PlayerEatNegative");
                 }
                 
             }
