@@ -20,10 +20,11 @@ namespace Assets.Resources.Classes.Driver
 
 
 		public TextMeshProUGUI ScoreDisplay;
-		private int Level { get; set; } = 0;
+		public int Level = 0;
 		public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
 		public int NumPlayers;
 		public const int MillisecondsPerSecond = 1000;
+		public bool isTutorial = false;
 
 		/// <summary>
 		/// The actual timer that counts down in real time
@@ -207,10 +208,9 @@ namespace Assets.Resources.Classes.Driver
 		/// <param name="e">The arguments passed when the timer calls the function</param>
 		public void IncrementTimerCount(object source, ElapsedEventArgs e)
 		{
-			if (!GameVariables.Paused)
+			if (!GameVariables.Paused && !this.isTutorial)
 			{
 				this.TimerCount--;
-				//Debug.Log(this.TimerCount);
 			}
 
 			if (this.TimerCount == 0)
