@@ -95,6 +95,15 @@ namespace Assets.Resources.Classes.Blobs
             { 
                 consumable.OnCollisionEvent = consumable.Shrink(speed);
                 this.Player.OnCollisionEvent = this.ConsumeFoodEvent(consumable, speed);
+
+                if (consumable.FoodValue > 0) // select different sound effect if food is positive or negative
+                {
+                    FindObjectOfType<AudioManager>().Play("PlayerEatPostive");
+                }
+                else {
+                    FindObjectOfType<AudioManager>().Play("PlayerEatNegative");
+                }
+                
             }
             else if (consumable.BlobType == BlobType.PowerUp)
             {
