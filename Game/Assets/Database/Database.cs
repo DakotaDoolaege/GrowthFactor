@@ -201,9 +201,6 @@ public class Database : MonoBehaviour
 
     public bool Authenticate(string username, string password)
     {
-        /* Query:
-         * 
-         */
         string hash = Sha256Hash(password);
         string storedHash = GetHash(username);
 
@@ -242,6 +239,63 @@ public class Database : MonoBehaviour
             // Note: Username is primary key; should only be one result
             return result.GetString(0);
         }
-        return "NULL";
+        return "NULL";  // Returned if user doesn't exist in Admin table
+    }
+
+    public bool ChangePassword(string user, string oldPassword, string newPassword)
+    {
+        bool auth = Authenticate(user, oldPassword);
+        if (!auth)
+            return false;
+
+        /* Query:
+         * UPDATE Admin
+         * SET Hash = [newPasswordHash]
+         * WHERE Username = user
+         */
+        string hash = Sha256Hash(newPassword);
+        string cmdText = "UPDATE Admin SET Hash = '" + hash + "' WHERE Username = '" + user + "'";
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
+
+        return true;
+    }
+
+    public void RegisterAdmin(string username, string password)
+    {
+        string hash = Sha256Hash(password);
+
+        /* Query:
+         * INSERT INTO Admin
+         * VALUES (user, hash)
+         */
+
+        string cmdText = "INSERT INTO Admin VALUES ('" + username + "', '" + hash + ",)";
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
+    }
+
+    public int AdminCount()
+    {
+        /* Query:
+         * SELECT count(*)
+         * FROM Admin
+         */
+
+        int count = 0;
+        string queryText = "SELECT count(*) FROM Admin";
+
+        IDataReader result = Query(queryText);
+        while (result.Read())
+        {
+            string resultStr = result.GetString(0); // Should return only a single value
+            Int32.TryParse(resultStr, out count);
+        }
+
+        return count;
     }
 }
