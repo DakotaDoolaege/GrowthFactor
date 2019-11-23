@@ -33,7 +33,6 @@ namespace Assets.MainMenu.Scripts
         /// </summary>
         public void SwitchImage()
         {
-            float tol = 0.05f;
             bool isMuted = this.Manager.isMuted;
 
             if (isMuted && this.image != null)
