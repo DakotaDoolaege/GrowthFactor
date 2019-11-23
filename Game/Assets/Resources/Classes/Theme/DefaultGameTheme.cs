@@ -28,7 +28,7 @@ namespace Assets.Resources.Classes.Theme
         private const string SpriteFile = "BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048";
 
         // Get the list of all sprites in the sheet
-        private static readonly IList<Sprite> SpritesSheet = UnityEngine.Resources.LoadAll<Sprite>(SpriteFile);
+        private static new readonly IList<Sprite> SpritesSheet = UnityEngine.Resources.LoadAll<Sprite>(SpriteFile);
 
         // Create the list of names in the exact order of the list of sprites
         private static readonly IList<string> Names = (from sprite in SpritesSheet select sprite.name).ToList();

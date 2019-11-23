@@ -12,7 +12,6 @@ namespace Assets.Resources.Classes.Driver
 {
 	public class Driver : MonoBehaviour
 	{
-		public GameTheme GameTheme { get; set; }
 		private GameObject Background { get; set; }
 
 		public Instantiator.Instantiator PlayerInstantiator;
@@ -49,7 +48,6 @@ namespace Assets.Resources.Classes.Driver
 		// Start is called before the first frame update
 		void Start()
 		{
-			this.GameTheme = ApplicationTheme.GetTheme();
 			this.SetBackground();
 
 			// GetPlayerCount();
@@ -79,9 +77,9 @@ namespace Assets.Resources.Classes.Driver
 
 			SpriteRenderer render = this.Background.GetComponent<SpriteRenderer>();
 
-			render.sprite = this.GameTheme.GetBackground();
+			render.sprite = ApplicationTheme.CurrentTheme.GetBackground();
 
-			ApplicationTheme.ScaleBackground(this.Background, this.GameTheme.GetBackground());
+			ApplicationTheme.ScaleBackground(this.Background, ApplicationTheme.CurrentTheme.GetBackground());
 		}
 
 		/// <summary>
@@ -169,7 +167,7 @@ namespace Assets.Resources.Classes.Driver
 		public float GetLevelTime()
 		{
 			float extraSecondsPerLevel = 5.0f;
-			float baseSecondsPerLevel = 20.0f;
+			float baseSecondsPerLevel = 25.0f;
 			return baseSecondsPerLevel + (this.Level * extraSecondsPerLevel);
 		}
 

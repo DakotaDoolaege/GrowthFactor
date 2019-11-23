@@ -41,17 +41,15 @@ namespace Assets.Resources.Classes.Blobs
             {
                 case BlobType.Food:
                     {
-                        return value < 0 ? GameDriver.GameTheme.GetNegativeFood() :
-                            GameDriver.GameTheme.GetPositiveFood();
+                        return value < 0 ? ApplicationTheme.CurrentTheme.GetNegativeFood() :
+                            ApplicationTheme.CurrentTheme.GetPositiveFood();
                     }
                 case BlobType.Player:
                     {
-                        return GameDriver.GameTheme.GetPlayer();
+                        return ApplicationTheme.CurrentTheme.GetPlayer();
                     }
                 case BlobType.Pause:
                     {
-                        // IList<Sprite> SpritesSheet = UnityEngine.Resources.LoadAll<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048.png");
-                        //return UnityEngine.Resources.Load<Sprite>("BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048.png");
                         return spritesSheet[56];
                     }
 
