@@ -34,7 +34,6 @@ namespace Assets.Resources.Classes
                 throw new ArgumentException("Index is out of range", nameof(index));
             }
 
-
             CurrentTheme = Themes[index];
         }
 
