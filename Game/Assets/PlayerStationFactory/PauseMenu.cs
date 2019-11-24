@@ -14,6 +14,14 @@ namespace Assets.PlayerStationFactory.PauseMenu
 		}
 
 		/// <summary>
+		/// Resumes the game
+		/// </summary>
+		public void ResumeGame()
+		{
+			GameVariables.Paused = false;
+		}
+
+		/// <summary>
 		/// Restarts the level to beginning by "switching" to it again
 		/// </summary>
 		public void RestartLevel()
@@ -23,14 +31,16 @@ namespace Assets.PlayerStationFactory.PauseMenu
 		}
 
 		/// <summary>
-		/// Activates the SaveScoresOverlay and instantiates keyboards at each player station
+		/// Ends the level by setting the remaining time to 0
 		/// </summary>
-		public void SaveMenu()
+		public void EndLevel()
 		{
-			gameObject.SetActive(false);
+			Debug.Log(GameObject.FindGameObjectWithTag("Driver").GetComponent("Driver"));
+			GameVariables.EndLevel = true;
+			GameVariables.Paused = false;
+			//gameObject.SetActive(false);
 			//EndLevelScript.CreatePlayerPanels();
-			gameObject.SetActive(true);
-			//GameVariables.Paused = false;
+			//gameObject.SetActive(true);
 		}
 
 

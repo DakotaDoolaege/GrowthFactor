@@ -10,17 +10,18 @@ using Assets.Resources.Classes.Driver;
 /// <summary>
 /// Handles pause, end and player name input UI logic
 /// </summary>
-public class EndLevelScript : MonoBehaviour
+public class EndLevelMenu : MonoBehaviour
 {
 	public GameObject PlayerPanel;
 	public int PlayerNumber;
 
 	/// <summary>
+	/// MOVED DELETE
 	/// Resumes the game
 	/// </summary>
 	public void ResumeGame()
 	{
-		GameVariables.Paused = false;
+	//	GameVariables.Paused = false;
 	}
 
 	/// <summary>
@@ -37,20 +38,19 @@ public class EndLevelScript : MonoBehaviour
 	}
 
 	/// <summary>
-	/// MOVED DELETE
 	/// Restarts the level to beginning by "switching" to it again
 	/// </summary>
 	public void RestartLevel()
 	{
+		gameObject.SetActive(false);
 		GameVariables.Paused = false;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 	}
 
 	/// <summary>
-	/// MOVED DELETE
 	/// Activates the SaveScoresOverlay and instantiates keyboards at each player station
 	/// </summary>
-	public void SaveMenu()
+	public void ShowSaveScreen()
 	{
 		gameObject.SetActive(false);
 		CreatePlayerPanels();
@@ -82,7 +82,7 @@ public class EndLevelScript : MonoBehaviour
 	public void SaveName(Text Name)
 	{
 		string username = Name.text;
-		int PlayerNum = transform.GetComponent<EndLevelScript>().PlayerNumber;
+		int PlayerNum = transform.GetComponent<EndLevelMenu>().PlayerNumber;
 		if (Profanity.ValidateName(username))
 		{
 			GameVariables.PlayerStations[PlayerNum].SetName(username);
@@ -120,7 +120,7 @@ public class EndLevelScript : MonoBehaviour
 		{
 			if (child.name == "PlayerInputPanel(Clone)")
 			{
-				PlayerNum = child.GetComponent<EndLevelScript>().PlayerNumber;
+				PlayerNum = child.GetComponent<EndLevelMenu>().PlayerNumber;
 				GameVariables.PlayerStations[PlayerNum].SaveScore();
 			}
 		}
@@ -161,7 +161,7 @@ public class EndLevelScript : MonoBehaviour
 				Keyboard.transform.SetParent(gameObject.transform, false);
 				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
 				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
-				Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+				Keyboard.transform.GetComponent<EndLevelMenu>().PlayerNumber = i;
 		}
 	}
 
