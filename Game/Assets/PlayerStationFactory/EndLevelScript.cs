@@ -37,6 +37,7 @@ public class EndLevelScript : MonoBehaviour
 	}
 
 	/// <summary>
+	/// MOVED DELETE
 	/// Restarts the level to beginning by "switching" to it again
 	/// </summary>
 	public void RestartLevel()
@@ -46,6 +47,7 @@ public class EndLevelScript : MonoBehaviour
 	}
 
 	/// <summary>
+	/// MOVED DELETE
 	/// Activates the SaveScoresOverlay and instantiates keyboards at each player station
 	/// </summary>
 	public void SaveMenu()
@@ -128,7 +130,7 @@ public class EndLevelScript : MonoBehaviour
 	/// <summary>
 	/// Creates the PlayerPanels when the SaveScoresOverlay is activated
 	/// </summary>
-	private void CreatePlayerPanels()
+	public void CreatePlayerPanels()
 	{
 		GameObject overlay = gameObject.transform.gameObject;
 		overlay.transform.Translate(new Vector3(0, 0, 0));
