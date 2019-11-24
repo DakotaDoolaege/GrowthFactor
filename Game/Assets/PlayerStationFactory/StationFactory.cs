@@ -9,7 +9,6 @@ public class StationFactory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		Debug.Log("hello worldd");
 		CreateStationControls(); 
     }
 
@@ -28,6 +27,7 @@ public class StationFactory : MonoBehaviour
 		overlay.transform.Translate(new Vector3(0, 0, 0));
 		for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
 		{
+			Debug.Log("We are creating a " + Prefab);
 			Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
 			GameObject Keyboard;
 			

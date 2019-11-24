@@ -43,7 +43,7 @@ public class EndLevelMenu : MonoBehaviour
 	public void RestartLevel()
 	{
 		gameObject.SetActive(false);
-		GameVariables.Paused = false;
+		GameVariables.EndLevel = false;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 	}
 
@@ -52,9 +52,11 @@ public class EndLevelMenu : MonoBehaviour
 	/// </summary>
 	public void ShowSaveScreen()
 	{
-		gameObject.SetActive(false);
-		CreatePlayerPanels();
-		gameObject.SetActive(true);
+	//	gameObject.SetActive(false);
+		GameVariables.EndLevel = false;
+		GameVariables.ShowScores = true;
+		//CreatePlayerPanels();
+		//gameObject.SetActive(true);
 		//GameVariables.Paused = false;
 	}
 

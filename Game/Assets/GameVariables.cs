@@ -11,6 +11,7 @@ public static class GameVariables
     private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
     private static bool paused;
     private static bool LevelEnded;
+    private static bool ScoresActivated;
 	private static int PlayersReady; //used to track that all players are ready to move to next scene
 	private static Database DB;
 
@@ -147,6 +148,21 @@ public class PlayerStation : IEquatable<PlayerStation>
         set
         {
             LevelEnded = value;
+        }
+    }
+
+	/// <summary>
+    /// Tracks if the Scoresoverlay is to be shown
+    /// </summary>
+    public static bool ShowScores
+    {
+        get
+        {
+            return ScoresActivated;
+        }
+        set
+        {
+            ScoresActivated = value;
         }
     }
 

@@ -84,7 +84,7 @@ public class AudioManager : MonoBehaviour
         }
 
         //givenSound.soundVolume = volumeSlider.value;
-        Debug.LogWarning(givenSound.soundVolume);
+        //Debug.LogWarning(givenSound.soundVolume);
         givenSound.soundSource.Play(); // play the sound provided
     }
 
