@@ -27,33 +27,35 @@ public class StationFactory : MonoBehaviour
 		overlay.transform.Translate(new Vector3(0, 0, 0));
 		for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
 		{
-			Debug.Log("We are creating a " + Prefab);
 			Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
-			GameObject Keyboard;
+			GameObject NewObject;
 			
 			if (startPosition.y > 1500)
 			{
 				startPosition.y = startPosition.y - 50;
-				Keyboard = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
+				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
 			}
 			else if (startPosition.x < 500)
 			{
-				Keyboard = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
+				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
 
 			}
 			else if (startPosition.x > 3000)
 			{
-				Keyboard = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
 			}
 			else
 			{
 				startPosition.y = startPosition.y + 50;
-				Keyboard = Instantiate(Prefab, startPosition, Quaternion.identity) as GameObject;
+				NewObject = Instantiate(Prefab, startPosition, Quaternion.identity) as GameObject;
 			}
-				Keyboard.transform.SetParent(gameObject.transform, false);
-				TextMeshProUGUI Score = Keyboard.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-				//Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
-				//Keyboard.transform.GetComponent<EndLevelScript>().PlayerNumber = i;
+				NewObject.transform.SetParent(gameObject.transform, false);
+			if (NewObject.name == "SaveStation(Clone)")
+			{
+				TextMeshProUGUI Score = NewObject.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+				Score.text = GameVariables.PlayerStations[i].GetScore().ToString();
+				NewObject.transform.GetComponent<SaveScoresMenu>().PlayerNumber = i;
+			}
 		}
 	}
 }

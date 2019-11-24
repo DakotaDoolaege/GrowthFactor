@@ -48,7 +48,7 @@ namespace Assets.Resources.Classes.Driver
 		/// <summary>
 		/// Array of objects to show when the save scores overlay is shown
 		/// </summary>
-		private GameObject _scoresOverlay;
+		public GameObject _scoresOverlay;
 
 		// Start is called before the first frame update
 		void Start()
@@ -59,7 +59,6 @@ namespace Assets.Resources.Classes.Driver
 			// GetPlayerCount();
 			this._pauseMenu = GameObject.FindGameObjectWithTag("ShowOnPause");
 			this._endObjects = GameObject.FindGameObjectsWithTag("ShowOnLevelEnd");
-			this._scoresOverlay = GameObject.FindGameObjectWithTag("ScoresOverlay");
 			this.HidePaused();
 			this.HideEnded();
 
@@ -147,7 +146,7 @@ namespace Assets.Resources.Classes.Driver
 		/// </summary>
 		public void ShowScores()
 		{
-			//Time.timeScale = 0;
+			Time.timeScale = 0;
 
 			this._scoresOverlay.SetActive(true);
 		}
@@ -166,7 +165,6 @@ namespace Assets.Resources.Classes.Driver
 		void Update()
 		{
 			this.CheckWin();
-			Debug.Log(GameVariables.EndLevel);
 
 			if (this.LevelEnded || this.TimerCount <= 0.0f || GameVariables.EndLevel)
 			{
