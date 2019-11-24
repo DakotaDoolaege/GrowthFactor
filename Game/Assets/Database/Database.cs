@@ -31,6 +31,7 @@ public class Database : MonoBehaviour
         this.dbFile = Application.dataPath + "/Database/PlayerScores.db";
         this.conStr = "URI=file:" + this.dbFile;
         bool needCreate = false;
+        bool test = false;          // Set this to true to load test data
 
         //Debug.Log(this.conStr);         // Check
         // If DB doesn't exist, make it
@@ -62,11 +63,14 @@ public class Database : MonoBehaviour
             //Debug.Log("Creating tables...");
 
             // This next block populates with test data. Delete before handover
-            IDbCommand testData = this.dbCon.CreateCommand();
-            testData.CommandText = testDataScript;
-            testData.ExecuteNonQuery();
-            testData.Dispose();
-            //Debug.Log("Populating with test data...");
+            if (test)
+            {
+                IDbCommand testData = this.dbCon.CreateCommand();
+                testData.CommandText = testDataScript;
+                testData.ExecuteNonQuery();
+                testData.Dispose();
+                //Debug.Log("Populating with test data...");
+            }
 
             needCreate = false;
         }
@@ -81,9 +85,19 @@ public class Database : MonoBehaviour
         //PurgeOld();
 
         // Test hashing
-        Debug.Log(Sha256Hash("password"));
-        Debug.Log(GetHash("Admin"));
-        Debug.Log(Authenticate("Admin", "password"));
+        //Debug.Log(Sha256Hash("password"));
+        //Debug.Log(GetHash("Admin"));
+        //Debug.Log(Authenticate("Admin", "password"));
+
+        // Test Admin table methods
+        //RegisterAdmin("TestAdmin", "password2");
+        //Debug.Log(RemoveAdmin("Admin", "password", "TestAdmin"));
+        //GetAllAdmins();
+        //Debug.Log(AdminCount());
+        //Debug.Log(GetAdmin("TestAdmin"));
+        //Debug.Log(ChangePassword("TestAdmin", "password2", "password3"));
+
+
     }
 
     // Update is called once per frame
@@ -269,10 +283,10 @@ public class Database : MonoBehaviour
 
         /* Query:
          * INSERT INTO Admin
-         * VALUES (user, hash)
+         * VALUES (username, hash)
          */
 
-        string cmdText = "INSERT INTO Admin VALUES ('" + username + "', '" + hash + ",)";
+        string cmdText = "INSERT INTO Admin VALUES ('" + username + "', '" + hash + "')";
         IDbCommand command = this.dbCon.CreateCommand();
         command.CommandText = cmdText;
         command.ExecuteNonQuery();
@@ -292,10 +306,73 @@ public class Database : MonoBehaviour
         IDataReader result = Query(queryText);
         while (result.Read())
         {
-            string resultStr = result.GetString(0); // Should return only a single value
+            string resultStr = result.GetValue(0).ToString(); // Should return only a single value
             Int32.TryParse(resultStr, out count);
         }
 
         return count;
+    }
+
+    public IList GetAllAdmins()
+    {
+        /* Query
+         * SELECT Username
+         * FROM Admin
+         */
+
+        IList admins = new List<string>();
+        string query = "SELECT Username FROM Admin";
+        IDataReader results = Query(query);
+
+        while (results.Read())
+        {
+            string username = results.GetValue(0).ToString();
+            admins.Add(username);
+
+            Debug.Log(username);
+        }
+
+        return admins;
+    }
+
+    public string GetAdmin(string target)
+    {
+        /* Query:
+         * SELECT Username
+         * FROM Admin
+         * WHERE Username = target
+         */
+
+        string queryText = "SELECT Username FROM Admin WHERE Username = '" + target + "'";
+        string username = "";
+        IDataReader result = Query(queryText);
+        while (result.Read())
+        {
+            username = result.GetString(0); // SHould return a single result
+        }
+
+        return username;
+    }
+
+    public bool RemoveAdmin(string user, string password, string target)
+    {
+        if (! Authenticate(user, password))
+            return false;
+
+        if (GetAdmin(target) == "")
+            return false;
+
+        /* Query:
+         * DELETE FROM Admin
+         * WHERE Username = target
+         */
+
+        string cmdText = "DELETE FROM Admin WHERE Username = '" + target + "'";
+        IDbCommand command = this.dbCon.CreateCommand();
+        command.CommandText = cmdText;
+        command.ExecuteNonQuery();
+        command.Dispose();
+
+        return (GetAdmin(target) == "");
     }
 }
