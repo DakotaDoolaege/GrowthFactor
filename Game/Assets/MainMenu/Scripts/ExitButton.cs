@@ -12,6 +12,8 @@ namespace Assets.MainMenu.Scripts
         /// </summary>
         public void Exit()
         {
+            Database Connection = GameObject.Find("DBScript").GetComponent<Database>();
+            Connection.CloseConnection();
             Application.Quit(0);
         }
     }
