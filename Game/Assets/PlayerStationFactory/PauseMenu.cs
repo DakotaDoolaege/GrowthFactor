@@ -35,9 +35,8 @@ namespace Assets.PlayerStationFactory.PauseMenu
 		/// </summary>
 		public void EndLevel()
 		{
-			Debug.Log(GameObject.FindGameObjectWithTag("Driver").GetComponent("Driver"));
-			GameVariables.EndLevel = true;
 			GameVariables.Paused = false;
+			GameVariables.EndLevel = true;
 			//gameObject.SetActive(false);
 			//EndLevelScript.CreatePlayerPanels();
 			//gameObject.SetActive(true);

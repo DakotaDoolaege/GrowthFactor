@@ -59,7 +59,6 @@ namespace Assets.Resources.Classes.Blobs
 
         public void PauseGame()
         {
-            UnityEngine.Debug.Log("pause clicked");
             GameVariables.Paused = true;
         }
 
