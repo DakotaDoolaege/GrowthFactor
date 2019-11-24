@@ -387,7 +387,7 @@ PrefabInstance:
     - target: {fileID: 4321576914236012304, guid: 89508d57997fb864aa4e92f2547dab45,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4321576914236012304, guid: 89508d57997fb864aa4e92f2547dab45,
         type: 3}
@@ -911,6 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28e82d3a68267548baab37ed656568c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNumber: 0
 --- !u!1001 &325700721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -922,6 +923,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Driver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220184383197353800, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7220184383197353806, guid: 7158a3189dbaec546bee2efb6fd9df54,
         type: 3}
@@ -994,6 +1000,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6335659893754982487, guid: 22132c8c5ffa91846b9356a9e0f14f34,
         type: 3}
+    - target: {fileID: 7220184383197353801, guid: 7158a3189dbaec546bee2efb6fd9df54,
+        type: 3}
+      propertyPath: _scoresOverlay
+      value: 
+      objectReference: {fileID: 189993254}
     - target: {fileID: 3388017558150653582, guid: 7158a3189dbaec546bee2efb6fd9df54,
         type: 3}
       propertyPath: PauseButton
