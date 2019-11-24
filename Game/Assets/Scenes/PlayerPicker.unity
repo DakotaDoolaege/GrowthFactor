@@ -352,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -665,12 +665,12 @@ PrefabInstance:
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 768
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 300
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 8973062694152771814, guid: efe625004cb95d744a42fb2c0723e7ae,
         type: 3}
@@ -1984,6 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8de2ee001da0c40a6427a52ad06b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &2010842755 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8973062694152771810, guid: efe625004cb95d744a42fb2c0723e7ae,
