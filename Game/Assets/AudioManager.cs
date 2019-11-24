@@ -9,7 +9,11 @@ public class AudioManager : MonoBehaviour
     // FindObjectOfType<AudioManager>().Play("SoundName")
     public bool isMuted = false; // game muted
 
-    public Sound[] listOfSounds;
+    public Sound[] listOfSounds; // list of game sounds
+
+    public Slider volumeSlider; // volume slider in admin menu
+
+    public float levelBeforeMute; // keeps the audio level value before the game was muted
 
     // avoid creating new audio manager in every scene loaded
     public static AudioManager audioManagerInstance;
@@ -37,10 +41,15 @@ public class AudioManager : MonoBehaviour
         foreach (Sound sound in listOfSounds)
         {
             sound.soundSource = gameObject.AddComponent<AudioSource>();
+
             sound.soundSource.volume = sound.soundVolume;
+            sound.soundSource.volume = volumeSlider.value;
+
             sound.soundSource.clip = sound.soundClip;
             sound.soundSource.loop = sound.soundLoop;
-        }      
+        }
+
+        //volumeSlider.value = 1f;
     }
 
     /// <summary>
@@ -74,7 +83,23 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        givenSound.soundVolume = volumeSlider.value;
+        Debug.LogWarning(givenSound.soundVolume);
         givenSound.soundSource.Play(); // play the sound provided
+    }
+
+
+    public void SetVolume() {
+
+        foreach (Sound sound in listOfSounds)
+        {
+            sound.soundSource.volume = volumeSlider.value;
+
+            if (volumeSlider.value == 0f)
+            {
+                audioManagerInstance.isMuted = true;
+            }
+        }
     }
 
     /// <summary>
@@ -83,15 +108,19 @@ public class AudioManager : MonoBehaviour
     public void Mute()
     {
         // checks if audio manager is already muted; if it is, unmutes; if not, mutes
-        if (audioManagerInstance.isMuted == false)
+        if (audioManagerInstance.isMuted == false) // if audio not currently muted, mute
         {
+            levelBeforeMute = volumeSlider.value;
             AudioListener.volume = 0;
+            volumeSlider.value = 0;
             audioManagerInstance.isMuted = true;
+            
         }
 
         else 
         {
-            AudioListener.volume = 1f;
+            AudioListener.volume = levelBeforeMute;
+            volumeSlider.value = levelBeforeMute;
             audioManagerInstance.isMuted = false;
 
         }
