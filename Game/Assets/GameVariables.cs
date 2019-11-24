@@ -10,6 +10,7 @@ public static class GameVariables
 {
     private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
     private static bool paused;
+    private static bool LevelEnded;
 	private static int PlayersReady; //used to track that all players are ready to move to next scene
 	private static Database DB;
 
@@ -131,6 +132,21 @@ public class PlayerStation : IEquatable<PlayerStation>
         set
         {
             paused = value;
+        }
+    }
+    
+	/// <summary>
+    /// Tracks if the level is ended
+    /// </summary>
+    public static bool EndLevel
+    {
+        get
+        {
+            return LevelEnded;
+        }
+        set
+        {
+            LevelEnded = value;
         }
     }
 
