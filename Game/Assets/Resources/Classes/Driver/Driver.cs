@@ -18,7 +18,7 @@ namespace Assets.Resources.Classes.Driver
 		public Instantiator.Instantiator ConsumableInstantiator;
 
 		public TextMeshProUGUI ScoreDisplay;
-		public int Level = 0;
+		public int Level = GameVariables.setLevel;
 		public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
 		public int NumPlayers { get => GameVariables.PlayerStations.Count; }
 		public const int MillisecondsPerSecond = 1000;

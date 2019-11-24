@@ -31,12 +31,28 @@ namespace Assets.PlayerStationFactory.PauseMenu
 		}
 
 		/// <summary>
-		/// Ends the level by setting the remaining time to 0
+		/// Ends the level 
 		/// </summary>
 		public void EndLevel()
 		{
 			GameVariables.Paused = false;
 			GameVariables.EndLevel = true;
+			//gameObject.SetActive(false);
+			//EndLevelScript.CreatePlayerPanels();
+			//gameObject.SetActive(true);
+		}
+		
+		/// <summary>
+		/// Quits the game without saving scores 
+		/// </summary>
+		public void QuitGame()
+		{
+			GameVariables.Paused = false;
+			GameVariables.EndLevel = false;
+			GameVariables.ShowScores = false;
+			GameVariables.Ready = 0;
+			GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 			//gameObject.SetActive(false);
 			//EndLevelScript.CreatePlayerPanels();
 			//gameObject.SetActive(true);

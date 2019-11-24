@@ -9,10 +9,6 @@ using UnityEngine;
 public static class GameVariables
 {
 	private static List<PlayerStation> GamePlayers = new List<PlayerStation>();
-	private static bool paused;
-	private static bool LevelEnded;
-	private static bool ScoresActivated;
-	private static int PlayersReady; //used to track that all players are ready to move to next scene
 	private static Database DB;
 
 	/// <summary>
@@ -134,62 +130,27 @@ public static class GameVariables
 	/// <summary>
 	/// Tracks if the game is active or not
 	/// </summary>
-	public static bool Paused
-	{
-		get
-		{
-			return paused;
-		}
-		set
-		{
-			paused = value;
-		}
-	}
+	public static bool Paused { get; set; }
 
 	/// <summary>
 	/// Tracks if the level is ended
 	/// </summary>
-	public static bool EndLevel
-	{
-		get
-		{
-			return LevelEnded;
-		}
-		set
-		{
-			LevelEnded = value;
-		}
-	}
+	public static bool EndLevel { get; set; }
 
 	/// <summary>
 	/// Tracks if the Scoresoverlay is to be shown
 	/// </summary>
-	public static bool ShowScores
-	{
-		get
-		{
-			return ScoresActivated;
-		}
-		set
-		{
-			ScoresActivated = value;
-		}
-	}
+	public static bool ShowScores { get; set; }
 
 	/// <summary>
 	/// Tracks if all players in the game are ready to move to the next scene
 	/// </summary>
-	public static int Ready
-	{
-		get
-		{
-			return PlayersReady;
-		}
-		set
-		{
-			PlayersReady = value;
-		}
-	}
+	public static int Ready { get; set; }
+
+	/// <summary>
+	/// Sets the level for the game
+	/// </summary>
+	public static int setLevel { get; set; } = 1;
 
 
 }
