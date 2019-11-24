@@ -34,7 +34,11 @@ public class EndLevelMenu : MonoBehaviour
 	/// </remarks>
 	public void NextLevel()
 	{
-		Debug.Log("Next level! set me up");
+		gameObject.SetActive(false);
+		GameVariables.EndLevel = false;
+		GameVariables.setLevel++;	
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
+		
 
 	}
 
