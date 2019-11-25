@@ -44,7 +44,7 @@ namespace Assets.Resources.Classes.Driver
 		/// Array of objects to show when the level ended screen is shown
 		/// </summary>
 		private GameObject[] _endObjects;
-		
+
 		/// <summary>
 		/// Array of objects to show when the save scores overlay is shown
 		/// </summary>
@@ -108,7 +108,7 @@ namespace Assets.Resources.Classes.Driver
 				obj.SetActive(false);
 			}
 		}
-		
+
 		/// <summary>
 		/// Hides the scores overlay
 		/// </summary>
@@ -140,9 +140,9 @@ namespace Assets.Resources.Classes.Driver
 				obj.SetActive(true);
 			}
 		}
-		
+
 		/// <summary>
-		/// Shows the scores overlay 
+		/// Shows the scores overlay
 		/// </summary>
 		public void ShowScores()
 		{
@@ -185,7 +185,7 @@ namespace Assets.Resources.Classes.Driver
 			{
 				this.HidePaused();
 			}
-			
+
 			if (GameVariables.ShowScores)
 			{
 				this.ShowScores();

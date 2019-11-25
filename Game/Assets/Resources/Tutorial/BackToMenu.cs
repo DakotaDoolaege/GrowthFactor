@@ -11,15 +11,16 @@ using UnityEngine;
 /// </summary>
 public class BackToMenu : MonoBehaviour
 {
-    Tutorial Images { get; set; }
-    MainMenu Menu { get; set; }
+    private Tutorial Images { get; set; }
+    private MainMenu Menu { get; set; }
+    public ArrowButtonType Type = ArrowButtonType.BACK;
 
     /// <summary>
     /// Start is called before the first frame
     /// </summary>
     void Start()
     {
-        this.Images = FindObjectOfType<Tutorial>().gameObject.GetComponent<Tutorial>(); 
+        this.Images = FindObjectOfType<Tutorial>().gameObject.GetComponent<Tutorial>();
         this.Menu = FindObjectOfType<MainMenu>().gameObject.GetComponent<MainMenu>();
     }
 
@@ -30,7 +31,11 @@ public class BackToMenu : MonoBehaviour
     /// </summary>
     public void ToMenu()
     {
-        if (this.Images.AtBeginning)
+        if (this.Images.AtBeginning && this.Type == ArrowButtonType.BACK)
+        {
+            this.Menu.ReturnToMenu();
+        }
+        else if (this.Images.AtEnd && this.Type == ArrowButtonType.FORWARD)
         {
             this.Menu.ReturnToMenu();
         }
