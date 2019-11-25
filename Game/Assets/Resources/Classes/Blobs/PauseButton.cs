@@ -23,7 +23,7 @@ namespace Assets.Resources.Classes.Blobs
         public PlayerAction Action { get; set; }
         public int Score { get; set; }
 
-        
+
         /// <summary>
         /// Start is called before the first frame to initialize the object
         /// </summary>
@@ -35,7 +35,7 @@ namespace Assets.Resources.Classes.Blobs
            //     Pausebtn.image.sprite = ApplicationTheme.CurrentTheme.GetDeactivePlayer();
             //}
             //this.Renderer = this.gameObject.GetComponent<SpriteRenderer>();
-            
+
 
             // Generate the type of Blob
             this.BlobType = this.GetBlobType();
@@ -55,11 +55,14 @@ namespace Assets.Resources.Classes.Blobs
             //this.FoodValue = InitialPlayerValue;
             //this.RigidBody.mass = PlayerMass;
             //this.StartPosition = this.transform.position;
+
         }
 
         public void PauseGame()
         {
+            UnityEngine.Debug.Log(GameVariables.Paused);
             GameVariables.Paused = true;
+            UnityEngine.Debug.Log(GameVariables.Paused);
         }
 
 
@@ -153,7 +156,7 @@ namespace Assets.Resources.Classes.Blobs
         //    StartCoroutine(consumable.OnCollisionEvent);
         //}
 
-        
+
        // public void OnCollisionExit2D(Collision2D collision)
        // {
        //     if (collision.gameObject.tag == "Food")
