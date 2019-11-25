@@ -88,7 +88,7 @@ public static class GameVariables
 
 
 		/// <summary>
-		/// Tests if one player equals another by comparing their location 
+		/// Tests if one player equals another by comparing their location
 		/// </summary>
 		/// <param name="other"></param>
 		/// <returns></returns>
@@ -113,7 +113,7 @@ public static class GameVariables
 	}
 
 	/// <summary>
-	/// List of players 
+	/// List of players
 	/// </summary>
 	public static List<PlayerStation> PlayerStations
 	{
@@ -125,6 +125,12 @@ public static class GameVariables
 		{
 			GamePlayers = value;
 		}
+	}
+
+	public static void PauseGame()
+	{
+		Paused = true;
+		Debug.Log(Paused);
 	}
 
 	/// <summary>
