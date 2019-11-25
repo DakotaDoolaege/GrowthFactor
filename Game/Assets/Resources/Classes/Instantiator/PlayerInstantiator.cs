@@ -35,16 +35,71 @@ namespace Assets.Resources.Classes.Instantiator
             for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
             {
                 Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
-                startPosition.x = startPosition.x - 1920 -200;//remove offset n replace with proper function
-                startPosition.y = startPosition.y - 1080;
+                Vector2 offset = this.GetOffset(startPosition);
+                startPosition.x = startPosition.x - 1920 + offset.x;//remove offset n replace with proper function
+                startPosition.y = startPosition.y - 1080 + offset.y;
 
                 GameObject Pausebtn = Instantiate(PauseButton, startPosition, Quaternion.identity) as GameObject;
                 Pausebtn.transform.SetParent(Canvas.transform, false);
+
+                Vector3 rotation = this.GetRotation(startPosition);
+                Pausebtn.transform.Rotate(rotation);
             }
 
             this.CurrentBlobs = new List<Blob>();
             //this.SetStartPositions();
             base.Start();
+        }
+
+        private Vector3 GetRotation(Vector2 position)
+        {
+            // if (position.x <= 1920 && position.y < 1080)
+            // {
+            //     return new Vector2(-200, 0);
+            // }
+            // else if (position.x >= 1920 && position.y < 1080)
+            // {
+            //     return new Vector2(-200, 0);
+            // }
+            Debug.Log("PAUSE: " + position);
+            if (position.y == 200 && position.x == -1600)
+            {
+                return new Vector3(0, 0, 270);
+            }
+            else if (position.y == -200 && position.x == 1600)
+            {
+                return new Vector3(0, 0, 90);
+            }
+            else if (position.y >= 500)
+            {
+                return new Vector3(0, 0, 180);
+            }
+            return new Vector3(0, 0, 0);
+        }
+
+        private Vector2 GetOffset(Vector2 position)
+        {
+            if (position.x <= 1920 && position.y < 1080)
+            {
+                return new Vector2(-200, 0);
+            }
+            else if (position.x >= 1920 && position.y < 1080)
+            {
+                return new Vector2(-200, 0);
+            }
+            else if (position.x <= 1920 && position.y > 1080)
+            {
+                return new Vector2(200, 0);
+            }
+            else if (position.x >= 1920 && position.y > 1080)
+            {
+                return new Vector2(200, 0);
+            }
+            else if (position.x >= 1029 && position.y == 1080)
+            {
+                return new Vector2(0, -200);
+            }
+            return new Vector2(0, 200);
         }
 
         // Update is called once per frame
@@ -96,8 +151,30 @@ namespace Assets.Resources.Classes.Instantiator
             //Debug.Log("START POS:" +startPosition);
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
             startPosition.y = startPosition.y - 2;
-            GameObject Button = Instantiate(PauseButton, startPosition, Quaternion.identity);
+            // GameObject Button = Instantiate(PauseButton, startPosition, Quaternion.identity);
             this.CurrentBlobs.Add(player.GetComponent<Player>());
+
+            // Rotate players
+            Vector2 position = new Vector2(startPosition.x, startPosition.y);
+            Debug.Log(position);
+
+            if (position.x >= 0 && position.y >= 0)
+            {
+                player.transform.Rotate(new Vector3(0, 0, 180));
+
+            }
+            else if (position.x >= 0 && position.y >= -2 && position.y <= 2)
+            {
+                player.transform.Rotate(new Vector3(0, 0, 90));
+            }
+            else if (position.x <= 0 && position.y >= -2 && position.y <= 2)
+            {
+                player.transform.Rotate(new Vector3(0, 0, -90));
+            }
+            else if (position.x <= 0 && position.y >= 0)
+            {
+                player.transform.Rotate(new Vector3(0, 0, 180));
+            }
 
             return player;
         }
