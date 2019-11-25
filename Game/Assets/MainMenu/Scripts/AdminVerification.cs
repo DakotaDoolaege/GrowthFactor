@@ -16,7 +16,7 @@ public class AdminVerification : MonoBehaviour
     void Start()
     {
 		DB = GameObject.Find("DBScript").GetComponent<Database>();
-    }
+ }
 
 	/// <summary>
 	/// Logs the admin in and shows the full menu
@@ -24,7 +24,7 @@ public class AdminVerification : MonoBehaviour
 	/// <param name="Password"></param>
 	public void Login(InputField Password)
 	{
-		if(DB.Authenticate("Dakota",Password.text) == true)
+		if(DB.Authenticate("admin",Password.text) == true)
 		{
 			Debug.Log("User authenticated");
 			SoundButton.SetActive(true);
