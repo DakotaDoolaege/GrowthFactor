@@ -3,7 +3,7 @@ using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 
 
-//TODO: Refactor now that player positions are being pulled from the game variables (
+// TODO: Refactor now that player positions are being pulled from the game variables (
 
 namespace Assets.Resources.Classes.Instantiator
 {
@@ -42,7 +42,7 @@ namespace Assets.Resources.Classes.Instantiator
                 Pausebtn.transform.SetParent(Canvas.transform, false);
             }
 
-            this.CurrentBlobs = new List<Blob>();   
+            this.CurrentBlobs = new List<Blob>();
             //this.SetStartPositions();
             base.Start();
         }

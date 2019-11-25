@@ -12,7 +12,8 @@ public class Tutorial : MonoBehaviour
     SpriteRenderer Renderer { get; set; }
     private int Index { get; set;} = 0;
     private Sprite CurrentImage { get => this.TutorialImages[this.Index]; }
-    public bool AtBeginning{ get => this.Index == 0; }
+    public bool AtBeginning { get => this.Index == 0; }
+    public bool AtEnd { get => this.Index == TutorialImages.Count - 1; }
 
     /// <summary>
     /// Start is called before the first frame to initialize the object
