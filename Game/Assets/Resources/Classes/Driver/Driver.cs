@@ -18,7 +18,7 @@ namespace Assets.Resources.Classes.Driver
 		public Instantiator.Instantiator ConsumableInstantiator;
 
 		public TextMeshProUGUI ScoreDisplay;
-		public int Level = 0;
+		public int Level = GameVariables.setLevel;
 		public IList<Blob> Players => this.PlayerInstantiator.CurrentBlobs;
 		public int NumPlayers { get => GameVariables.PlayerStations.Count; }
 		public const int MillisecondsPerSecond = 1000;
@@ -41,13 +41,19 @@ namespace Assets.Resources.Classes.Driver
 		private GameObject _pauseMenu;
 
 		/// <summary>
-		/// Array of objects to show when the level ended screen is show
+		/// Array of objects to show when the level ended screen is shown
 		/// </summary>
 		private GameObject[] _endObjects;
+		
+		/// <summary>
+		/// Array of objects to show when the save scores overlay is shown
+		/// </summary>
+		public GameObject _scoresOverlay;
 
 		// Start is called before the first frame update
 		void Start()
 		{
+			Time.timeScale = 1;
 			this.SetBackground();
 
 			// GetPlayerCount();
@@ -102,6 +108,15 @@ namespace Assets.Resources.Classes.Driver
 				obj.SetActive(false);
 			}
 		}
+		
+		/// <summary>
+		/// Hides the scores overlay
+		/// </summary>
+		public void HideScores()
+		{
+
+			this._scoresOverlay.SetActive(false);
+		}
 
 		/// <summary>
 		/// Shows the pause screen
@@ -125,6 +140,16 @@ namespace Assets.Resources.Classes.Driver
 				obj.SetActive(true);
 			}
 		}
+		
+		/// <summary>
+		/// Shows the scores overlay 
+		/// </summary>
+		public void ShowScores()
+		{
+			Time.timeScale = 0;
+
+			this._scoresOverlay.SetActive(true);
+		}
 
 		/// <summary>
 		/// Performs setup routine when starting a new level
@@ -141,10 +166,14 @@ namespace Assets.Resources.Classes.Driver
 		{
 			this.CheckWin();
 
-			if (this.LevelEnded || this.TimerCount <= 0.0f)
+			if (this.LevelEnded || this.TimerCount <= 0.0f || GameVariables.EndLevel)
 			{
 				this.ShowEnded();
 				this.UpdateScores();
+			}
+			else
+			{
+				this.HideEnded();
 			}
 
 			if (GameVariables.Paused)
@@ -155,6 +184,15 @@ namespace Assets.Resources.Classes.Driver
 			else
 			{
 				this.HidePaused();
+			}
+			
+			if (GameVariables.ShowScores)
+			{
+				this.ShowScores();
+			}
+			else
+			{
+				this.HideScores();
 			}
 
 			this.TimerCount -= Time.deltaTime;
