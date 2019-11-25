@@ -147,5 +147,5 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Renderer: {fileID: 0}
   Collider: {fileID: 0}
-  BlobType: 0
+  BlobType: 3
   LastVelocity: {x: 0, y: 0}
