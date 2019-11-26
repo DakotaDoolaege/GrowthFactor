@@ -32,6 +32,7 @@ public class SaveScoresMenu : MonoBehaviour
 			Name.transform.parent.parent.gameObject.SetActive(false);
 			GameVariables.Ready++;
 
+
 			if (GameVariables.Ready == GameVariables.PlayerStations.Count) //Calls main menu if all players have finished
 				MainMenu();
 		}
