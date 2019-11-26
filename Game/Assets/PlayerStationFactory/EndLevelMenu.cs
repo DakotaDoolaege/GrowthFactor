@@ -34,6 +34,7 @@ public class EndLevelMenu : MonoBehaviour
 	/// </remarks>
 	public void NextLevel()
 	{
+		Debug.Log("HERE");
 		gameObject.SetActive(false);
 		GameVariables.EndLevel = false;
 		GameVariables.setLevel++;	
@@ -47,6 +48,7 @@ public class EndLevelMenu : MonoBehaviour
 	/// </summary>
 	public void RestartLevel()
 	{
+		Debug.Log("HEReeE");
 		gameObject.SetActive(false);
 		GameVariables.EndLevel = false;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 

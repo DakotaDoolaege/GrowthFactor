@@ -13,7 +13,7 @@ public static class Profanity
 
 	public static bool ValidateName(string Name)
 	{
-		return !blacklist.Contains(Name);
+		return !blacklist.Contains(Name.ToLower());
 
 	}
 
