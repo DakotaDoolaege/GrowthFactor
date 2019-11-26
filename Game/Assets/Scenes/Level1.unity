@@ -407,7 +407,7 @@ PrefabInstance:
     - target: {fileID: 4321576914236012316, guid: 89508d57997fb864aa4e92f2547dab45,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4321576914236012316, guid: 89508d57997fb864aa4e92f2547dab45,
         type: 3}
@@ -534,6 +534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321576914236012317, guid: 89508d57997fb864aa4e92f2547dab45,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 1873209523279388941, guid: 89508d57997fb864aa4e92f2547dab45,
         type: 3}
@@ -854,6 +859,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321576914236012319, guid: 89508d57997fb864aa4e92f2547dab45,
+        type: 3}
+      propertyPath: m_BlockingObjects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321576914236012319, guid: 89508d57997fb864aa4e92f2547dab45,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89508d57997fb864aa4e92f2547dab45, type: 3}
