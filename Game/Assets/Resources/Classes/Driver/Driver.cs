@@ -205,7 +205,7 @@ namespace Assets.Resources.Classes.Driver
 		public float GetLevelTime()
 		{
 			float extraSecondsPerLevel = 5.0f;
-			float baseSecondsPerLevel = 25.0f;
+			float baseSecondsPerLevel = 2.0f;
 			return baseSecondsPerLevel + (this.Level * extraSecondsPerLevel);
 		}
 
