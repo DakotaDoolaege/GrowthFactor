@@ -166,7 +166,7 @@ namespace Assets.Resources.Classes.Driver
 		{
 			this.CheckWin();
 
-			if (this.LevelEnded || this.TimerCount <= 0.0f || GameVariables.EndLevel)
+			if ((this.LevelEnded || this.TimerCount <= 0.0f || GameVariables.EndLevel) && !GameVariables.ShowScores)
 			{
 				this.ShowEnded();
 				this.UpdateScores();
