@@ -32,10 +32,11 @@ public class AudioManager : MonoBehaviour
         else // already have audio manager
         {
             Destroy(gameObject);
+
         }
 
         // audio manager persists across scenes
-        DontDestroyOnLoad(gameObject);        
+        DontDestroyOnLoad(gameObject);
 
         //set volume, clip, and loop for each sound
         foreach (Sound sound in listOfSounds)
@@ -93,7 +94,7 @@ public class AudioManager : MonoBehaviour
         {
             sound.soundSource.volume = volumeSlider.value;
 
-            if (volumeSlider.value == 0f)
+            if (volumeSlider.value <= 0f)
             {
                 audioManagerInstance.isMuted = true;
             }
