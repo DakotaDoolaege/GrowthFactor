@@ -3,10 +3,12 @@ using Assets.Resources.Classes.Blobs;
 using UnityEngine;
 
 
-// TODO: Refactor now that player positions are being pulled from the game variables (
-
 namespace Assets.Resources.Classes.Instantiator
 {
+    /// <summary>
+    /// Class <c>PlayerInstantiator</c> instantiates players at appropriate
+    /// locations.
+    /// </summary>
     public class PlayerInstantiator : Instantiator
     {
 
@@ -15,13 +17,7 @@ namespace Assets.Resources.Classes.Instantiator
         public bool paused = false;
 
         public const int NumStartPositions = 6;
-        //public IList<Blob> CurrentBlobs;
         private const float ShiftFromEdge = 1.0f;
-
-        protected override void InitializePositionArray()
-        {
-            this.StartPositions = new Vector3[NumStartPositions];
-        }
 
         /// <summary>
         /// The current number of players playing
@@ -47,21 +43,24 @@ namespace Assets.Resources.Classes.Instantiator
             }
 
             this.CurrentBlobs = new List<Blob>();
-            //this.SetStartPositions();
             base.Start();
         }
 
+        /// <summary>
+        /// Initializes the array of player positions
+        /// </summary>
+        protected override void InitializePositionArray()
+        {
+            this.StartPositions = new Vector3[NumStartPositions];
+        }
+
+        /// <summary>
+        /// Gets the rotation for players
+        /// </summary>
+        /// <param name="position">The approximate position of the player</param>
+        /// <returns></returns>
         private Vector3 GetRotation(Vector2 position)
         {
-            // if (position.x <= 1920 && position.y < 1080)
-            // {
-            //     return new Vector2(-200, 0);
-            // }
-            // else if (position.x >= 1920 && position.y < 1080)
-            // {
-            //     return new Vector2(-200, 0);
-            // }
-            Debug.Log("PAUSE: " + position);
             if (position.y == 200 && position.x == -1600)
             {
                 return new Vector3(0, 0, 270);
@@ -77,6 +76,12 @@ namespace Assets.Resources.Classes.Instantiator
             return new Vector3(0, 0, 0);
         }
 
+        /// <summary>
+        /// Gets the offset from the edge of the screen at which to set the
+        /// player
+        /// </summary>
+        /// <param name="position">The approximate position of the player</param>
+        /// <returns></returns>
         private Vector2 GetOffset(Vector2 position)
         {
             if (position.x <= 1920 && position.y < 1080)
@@ -102,15 +107,9 @@ namespace Assets.Resources.Classes.Instantiator
             return new Vector2(0, 200);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    this.GenerateBlob();
-            //}
-        }
-
+        /// <summary>
+        /// Sets the appropriate start positions for players
+        /// </summary>
         protected override void SetStartPositions()
         {
             float x = Camera.main.transform.position.x;
@@ -119,9 +118,6 @@ namespace Assets.Resources.Classes.Instantiator
 
             float height = Camera.main.orthographicSize * 2.0f;
             float width = Camera.main.aspect * height;
-
-            //Debug.Log(height);
-            //Debug.Log(width);
 
             this.StartPositions[0] = new Vector3(x + (width / 2) - ShiftFromEdge, y, z);
             this.StartPositions[1] = new Vector3(x - (width / 2) + ShiftFromEdge, y, z);
@@ -145,13 +141,12 @@ namespace Assets.Resources.Classes.Instantiator
             {
                 return null;
             }
-            //Vector3 startPosition = this.StartPositions[this.CurrentBlobs.Count];//changed this to pull locations from gamevariables
             Vector3 startPosition = (Camera.main.ScreenToWorldPoint(GameVariables.PlayerStations[this.CurrentBlobs.Count].GetPosition()));
             startPosition.z = 0;
-            //Debug.Log("START POS:" +startPosition);
+
             GameObject player = Instantiate(this.Prefab, startPosition, Quaternion.identity);
             startPosition.y = startPosition.y - 2;
-            // GameObject Button = Instantiate(PauseButton, startPosition, Quaternion.identity);
+
             this.CurrentBlobs.Add(player.GetComponent<Player>());
 
             // Rotate players

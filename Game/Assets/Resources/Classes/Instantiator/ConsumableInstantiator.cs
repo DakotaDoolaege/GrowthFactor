@@ -6,16 +6,9 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
-    /*
-     * TODO
-     * - Implement observable pattern so that the instantiator
-     * can register with Consumables so that when they are
-     * consumed, we can update in a more appropriate manner.
-     *
-     * The instantiator should be the observer, and the
-     * observable should be the PlayerAction, which decides
-     * when a Consumable is consumed.
-     */
+    /// <summary>
+    /// Class <c>ConcumableInstantiator</c> instantiates consumables
+    /// </summary>
     public class ConsumableInstantiator : Instantiator
     {
         public const int NumStartPositions = 5; // Override NumStartPositions
@@ -30,11 +23,11 @@ namespace Assets.Resources.Classes.Instantiator
             base.Start();
             this._rnd = new System.Random();
             //this.SetStartPositions();
-            
+
             // Get the level from the game driver
             var obj = GameObject.FindGameObjectWithTag("Driver");
             Driver.Driver driver = obj.gameObject.GetComponent<Driver.Driver>();
-            this.Level = driver.Level;            
+            this.Level = driver.Level;
 
             for (int i = 0; i < NumStartPositions; i++)
             {
@@ -46,7 +39,7 @@ namespace Assets.Resources.Classes.Instantiator
         {
             this.StartPositions = new Vector3[NumStartPositions];
         }
-        
+
         /// <summary>
         /// Update is called once per frame
         /// </summary>

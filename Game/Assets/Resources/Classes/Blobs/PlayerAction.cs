@@ -6,16 +6,9 @@ namespace Assets.Resources.Classes.Blobs
 {
     /// <summary>
     /// Enum <c>PlayerActionType</c> represents the appropriate types of
-    /// player actions. 
+    /// player actions.
     /// </summary>
     public enum PlayerActionType {Default, NoRed, Shield}
-
-    ///// <summary>
-    ///// Delegate <c>ObserveConsumption</c> is used to register objects
-    ///// with the PlayerAction that need to be updated when a Consumable
-    ///// is consumed.
-    ///// </summary>
-    //public delegate void ObserveConsumption(Consumable consumable);
 
     /// <summary>
     /// Class <c>PlayerAction</c> represents actions a Player can take on the
@@ -28,22 +21,13 @@ namespace Assets.Resources.Classes.Blobs
         public bool Consuming { get; set; }
         private AudioManager Audio { get; set; }
 
-        ///// <summary>
-        ///// Event <c>ConsumedConsumable</c> is a delegate that is called
-        ///// when a Consumable object gets consumed by the Player.
-        ///// </summary>
-        //public event ObserveConsumption ConsumedConsumable;
-
         /// <summary>
         /// Start is called once per frame.
         /// </summary>
         public virtual void Start()
         {
             this.Audio = FindObjectOfType<AudioManager>();
-            //this.ConsumedConsumable += this.Player.Instantiator.ConsumeBlob;
         }
-
-        //public abstract void ConsumePowerUpEvent();
 
         /// <summary>
         /// Deals with the event of consumption of a consumable
@@ -66,6 +50,10 @@ namespace Assets.Resources.Classes.Blobs
             StartCoroutine(consumable.OnCollisionEvent);
         }
 
+        /// <summary>
+        /// Actions to take upon exiting collision
+        /// </summary>
+        /// <param name="consumable">The consumable object that was collided with</param>
         public virtual void StopConsumeEvent(Consumable consumable)
         {
             if (!this.Consuming)
@@ -94,7 +82,7 @@ namespace Assets.Resources.Classes.Blobs
         public void SetOnCollisionEvents(Consumable consumable, int speed = Consumable.ShrinkSpeed)
         {
             if (consumable.BlobType == BlobType.Food)
-            { 
+            {
                 consumable.OnCollisionEvent = consumable.Shrink(speed);
                 this.Player.OnCollisionEvent = this.ConsumeFoodEvent(consumable, speed);
 
@@ -108,7 +96,7 @@ namespace Assets.Resources.Classes.Blobs
                     // FindObjectOfType<AudioManager>().Play("PlayerEatNegative");
                     this.Audio.Play("PlayerEatNegative");
                 }
-                
+
             }
             else if (consumable.BlobType == BlobType.PowerUp)
             {

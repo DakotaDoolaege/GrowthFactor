@@ -18,6 +18,9 @@ namespace Assets.Resources.Classes
         public static GameTheme CurrentTheme;
         private const int DEFAULT_THEME_INDEX = 0;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         static ApplicationTheme()
         {
             Themes = new List<GameTheme> {new DefaultGameTheme(), new KnightTheme(), new HalloweenTheme()};
@@ -27,6 +30,10 @@ namespace Assets.Resources.Classes
             CurrentTheme = Themes[DEFAULT_THEME_INDEX];
         }
 
+        /// <summary>
+        /// Switches the theme to that of the specified index
+        /// </summary>
+        /// <param name="index">The index of the theme in the themes list</param>
         public static void SwitchTheme(int index)
         {
             if (index >= Themes.Count || index < 0)
@@ -48,6 +55,9 @@ namespace Assets.Resources.Classes
             return CurrentTheme;
         }
 
+        /// <summary>
+        /// Refreshes all loaded themes
+        /// </summary>
         public static void RefreshThemes()
         {
             for (int i = 0; i < Themes.Count; i++)
@@ -56,6 +66,11 @@ namespace Assets.Resources.Classes
             }
         }
 
+        /// <summary>
+        /// Scales the in-game background for the background prefab object
+        /// </summary>
+        /// <param name="backgroundObject">The object holding the background</param>
+        /// <param name="background">The sprite to use for the background</param>
         public static void ScaleBackground(GameObject backgroundObject, Sprite background)
         {
             SpriteRenderer renderer = backgroundObject.GetComponent<SpriteRenderer>();
