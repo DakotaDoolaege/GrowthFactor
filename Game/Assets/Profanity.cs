@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 public static class Profanity
@@ -26,7 +27,7 @@ public static class Profanity
 	public static void BlacklistWord(string word)
 	{
 		CreateFile();
-		File.AppendAllText(path, word);
+		File.AppendAllText(path, word + Environment.NewLine);
 		blacklist.AddRange(File.ReadAllLines(path));	
 	}
 
