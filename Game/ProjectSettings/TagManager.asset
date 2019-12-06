@@ -8,6 +8,14 @@ TagManager:
   - Food
   - Database
   - AudioManager
+  - VolumeSlider
+  - Wall
+  - ShowOnLevelEnd
+  - Driver
+  - RefreshOnThemeUpdate
+  - Background
+  - ShowOnPause
+  - ScoresOverlay
   layers:
   - Default
   - TransparentFX
