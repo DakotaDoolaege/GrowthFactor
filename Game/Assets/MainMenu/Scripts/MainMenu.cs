@@ -54,6 +54,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
+		GameVariables.ClearPlayers();
         string menuName = "Menu";
         StartCoroutine(LoadMainMenu(menuName));
     }
