@@ -51,7 +51,7 @@ namespace Assets.PlayerStationFactory.PauseMenu
 			GameVariables.EndLevel = false;
 			GameVariables.ShowScores = false;
 			GameVariables.Ready = 0;
-			GameVariables.PlayerStations = new List<GameVariables.PlayerStation>();
+			GameVariables.ClearPlayers();
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - SceneManager.GetActiveScene().buildIndex); // get the scene next in the queue after current 
 			//gameObject.SetActive(false);
 			//EndLevelScript.CreatePlayerPanels();
