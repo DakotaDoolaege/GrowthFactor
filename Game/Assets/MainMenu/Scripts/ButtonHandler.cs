@@ -35,8 +35,6 @@ public class ButtonHandler : MonoBehaviour
             Station.SetPosition(transform.position);
             GameStations.Remove(Station);
             GameVariables.PlayerStations = GameStations;
-            //Debug.Log("Players counter after remove:" + GameVariables.PlayerStations.Count);
-
 
             active = false;
             Player.image.overrideSprite = deactivated;
@@ -48,8 +46,6 @@ public class ButtonHandler : MonoBehaviour
             Station.SetPosition(transform.position);
             GameStations.Add(Station);
             GameVariables.PlayerStations = GameStations;
-            //Debug.Log("Players counter" + GameVariables.PlayerStations.Count + "player position: " + Station.GetPosition());
-
             
             active = true;
             Player.image.overrideSprite = activated;

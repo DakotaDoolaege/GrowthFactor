@@ -37,7 +37,7 @@ public class AdminVerification : MonoBehaviour
 
 	public void Logout()
 	{
-		// SoundButton.SetActive(false);
+		SoundButton.SetActive(false);
 		RemoveName.SetActive(false);
 		LoginUI.SetActive(true);
 	}
@@ -51,7 +51,6 @@ public class AdminVerification : MonoBehaviour
 		DB.RemoveScore(Name.text);
 		Profanity.BlacklistWord(Name.text);
 		Name.text = "";
-
 	}
 
 
