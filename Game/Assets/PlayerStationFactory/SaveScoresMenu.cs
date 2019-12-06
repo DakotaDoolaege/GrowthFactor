@@ -8,6 +8,7 @@ public class SaveScoresMenu : MonoBehaviour
 {
 
 	public int PlayerNumber;
+	public GameObject Alert;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -23,7 +24,7 @@ public class SaveScoresMenu : MonoBehaviour
 	/// Adds the inputed player name to their player station if it is not profane
 	/// </summary>
 	/// <param name="Name">The players name</param>
-	public void SaveName(Text Name)
+	public void SaveName(InputField Name)
 	{
 		string username = Name.text;
 		if (Profanity.ValidateName(username))
@@ -38,9 +39,14 @@ public class SaveScoresMenu : MonoBehaviour
 		}
 		else
 		{
+			Name.text = "";
+			Alert.SetActive(true);
+
+
 			//Todo: clear input and alert user to change their name
 		}
 	}
+
 	/// <summary>
 	/// Doesn't save users score, just deactivates their PlayerStation
 	/// </summary>
