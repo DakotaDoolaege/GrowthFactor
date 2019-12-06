@@ -49,8 +49,9 @@ public class AdminVerification : MonoBehaviour
 	public void DeleteName(InputField Name)
 	{
 		DB.RemoveScore(Name.text);
-		Debug.Log("Removing: " + Name.text);
+		Profanity.BlacklistWord(Name.text);
 		Name.text = "";
+
 	}
 
 
