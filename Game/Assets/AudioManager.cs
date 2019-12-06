@@ -5,7 +5,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    
+
     // FindObjectOfType<AudioManager>().Play("SoundName")
     public bool isMuted = false; // game muted
 
@@ -113,10 +113,10 @@ public class AudioManager : MonoBehaviour
             AudioListener.volume = 0;
             volumeSlider.value = 0;
             audioManagerInstance.isMuted = true;
-            
+
         }
 
-        else 
+        else
         {
             AudioListener.volume = levelBeforeMute;
             volumeSlider.value = levelBeforeMute;
