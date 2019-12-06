@@ -118,28 +118,10 @@ namespace Assets.Resources.Classes.Blobs
             base.UpdateColliderSize();
         }
 
-        ///// <summary>
-        ///// A function which calculates the changes to a Player object upon
-        ///// consuming a consumable object.
-        ///// </summary>
-        ///// <param name="consumable">The consumable object that the Player object
-        ///// consumes</param>
-        //public void ConsumeFood(Consumable consumable)
-        //{
-        //    // Set the collision instance variable
-        //    //this.OnCollisionEvent = this.ConsumeFoodEvent(consumable);
-        //    this.SetOnCollisionEvent(consumable);
-
-
-        //    // Enact the Consumable's changes to the player, which will call the
-        //    // collision event on the player
-        //    consumable.OnPlayerConsume(this);
-
-        //    // Start the collision event on the consumable
-        //    StartCoroutine(consumable.OnCollisionEvent);
-        //}
-
-
+        /// <summary>
+        /// The actions to take upon exiting collision
+        /// </summary>
+        /// <param name="collision">The object collided with</param>
         public void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Food")
@@ -168,52 +150,6 @@ namespace Assets.Resources.Classes.Blobs
             }
         }
 
-        ///// <summary>
-        ///// Animates a Player object's growth upon consuming a Consumable
-        ///// object.
-        ///// </summary>
-        ///// <param name="consumable">The object to consume</param>
-        ///// <param name="speed">The speed at which to grow the player</param>
-        ///// <returns>
-        ///// An IEnumerator that tells the coroutine when to stop and restart
-        ///// execution
-        ///// </returns>
-        //public IEnumerator ConsumeFoodEvent(Blob consumable, int speed = Consumable.ShrinkSpeed)
-        //{
-        //    UnityEngine.Debug.Log("Player: " + this.FoodValue);
-        //    int value = consumable.FoodValue;
-        //    while (value > 0)
-        //    {
-        //        if (value - speed < 0)
-        //        {
-        //            this.Grow(value);
-        //            value = 0;
-        //            yield return null;
-        //        }
-        //        else
-        //        {
-        //            this.Grow(speed);
-        //            value -= speed;
-        //            yield return null;
-        //        }
-        //    }
-        //    while (value < 0)
-        //    {
-        //        if (value + speed > 0)
-        //        {
-        //            this.Grow(-speed);
-        //            value += speed;
-        //            yield return null;
-        //        }
-        //        else
-        //        {
-        //            this.Grow(value);
-        //            value = 0;
-        //            yield return null;
-        //        }
-        //    }
-        //}
-
         /// <summary>
         /// Moves the player back to the start after it has been displaced
         /// </summary>
@@ -225,14 +161,5 @@ namespace Assets.Resources.Classes.Blobs
             this.transform.position = Vector3.MoveTowards(this.transform
                 .position, this.StartPosition, step);
         }
-
-        //public void SetOnCollisionEvent(Consumable consumable)
-        //{
-        //    if (consumable.BlobType == BlobType.Food)
-        //    {
-        //        this.OnCollisionEvent = this.ConsumeFoodEvent(consumable);
-        //    }
-        //    // else set to PowerUp OnCollisionEvent
-        //}
     }
 }

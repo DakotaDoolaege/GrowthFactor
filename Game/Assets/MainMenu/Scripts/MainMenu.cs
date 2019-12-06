@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
         // call to coroutine
         StartCoroutine("Wait");
     }
-    
+
     /// <summary>
     /// Loads main game scene when player clicks play button
     /// </summary>
@@ -39,16 +39,14 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // wait 1/2 a second
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // get the scene next in the queue after current
     }
 
     public void ShowScore()
     {
-        //Rect buttonRect = new Rect();
-        //PopupWindow.Show(buttonRect, new ScoreWindow());
-        //SceneManager.LoadScene("Scores");
         SceneManager.LoadScene("Scoreboard");
     }
+
     /// <summary>
     /// Loads the main menu
     /// </summary>

@@ -45,7 +45,7 @@ namespace Assets.Resources.Classes.Theme
         /// </summary>
         public HalloweenTheme() : base()
         {
-            // Set the main menu's background 
+            // Set the main menu's background
             this.SetMainMenuBackground();
 
             // Set the in-game background
@@ -124,6 +124,10 @@ namespace Assets.Resources.Classes.Theme
             return UnityEngine.Resources.Load<Sprite>(playerSheet + playerNumber);
         }
 
+        /// <summary>
+        /// Gets the active player sprite
+        /// </summary>
+        /// <returns>The icon for the active player</returns>
         public override Sprite GetActivePlayer()
         {
             return UnityEngine.Resources.Load<Sprite>(this.ActivePlayer);
@@ -150,8 +154,6 @@ namespace Assets.Resources.Classes.Theme
         public override Sprite GetNegativeFood()
         {
             int ind = this._random.Next() % this.NegativeFoods.Count;
-            //Debug.Log("Random: " + ind);
-
             return this.NegativeFoods[ind];
         }
 
@@ -166,13 +168,12 @@ namespace Assets.Resources.Classes.Theme
             this.SetMainMenuBackground();
         }
 
+        /// <summary>
+        /// Sets the main meny background
+        /// </summary>
         public void SetMainMenuBackground()
         {
             this.MainMenuBackgroundPrefab = "MainMenuBackgrounds/HalloweenBackground" + this._random.Next(1, 4);
-
-            //GameObject parallax = UnityEngine.Resources.Load<GameObject>(file);
-            //parallax = GameObject.Instantiate(parallax);
-            //return parallax;
         }
     }
 }

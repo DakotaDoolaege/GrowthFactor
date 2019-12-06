@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Instantiator
 {
+    /// <summary>
+    /// Class <c>Instantiator</c> instantiates blobs
+    /// </summary>
     public abstract class Instantiator : MonoBehaviour
     {
         public GameObject Prefab;
         protected Vector3[] StartPositions;
         public IList<Blob> CurrentBlobs;
-
         public int Count => this.CurrentBlobs.Count;
 
         // Start is called before the first frame update

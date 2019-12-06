@@ -9,16 +9,6 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
-    /*
-     * TODO:
-     *
-     * - Move consuming into just the Consumable class, so that on collision the
-     *   Consumable class takes care of all the consuming. It calls its action, which
-     *   calls the appropriate functionality on the Player, and then it calls the
-     *   appropriate functionality on itself.
-     */
-
-
     /// <summary>
     /// Enum <c>BlobType</c> represents each type that a blob may be
     /// </summary>
@@ -31,8 +21,6 @@ namespace Assets.Resources.Classes.Blobs
     /// </summary>
     public abstract class Blob : MonoBehaviour
     {
-        // public int FoodValue { get; set; }
-
         public Rigidbody2D RigidBody;
         public Vector2 SizeVector;
         public Sprite Icon;
@@ -74,14 +62,12 @@ namespace Assets.Resources.Classes.Blobs
             this.BlobType = this.GetBlobType();
 
             // Generate food value and icon for blob
-            //this.FoodValue = GetFoodValue();
             this.Icon = GetSprite();
             this.Renderer.sprite = Icon;
 
             // Generate the size for the blob
             this.SizeVector = this.GetSize();
             this.Renderer.size = SizeVector;
-            //this.transform.localScale = this.SizeVector;
 
             // Adjust the collider
             this.Collider = this.GetComponent<CircleCollider2D>();
@@ -103,7 +89,7 @@ namespace Assets.Resources.Classes.Blobs
         public void UpdateColliderSize()
         {
             Vector2 spriteHalfSize = this.Renderer.size / 2.0f;
-            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ? 
+            this.Collider.radius = spriteHalfSize.x > spriteHalfSize.y ?
                 spriteHalfSize.x : spriteHalfSize.y;
         }
 
@@ -154,59 +140,5 @@ namespace Assets.Resources.Classes.Blobs
         /// Called once per frame to update the object
         /// </summary>
         public virtual void Update(){}
-
-        ///// <summary>
-        ///// Calculates the changes in the x-coordinate and y-coordinate of
-        ///// the force vector upon collision with some object. The changes in
-        ///// forces are calculated as follows:
-        /////
-        ///// The x coordinate changes by mass * cos(theta) where mass is the
-        ///// mass of the object being collided with and theta is the angle
-        ///// between the positive x-axis and the vector of the velocity of
-        ///// the collided with object.
-        /////
-        ///// The y coordinate changes by mass * sin(theta) where mass is the
-        ///// mass of the object being collided with and theta is the angle
-        ///// between the positive x-axis and the vector of the velocity of
-        ///// the collided with object.
-        ///// </summary>
-        ///// <param name="collision">The object being collided with</param>
-        //public void CalculateCollision2D(Collision2D collision)
-        //{
-        //    if (collision.gameObject.tag == "Food" || collision.gameObject.tag == "Player")
-        //    {
-        //        Rigidbody2D rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-        //        float mass = rigidbody.mass;
-        //        Blob blob = collision.gameObject.GetComponent<Blob>();
-
-        //        // Get the vectors of velocity and positive x-axis
-        //        Vector2 velocity = rigidbody.velocity;
-        //        Vector2 xAxis = rigidbody.centerOfMass + new Vector2(1, 0);
-
-        //        // Calculate the angle between the two
-        //        float theta = Vector2.Angle(xAxis, velocity);
-
-        //        // Calculate the changes in the x and y coordinates to be
-        //        // applied to the current object
-        //        float x = (float) (mass * blob.Acceleration.x * Math.Cos(theta));
-        //        float y = (float) (mass * blob.Acceleration.y * Math.Sin(theta));
-        //        Vector2 force = new Vector2(x, y);
-
-        //        // Change the current object's velocity by the calculate force
-        //        this.RigidBody.velocity -= force;
-        //    }
-        //}
-
-        /// <summary>
-        /// FixedUpdate() is called a by the UnityEngine to deal with physics
-        /// </summary>
-        public virtual void FixedUpdate()
-        {
-            //// Since this method deals with physics, it is a safe option to 
-            //// calculate the object's acceleration here
-            //this.Acceleration = (LastVelocity - this.RigidBody.velocity)
-            //                    / Time.fixedDeltaTime;
-            //this.LastVelocity = this.RigidBody.velocity;
-        }
     }
 }

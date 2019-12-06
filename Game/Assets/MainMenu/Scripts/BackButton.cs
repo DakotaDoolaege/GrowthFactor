@@ -15,14 +15,11 @@ public class BackButton : MonoBehaviour
     void Start()
     {
         this.Image = this.gameObject.GetComponent<Image>();
-
-        // this.Image.sprite = ApplicationTheme.CurrentTheme.GetBackIcon();
         this.Image.sprite = ApplicationTheme.CurrentTheme.GetArrowIcon(this.Type);
     }
 
     public void Refresh()
     {
-        // this.Image.sprite = ApplicationTheme.CurrentTheme.GetBackIcon();
         this.Image.sprite = ApplicationTheme.CurrentTheme.GetArrowIcon(this.Type);
     }
 }

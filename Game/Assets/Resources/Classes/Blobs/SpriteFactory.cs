@@ -14,10 +14,6 @@ namespace Assets.Resources.Classes.Blobs
     {
         public static Driver.Driver GameDriver = FindObjectOfType<Driver.Driver>();
 
-        private void Start()
-        {
-        }
-
         // Names of individual Sprites in the sliced Sprite file
         private const string NegativeFood = "NegativeFood";
         private const string PositiveFood = "PositiveFood";
@@ -27,6 +23,12 @@ namespace Assets.Resources.Classes.Blobs
         // The name of the file containing the sliced Sprite objects
         private const string SpriteFile = "BayatGames/Free Platform Game Assets/GUI/png/Iconic2048x2048";
 
+        /// <summary>
+        /// Generates the sprite to use for a blob
+        /// </summary>
+        /// <param name="value">The food value of the blob</param>
+        /// <param name="type">The type of the blob</param>
+        /// <returns>The sprite to use for the blob</returns>
         public static Sprite BlobFactory(int value, BlobType type)
         {
             // Get the list of all sprites in the sheet
@@ -53,7 +55,7 @@ namespace Assets.Resources.Classes.Blobs
                         return spritesSheet[56];
                     }
 
-                // When PowerUps added, add a case for the BlobType.PowerUp Enum
+                // Add powerup case here
 
                 default:
                     return null;
