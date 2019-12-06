@@ -86,7 +86,6 @@ public static class GameVariables
 			}
 		}
 
-
 		/// <summary>
 		/// Tests if one player equals another by comparing their location
 		/// </summary>
@@ -101,6 +100,7 @@ public static class GameVariables
 			else
 				return false;
 		}
+
 	}
 
 
@@ -110,6 +110,14 @@ public static class GameVariables
 		{
 			station.SaveScore();
 		}
+	}
+
+	/// <summary>
+	/// Clears the list of players
+	/// </summary>
+	public static void ClearPlayers()
+	{
+		GamePlayers = new List<GameVariables.PlayerStation>();
 	}
 
 	/// <summary>
