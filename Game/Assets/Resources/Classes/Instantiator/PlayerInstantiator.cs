@@ -32,7 +32,7 @@ namespace Assets.Resources.Classes.Instantiator
             {
                 Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
                 Vector2 offset = this.GetOffset(startPosition);
-                startPosition.x = startPosition.x - 1920 + offset.x;//remove offset n replace with proper function
+                startPosition.x = startPosition.x - 1920 + offset.x;
                 startPosition.y = startPosition.y - 1080 + offset.y;
 
                 GameObject Pausebtn = Instantiate(PauseButton, startPosition, Quaternion.identity) as GameObject;
