@@ -4,26 +4,36 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes
 {
+    /// <summary>
+    /// Class <c>ApplicationThemeSwitcher</c> is responsible for switching the
+    /// currently active application theme
+    /// </summary>
     public class ApplicationThemeSwitcher : MonoBehaviour
     {
         public int Index = 0;
-        public void Start()
-        {
 
-        }
-
+        /// <summary>
+        /// Switches the theme to the index specified by the Index instance
+        /// variable
+        /// </summary>
         public void SwitchTheme()
         {
             ApplicationTheme.SwitchTheme(this.Index);
             Camera.main.GetComponent<MainMenuBackground>().Refresh();
         }
 
+        /// <summary>
+        /// Refreshes the currently loaded application themes
+        /// </summary>
         public void RefreshThemes()
         {
             ApplicationTheme.RefreshThemes();
             Camera.main.GetComponent<MainMenuBackground>().Refresh();
         }
 
+        /// <summary>
+        /// Refreshes GUI elements upon theme change
+        /// </summary>
         public void RefreshGuiElements()
         {
             GameObject[] refreshItems = GameObject.FindGameObjectsWithTag("RefreshOnThemeUpdate");

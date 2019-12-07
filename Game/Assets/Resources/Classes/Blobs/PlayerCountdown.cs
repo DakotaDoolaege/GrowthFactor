@@ -6,6 +6,9 @@ using TMPro;
 
 namespace Assets.Resources.Classes.Blobs
 {
+    /// <summary>
+    /// Class <c>PlayerCountdown</c> displays the time remaining for the player
+    /// </summary>
     public class PlayerCountdown : MonoBehaviour
     {
         public Player AttachedPlayer { get; set; }

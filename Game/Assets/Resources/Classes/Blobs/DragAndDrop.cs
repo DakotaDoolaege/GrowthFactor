@@ -69,13 +69,6 @@ namespace Assets.Resources.Classes.Blobs
                 this.canBePushed = true;
             }
 
-            if (this.following)
-            {
-                //const float midpoint = 0.5f;
-                //this.transform.position = Vector2.Lerp(this.transform.position,
-                //    Camera.main.ScreenToWorldPoint(Input.mousePosition), midpoint);
-            }
-
             if (this.nextSave)
             {
                 StartCoroutine("SavePosition");
@@ -119,6 +112,10 @@ namespace Assets.Resources.Classes.Blobs
             this.nextSave = true;
         }
 
+        /// <summary>
+        /// Ensures the movement magnitude is acceptable
+        /// </summary>
+        /// <returns>Whether the movement is acceptable to make</returns>
         private bool CalculateMagnitude()
         {
             return (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position).magnitude <= this.offset;
@@ -139,10 +136,6 @@ namespace Assets.Resources.Classes.Blobs
                 this.startPosY = mousePos.y - this.transform.localPosition.y;
 
                 this.isHeld = true;
-
-                //// If we are dragging the object, notify the consumable
-                //Consumable consumable = this.gameObject.GetComponent<Consumable>();
-                //consumable.IsDragging = true;
             }
         }
 
@@ -158,10 +151,6 @@ namespace Assets.Resources.Classes.Blobs
                 Vector2 vel = this.rigidBody.velocity;
                 this.rigidBody.AddForce(vel);
             }
-
-            //// If we stop dragging the object, notify the consumable
-            //Consumable consumable = this.gameObject.GetComponent<Consumable>();
-            //consumable.IsDragging = false;
         }
 
     }
