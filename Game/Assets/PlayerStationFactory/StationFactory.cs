@@ -27,12 +27,10 @@ public class StationFactory : MonoBehaviour
 		overlay.transform.Translate(new Vector3(0, 0, 0));
 		for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
 		{
-			Debug.Log("Screen resolutionn:" + Screen.currentResolution);
 			Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
 			GameObject NewObject;
-			if (Screen.currentResolution.ToString() == "1920 x 1080 @ 60Hz")//If 1080P
+			if (Screen.width < 2000)//If 1080P
 			{
-				Debug.Log("Screen resolution:" + Screen.currentResolution);
 				if (startPosition.y > 550)
 				{
 					startPosition.y = startPosition.y - 50;
