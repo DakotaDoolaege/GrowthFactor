@@ -27,7 +27,6 @@ namespace Assets.Resources.Classes.Blobs
         [SerializeField] private const float POWER = 5f;
         private bool nextSave = true;
 
-        private bool following;
         private Rigidbody2D rigidBody;
         private Vector2 direction;
         private bool canBePushed;
@@ -38,7 +37,6 @@ namespace Assets.Resources.Classes.Blobs
         /// </summary>
         private void Start()
         {
-            this.following = false;
             this.offset += 10;
             this.lastPosition = this.transform.position;
             this.rigidBody = this.GetComponent<Rigidbody2D>();
@@ -57,14 +55,8 @@ namespace Assets.Resources.Classes.Blobs
                 //this.gameObject.transform.localPosition = new Vector3(mousePos.x - _startPosX, mousePos.y - _startPosY, 0);
             }
 
-            if (Input.GetMouseButtonDown(0) && (this.CalculateMagnitude()))
-            {
-                this.following = true;
-            }
-
             if (Input.GetMouseButtonUp(0) && (this.CalculateMagnitude()))
             {
-                this.following = false;
                 this.direction = (Vector2) this.transform.position - this.lastPosition;
                 this.canBePushed = true;
             }

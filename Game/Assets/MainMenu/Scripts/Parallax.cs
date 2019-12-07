@@ -7,7 +7,7 @@ public class Parallax : MonoBehaviour
 {
 
 	private float spriteLenght, spritePosition; // of the sprite
-	public GameObject camera; // reference to main camera
+	public new GameObject camera; // reference to main camera
 	public float parallaxEffect; // amount of parallax effect
 
 	void Start () {
