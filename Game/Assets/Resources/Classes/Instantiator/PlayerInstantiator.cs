@@ -151,7 +151,6 @@ namespace Assets.Resources.Classes.Instantiator
 
             // Rotate players
             Vector2 position = new Vector2(startPosition.x, startPosition.y);
-            Debug.Log(position);
 
             if (position.x >= 0 && position.y >= 0)
             {
