@@ -8,12 +8,19 @@ using System.Text;
 using Mono.Data.Sqlite;
 using UnityEngine;
 
+/// <summary>
+/// This is the class that's responsible for connecting to the game's database 
+/// and handling queries to manage game scores and admin account credentials.
+/// Within the game, this script is bound to a game object that's instantiated
+/// in the very first scene and lives persistently through scene changes until
+/// the game is closed.
+/// </summary>
 public class Database : MonoBehaviour
 {
-    private string dbFile;
-    private string conStr;
-    private IDbConnection dbCon;
-    private bool isOpen = false;
+    private string dbFile;          // The filename of the SQLite database file
+    private string conStr;          // Connection string
+    private IDbConnection dbCon;    // The connection to the database, using conStr
+    private bool isOpen = false;    // A flag indicating whether DB connection is open
 
     // Awake is called before the first frame update
     public void Awake()
