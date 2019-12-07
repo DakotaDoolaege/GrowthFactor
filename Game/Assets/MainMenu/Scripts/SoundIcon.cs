@@ -55,7 +55,6 @@ namespace Assets.MainMenu.Scripts
             this.Manager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
             this.Manager.Mute();
-            Debug.Log(this.Manager.isMuted);
             this.SwitchImage();
         }
     }

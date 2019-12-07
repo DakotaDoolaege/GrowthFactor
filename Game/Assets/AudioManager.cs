@@ -112,11 +112,10 @@ public class AudioManager : MonoBehaviour
             if (volumeSlider != null)
             {
                 levelBeforeMute = volumeSlider.value;
+                AudioListener.volume = 0;
+                volumeSlider.value = 0;
+                audioManagerInstance.isMuted = true;
             }
-            AudioListener.volume = 0;
-            volumeSlider.value = 0;
-            audioManagerInstance.isMuted = true;
-
         }
 
         else
