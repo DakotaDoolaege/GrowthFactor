@@ -109,7 +109,10 @@ public class AudioManager : MonoBehaviour
         // checks if audio manager is already muted; if it is, unmutes; if not, mutes
         if (audioManagerInstance.isMuted == false) // if audio not currently muted, mute
         {
-            levelBeforeMute = volumeSlider.value;
+            if (volumeSlider != null)
+            {
+                levelBeforeMute = volumeSlider.value;
+            }
             AudioListener.volume = 0;
             volumeSlider.value = 0;
             audioManagerInstance.isMuted = true;
