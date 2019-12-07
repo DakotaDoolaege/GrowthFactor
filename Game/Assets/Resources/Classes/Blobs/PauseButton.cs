@@ -42,7 +42,6 @@ namespace Assets.Resources.Classes.Blobs
         public void PauseGame()
         {
             GameVariables.Paused = true;
-            UnityEngine.Debug.Log(GameVariables.Paused);
         }
 
         /// <summary>

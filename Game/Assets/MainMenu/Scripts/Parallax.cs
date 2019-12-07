@@ -10,7 +10,8 @@ public class Parallax : MonoBehaviour
 	public new GameObject camera; // reference to main camera
 	public float parallaxEffect; // amount of parallax effect
 
-	void Start () {
+	void Start ()
+    {
 		spritePosition = transform.position.x; // start postion
 		spriteLenght = GetComponent<SpriteRenderer>().bounds.size.x; // length of sprite
 	}
