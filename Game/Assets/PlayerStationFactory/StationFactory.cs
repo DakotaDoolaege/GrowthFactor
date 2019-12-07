@@ -6,18 +6,18 @@ using UnityEngine;
 public class StationFactory : MonoBehaviour
 {
 	public GameObject Prefab; //the prefab to instantiate at each player station
-    // Start is called before the first frame update
-    void Start()
-    {
-		CreateStationControls(); 
-    }
+							  // Start is called before the first frame update
+	void Start()
+	{
+		CreateStationControls();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
+
 	/// <summary>
 	/// Creates the station controls when the scene is loaded
 	/// </summary>
@@ -27,29 +27,58 @@ public class StationFactory : MonoBehaviour
 		overlay.transform.Translate(new Vector3(0, 0, 0));
 		for (int i = 0; i < GameVariables.PlayerStations.Count; i++)
 		{
+			Debug.Log("Screen resolutionn:" + Screen.currentResolution);
 			Vector3 startPosition = GameVariables.PlayerStations[i].GetPosition();
 			GameObject NewObject;
-			
-			if (startPosition.y > 1500)
+			if (Screen.currentResolution.ToString() == "1920 x 1080 @ 60Hz")//If 1080P
 			{
-				startPosition.y = startPosition.y - 50;
-				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
-			}
-			else if (startPosition.x < 500)
-			{
-				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
+				Debug.Log("Screen resolution:" + Screen.currentResolution);
+				if (startPosition.y > 550)
+				{
+					startPosition.y = startPosition.y - 50;
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
+				}
+				else if (startPosition.x < 500)
+				{
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
 
-			}
-			else if (startPosition.x > 3000)
-			{
-				NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+				}
+				else if (startPosition.x > 1600)
+				{
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+				}
+				else
+				{
+					startPosition.y = startPosition.y + 50;
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.identity) as GameObject;
+				}
+				NewObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
 			}
 			else
 			{
-				startPosition.y = startPosition.y + 50;
-				NewObject = Instantiate(Prefab, startPosition, Quaternion.identity) as GameObject;
+				if (startPosition.y > 1500)
+				{
+					startPosition.y = startPosition.y - 50;
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-180, Vector3.forward)) as GameObject;
+				}
+				else if (startPosition.x < 500)
+				{
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(-90, Vector3.forward)) as GameObject;
+
+				}
+				else if (startPosition.x > 3000)
+				{
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.AngleAxis(90, Vector3.forward)) as GameObject;
+				}
+				else
+				{
+					startPosition.y = startPosition.y + 50;
+					NewObject = Instantiate(Prefab, startPosition, Quaternion.identity) as GameObject;
+				}
+
 			}
-				NewObject.transform.SetParent(gameObject.transform, false);
+			NewObject.transform.SetParent(gameObject.transform, false);
 			if (NewObject.name == "SaveStation(Clone)")
 			{
 				TextMeshProUGUI Score = NewObject.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
