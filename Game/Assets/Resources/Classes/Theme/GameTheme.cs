@@ -5,11 +5,6 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Theme
 {
-    /*
-     * TODO
-     * - Make factory get icons from theme
-     */
-
     /// <summary>
     /// Class <c>GameTheme</c> represents a theme for the game.
     /// </summary>
@@ -40,9 +35,9 @@ namespace Assets.Resources.Classes.Theme
         // Set the deactive player for the player picker
         public virtual string DeactivePlayer { get; } = "";
 
-        // PowerUps can be added here
-        //public Sprite PowerUp { get; set; }
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public GameTheme()
         {
             this.SpritesSheet =
@@ -112,6 +107,10 @@ namespace Assets.Resources.Classes.Theme
         /// </summary>
         public virtual void Refresh() { }
 
+        /// <summary>
+        /// Gets the background for the main menu
+        /// </summary>
+        /// <returns>The main menu background</returns>
         public virtual GameObject GetMainMenuBackground()
         {
             GameObject background = UnityEngine.Resources.Load<GameObject>(this.MainMenuBackgroundPrefab);
@@ -160,8 +159,5 @@ namespace Assets.Resources.Classes.Theme
         {
             return this.IconicSpritesSheet[this.DefaultTutorialButtonIndex];
         }
-
-        // Once PowerUps are added, uncomment the following line
-        //public abstract Sprite CreatePowerUp()
     }
 }

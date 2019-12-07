@@ -4,14 +4,6 @@ using UnityEngine;
 
 namespace Assets.Resources.Classes.Blobs
 {
-    /*
-     * TODO
-     * - Move the Shrink coroutine and other coroutines needed into
-     *   the ConsumableAction class so that the Consumable can have
-     *   dynamic actions, depending on the action.
-     */
-
-
     /// <summary>
     /// Class <c>Consumable</c> is a class that represents objects that may
     /// be consumed by a Player object. These include PowerUps and Food.
@@ -41,10 +33,6 @@ namespace Assets.Resources.Classes.Blobs
             base.Start();
         }
 
-        public override void FixedUpdate()
-        {
-        }
-
         /// <summary>
         /// Adds random velocity to the consumable object
         /// </summary>
@@ -61,13 +49,16 @@ namespace Assets.Resources.Classes.Blobs
                 float x = (float) (this.rand.Next(minVelocity, maxVelocity) *
                                    Math.Pow((-1), this.rand.Next(0, 2)) / divisor);
 
-                float y = (float) (this.rand.Next(minVelocity, maxVelocity) * 
+                float y = (float) (this.rand.Next(minVelocity, maxVelocity) *
                                    Math.Pow((-1), this.rand.Next(0, 2)) / divisor);
-                
+
                 this.RigidBody.velocity += (new Vector2(x, y));
             }
         }
 
+        /// <summary>
+        /// Update is called once per frame
+        /// </summary>
         public override void Update()
         {
             if (this.FoodValue == 0)
@@ -106,28 +97,14 @@ namespace Assets.Resources.Classes.Blobs
             return new Vector2(size, size);
         }
 
-        ///// <summary>
-        ///// Performs the appropriate action upon the player object when
-        ///// the player object consumes the current Consumable object.
-        ///// </summary>
-        ///// <param name="player">The Player object that consumes the
-        ///// Consumable object</param>
-        //public void OnPlayerConsume(Player player)
-        //{
-        //    // Shrink the consumable
-        //    if (this.BlobType == BlobType.Food || this.BlobType == BlobType.PowerUp)
-        //    {
-        //        this.OnCollisionEvent = this.Shrink();
-        //    }
-        //    //player.SetOnCollisionEvents(this);
-
-        //    // Call the action's action on the player, and start shrinking the
-        //    // consumable
-        //    this.Action.OnPlayerConsumption(player);
-        //    //StartCoroutine(this.OnCollisionEvent);
-        //}
-
-        public IEnumerator Shrink(int speed = ShrinkSpeed, 
+        /// <summary>
+        /// Shrinks the Consumable when being consumed by a player
+        /// </summary>
+        /// <param name="speed">The speed at which to shrink</param>
+        /// <param name="tolerance">The minimum allowed size for the food
+        /// object sprite</param>
+        /// <returns></returns>
+        public IEnumerator Shrink(int speed = ShrinkSpeed,
                                   float tolerance = MinSizeTolerance)
         {
             Vector2 decreaseValue;
@@ -182,7 +159,6 @@ namespace Assets.Resources.Classes.Blobs
 
             this.Instantiator.ConsumeBlob(this);
             Destroy(this.gameObject);
-
         }
     }
 }
